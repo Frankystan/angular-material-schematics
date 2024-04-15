@@ -8,19 +8,19 @@ import { Router } from '@angular/router';
     standalone: true,
     imports: [MatIconModule, MatButtonModule],
     template: `
-  <button mat-icon-button class="profile" (click)="goTo()"></button>
-  `,
+        <button mat-icon-button class="profile" (click)="goTo()"></button>
+    `,
     styles: [
-        `button.profile {
-        background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
-        background-size: cover;
-        border: 2px whitesmoke inset;
-      }
-      `
-    ]
+        `
+            button.profile {
+                background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+                background-size: cover;
+                border: 2px whitesmoke inset;
+            }
+        `,
+    ],
 })
 export class BtnProfileComponent {
-
     #router = inject(Router);
 
     goTo() {

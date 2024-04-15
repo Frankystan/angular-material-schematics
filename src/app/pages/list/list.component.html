@@ -1,13 +1,18 @@
 <mat-list>
-  @for (item of list; track item) {
-  <a mat-list-item class="mat-mdc-card card-item" routerLink="/profile">
-	<img matListItemAvatar src="https://material.angular.io/assets/img/examples/shiba1.jpg" alt="...">
-    <h3 matListItemTitle>{{ item.title }}</h3>
-    <span matListItemLine>{{ item.content }}	</span>
-    <span matListItemLine>{{ item.created_at }} - {{ item.author.displayName }}	</span>
-
-  </a>
-  }
+    @for (item of list; track item) {
+        <a mat-list-item class="mat-mdc-card card-item" routerLink="/profile">
+            <img
+                matListItemAvatar
+                src="https://material.angular.io/assets/img/examples/shiba1.jpg"
+                alt="..."
+            />
+            <h3 matListItemTitle>{{ item.title }}</h3>
+            <span matListItemLine>{{ item.content }} </span>
+            <span matListItemLine
+                >{{ item.created_at }} - {{ item.author.displayName }}
+            </span>
+        </a>
+    }
 </mat-list>
 
 <!-- <mat-list>

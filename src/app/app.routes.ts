@@ -10,17 +10,17 @@ import { ListComponent } from '@pages/list/list.component';
 import { FormComponent } from '@pages/form/form.component';
 
 export const APP_ROUTES: Routes = [
-  { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+    { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
 
-  { path: 'tree', component: TreeComponent },
-  { path: 'form', component: FormComponent },
-  { path: 'list', component: ListComponent },
-  { path: 'table', component: TableComponent },
-  { path: '404', component: NotFoundComponent },
-  { path: 'address', component: AddressComponent },
-  { path: 'profile', component: ProfileComponent },
-  { path: 'drag-drop', component: DragDropComponent },
-  { path: 'dashboard', component: DashboardComponent },
+    { path: 'tree', component: TreeComponent },
+    { path: 'form', component: FormComponent },
+    { path: 'list', component: ListComponent },
+    { path: 'table', component: TableComponent },
+    { path: '404', component: NotFoundComponent },
+    { path: 'address', component: AddressComponent },
+    { path: 'profile', component: ProfileComponent },
+    { path: 'drag-drop', component: DragDropComponent },
+    { path: 'dashboard', component: DashboardComponent },
 
-  { path: '**', redirectTo: '404', pathMatch: 'full' },
+    { path: '**', redirectTo: '404', pathMatch: 'full' },
 ];

@@ -1,7 +1,14 @@
 import { ScrollDispatcher, ScrollingModule } from '@angular/cdk/scrolling';
 import { DOCUMENT, ViewportScroller } from '@angular/common';
 import { ThisReceiver } from '@angular/compiler';
-import { Component, Input, Signal, inject, signal } from '@angular/core';
+import {
+    Component,
+    Input,
+    Signal,
+    effect,
+    inject,
+    signal,
+} from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -11,34 +18,33 @@ import { distinctUntilChanged, map, tap } from 'rxjs/operators';
 @Component({
     selector: 'app-fab-scroll-to-top',
     standalone: true,
-    imports: [MatIconModule, MatButtonModule,ScrollingModule],
+    imports: [MatIconModule, MatButtonModule, ScrollingModule],
     template: `
-
-
-        <button
-            mat-mini-fab
-            class="bottom-right"
-            color="primary"
-            aria-label="Scroll to top button"
-            (click)="scrollToTop()"	>
-        <mat-icon>arrow_upward</mat-icon>
-        </button>
-    
- `,
+        @if (isVisibe) {
+            <button
+                mat-mini-fab
+                class="bottom-right"
+                color="primary"
+                aria-label="Scroll to top button"
+                (click)="scrollToTop()"
+            >
+                <mat-icon>arrow_upward</mat-icon>
+            </button>
+        }
+    `,
     styles: [
         `
-  .bottom-right {
-		bottom: 5.5rem;
-		cursor: pointer;
-		float: right;
-		left: auto;
-		opacity: 0.7;
-		position: fixed;
-		right: 1.5rem;
-		z-index: 1;
-}
- 
- `,
+            .bottom-right {
+                bottom: 5.5rem;
+                cursor: pointer;
+                float: right;
+                left: auto;
+                opacity: 0.7;
+                position: fixed;
+                right: 1.5rem;
+                z-index: 1;
+            }
+        `,
     ],
 })
 export class FabScrollToTopComponent {
@@ -51,77 +57,51 @@ export class FabScrollToTopComponent {
     offSet: number = 300;
     lastPosition: number = 0;
     currentPosition: number = 0;
-    // visible= signal(false);
+    isVisibe: boolean = false;
+
+    constructor() {
+        effect(() => {
+            this.isVisibe = this.visible();
+        });
+    }
 
     viewport: Signal<HTMLElement | undefined> = toSignal(
         this.#scrollDispatcher.scrolled().pipe(
             map((event: any) => event.getElementRef().nativeElement),
-            tap((el: HTMLElement) => {
-                this.currentPosition = el.scrollTop;
-
-                switch (true) {
-                    case this.currentPosition == 0: // TOP
-                        this.show.set(false);
-                        break;
-                    case this.currentPosition > this.lastPosition: // DOWN
-                        this.show.set(false);
-                        break;
-                    case (this.lastPosition - this.offSet) >= 0: // UP
-                        this.show.set(true);
-                        break;
-
-                    default:
-                        this.show.set(false);
-                        break;
-                }
-
-                // console.log("visible: ", this.visible(), "current: ", this.currentPosition, "diff:", this.lastPosition - this.offSet);
-                // console.log("current: ",this.currentPosition,"last: ",this.lastPosition,"diff:",this.lastPosition - this.offSet);
-
-                this.lastPosition = this.currentPosition;
-                console.log("show: ",this.show());
-                
-            }),
             distinctUntilChanged(),
-            
-        )
+        ),
     );
 
-
-    visible:Signal<boolean> = toSignal(
+    visible = toSignal(
         this.#scrollDispatcher.scrolled().pipe(
             map((event: any) => event.getElementRef().nativeElement),
             map((el: HTMLElement) => {
                 this.currentPosition = el.scrollTop;
-                let visible:boolean = false;
+                let show: boolean = false;
 
                 switch (true) {
                     case this.currentPosition == 0: // TOP
-                        visible = false;
+                        show= false;
                         break;
                     case this.currentPosition > this.lastPosition: // DOWN
-                        visible = false;
+                        show= false;
                         break;
-                    case (this.lastPosition - this.offSet) >= 0: // UP
-                        visible = true;
+                    case this.lastPosition - this.offSet >= 0: // UP
+                       show= true;
                         break;
 
                     default:
-                        visible = false;
+                        show= false;
                         break;
                 }
 
-                // console.log("visible: ", this.visible(), "current: ", this.currentPosition, "diff:", this.lastPosition - this.offSet);
-                // console.log("current: ",this.currentPosition,"last: ",this.lastPosition,"diff:",this.lastPosition - this.offSet);
-
-
                 this.lastPosition = this.currentPosition;
 
-                
-                return visible;
-            })
-        )
-    ,{initialValue:false});
+                return show;
+            }),
+        ),
+        { initialValue: false },
+    );
 
     scrollToTop() {
         this.viewport()?.scroll({
@@ -130,24 +110,4 @@ export class FabScrollToTopComponent {
             behavior: 'smooth',
         });
     }
-
-
-
-
-
-
-    //   private readonly document = inject(DOCUMENT);
-    //   private readonly viewport = inject(ViewportScroller);
-
-    //   readonly showScroll$: Observable<boolean> = of(
-    //     this.document,
-    //     'scroll'
-    //   ).pipe(
-    //     tap(_ => console.log("position: ",this.viewport.getScrollPosition())),
-    //     map(() => this.viewport.getScrollPosition()?.[1] > 0)
-    //   );
-
-    //   scrollToTop(): void {
-    //     this.viewport.scrollToPosition([0, 0]);
-    //   }
 }

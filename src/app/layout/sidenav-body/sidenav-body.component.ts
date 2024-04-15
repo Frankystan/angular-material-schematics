@@ -5,23 +5,23 @@ import { Router, RouterModule } from '@angular/router';
 import { environment } from '@env/environment.development';
 
 export type SidenavListItem = {
-  icon: string;
-  title: string;
-  link?: string;
+    icon: string;
+    title: string;
+    link?: string;
 };
 
 @Component({
-  selector: 'app-sidenav-body',
-  standalone: true,
-  imports: [MatIconModule, MatListModule, RouterModule],
-  templateUrl: './sidenav-body.component.html',
+    selector: 'app-sidenav-body',
+    standalone: true,
+    imports: [MatIconModule, MatListModule, RouterModule],
+    templateUrl: './sidenav-body.component.html',
 })
 export class SidenavBodyComponent {
-  #router = inject(Router);
+    #router = inject(Router);
 
-  menuItems = signal<SidenavListItem[]>(environment.sidenav);
+    menuItems = signal<SidenavListItem[]>(environment.sidenav);
 
-  logout() {
-    this.#router.navigate(['']);
-  }
+    logout() {
+        this.#router.navigate(['']);
+    }
 }

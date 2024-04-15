@@ -1,8 +1,13 @@
 import { ApplicationConfig } from '@angular/core';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
-import { InMemoryScrollingFeature, InMemoryScrollingOptions, provideRouter, withComponentInputBinding, withInMemoryScrolling } from '@angular/router';
+import {
+    InMemoryScrollingFeature,
+    InMemoryScrollingOptions,
+    provideRouter,
+    withComponentInputBinding,
+    withInMemoryScrolling,
+} from '@angular/router';
 import { APP_ROUTES } from './app.routes';
-
 
 /*
 https://stackoverflow.com/questions/76318742/configuring-scroll-restoration-for-angular-standalone-router
@@ -19,10 +24,13 @@ const scrollConfig: InMemoryScrollingOptions = {
 const inMemoryScrollingFeature: InMemoryScrollingFeature =
     withInMemoryScrolling(scrollConfig);
 
-
 export const appConfig: ApplicationConfig = {
     providers: [
         provideAnimationsAsync(),
-        provideRouter(APP_ROUTES, withComponentInputBinding(), inMemoryScrollingFeature)
+        provideRouter(
+            APP_ROUTES,
+            withComponentInputBinding(),
+            inMemoryScrollingFeature,
+        ),
     ],
 };

@@ -8,11 +8,9 @@ https://juri.dev/blog/2018/05/dynamic-ui-with-cdk-portals/
 */
 
 @Component({
-  selector: 'app-root',
-  standalone: true,
-  imports: [NavigationComponent],
-  template: `
- 	<app-navigation />
-  `,
+    selector: 'app-root',
+    standalone: true,
+    imports: [NavigationComponent],
+    template: ` <app-navigation /> `,
 })
 export class AppComponent {}

@@ -1,45 +1,42 @@
 <mat-sidenav-container class="sidenav-container">
-  <mat-sidenav
-    #drawer
-    class="sidenav"
-    fixedInViewport
-    [attr.role]="isMobile() ? 'dialog' : 'navigation'"
-    [mode]="isMobile() ? 'over' : 'side'"
-    [opened]="isMobile() === false"
-  >
-    @if(isMobile()){
-    <app-sidenav-header (click)="close()" />
-    }
+    <mat-sidenav
+        #drawer
+        class="sidenav"
+        fixedInViewport
+        [attr.role]="isMobile() ? 'dialog' : 'navigation'"
+        [mode]="isMobile() ? 'over' : 'side'"
+        [opened]="isMobile() === false"
+    >
+        @if (isMobile()) {
+            <app-sidenav-header (click)="close()" />
+        }
 
-    <app-sidenav-body (click)="close()" />
-  </mat-sidenav>
-  <mat-sidenav-content>
-    <mat-toolbar color="primary" class="mat-elevation-z8">
-      @if (isMobile()) {
-      <button
-        type="button"
-        aria-label="Toggle sidenav"
-        mat-icon-button
-        (click)="drawer.toggle()"
-      >
-        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
-      </button>
-      }
-      <span>Angular Material Schematics by Fran</span>
-      <span class="flex-spacer"></span>
-      <span> {{ v }} </span>
-      @if(!isMobile()){
-        <app-btn-profile />
-      }
-    </mat-toolbar>
+        <app-sidenav-body (click)="close()" />
+    </mat-sidenav>
+    <mat-sidenav-content>
+        <mat-toolbar color="primary" class="mat-elevation-z8">
+            @if (isMobile()) {
+                <button
+                    type="button"
+                    aria-label="Toggle sidenav"
+                    mat-icon-button
+                    (click)="drawer.toggle()"
+                >
+                    <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+                </button>
+            }
+            <span>Angular Material Schematics by Fran</span>
+            <span class="flex-spacer"></span>
 
-    <!-- Add Content Here -->
+            @if (!isMobile()) {
+                <app-btn-profile />
+            }
+        </mat-toolbar>
 
-    <router-outlet></router-outlet>
+        <!-- Add Content Here -->
 
-    @if( visible() ){
+        <router-outlet></router-outlet>
 
         <app-fab-scroll-to-top />
-    }
-  </mat-sidenav-content>
+    </mat-sidenav-content>
 </mat-sidenav-container>
