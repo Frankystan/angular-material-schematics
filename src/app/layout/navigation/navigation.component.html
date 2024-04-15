@@ -27,6 +27,7 @@
       }
       <span>Angular Material Schematics by Fran</span>
       <span class="flex-spacer"></span>
+      <span> {{ v }} </span>
       @if(!isMobile()){
         <app-btn-profile />
       }
@@ -36,6 +37,9 @@
 
     <router-outlet></router-outlet>
 
-    <app-fab-scroll-to-top [isMobile]="isMobile()"/>
+    @if( visible() ){
+
+        <app-fab-scroll-to-top />
+    }
   </mat-sidenav-content>
 </mat-sidenav-container>
