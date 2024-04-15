@@ -1,5 +1,8 @@
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import { BtnProfileComponent } from '@layout/btn-profile/btn-profile.component';
 import { Component, Signal, inject, viewChild } from '@angular/core';
+import { FabScrollToTopComponent } from '@layout/fab-scroll-to-top/fab-scroll-to-top.component';
+import { map } from 'rxjs/operators';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
@@ -8,10 +11,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { RouterModule } from '@angular/router';
 import { SidenavBodyComponent } from '@layout/sidenav-body/sidenav-body.component';
 import { SidenavHeaderComponent } from '@layout/sidenav-header/sidenav-header.component';
-import { FabScrollToTopComponent } from '@layout/fab-scroll-to-top/fab-scroll-to-top.component';
 import { toSignal } from '@angular/core/rxjs-interop';
-import { map } from 'rxjs/operators';
-import { BtnProfileComponent } from '@layout/btn-profile/btn-profile.component';
 
 /*
 Scrolling
