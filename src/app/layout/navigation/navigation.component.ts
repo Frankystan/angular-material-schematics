@@ -11,6 +11,7 @@ import { SidenavHeaderComponent } from '@layout/sidenav-header/sidenav-header.co
 import { FabScrollToTopComponent } from '@layout/fab-scroll-to-top/fab-scroll-to-top.component';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { map } from 'rxjs/operators';
+import { BtnProfileComponent } from '@layout/btn-profile/btn-profile.component';
 
 /*
 Scrolling
@@ -41,6 +42,7 @@ https://juri.dev/blog/2018/05/dynamic-ui-with-cdk-portals/
     SidenavHeaderComponent,
     RouterModule,
     FabScrollToTopComponent,
+    BtnProfileComponent,
   ],
 })
 export class NavigationComponent {
