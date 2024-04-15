@@ -1,0 +1,27 @@
+/* Add application styles & imports to this file! */
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, 'Helvetica Neue', sans-serif;
+}
+
+.flex-spacer {
+  flex: 1 1 100%;
+}
+
+.content-centered {
+  display: flex;
+  place-content: center;
+  align-items: center;
+  flex-direction: row;
+  margin: 0.5rem;
+}
+
+.space-between {
+  display: flex;
+  place-content: center space-between;
+}

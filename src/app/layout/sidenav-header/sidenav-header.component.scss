@@ -1,0 +1,17 @@
+mat-toolbar {
+  height: fit-content;
+  flex-direction: column;
+  padding: 1rem;
+  text-align: center;
+
+  a {
+    text-decoration: none;
+    cursor: pointer;
+
+    img {
+      border-radius: 100%;
+      object-fit: cover;
+      margin-bottom: 1rem;
+    }
+  }
+}
