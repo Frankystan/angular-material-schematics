@@ -8,6 +8,7 @@ import {
     withInMemoryScrolling,
 } from '@angular/router';
 import { APP_ROUTES } from './app.routes';
+import { provideCustomTitleStrategy } from './providers/custom-title-strategy.provider';
 
 /*
 https://stackoverflow.com/questions/76318742/configuring-scroll-restoration-for-angular-standalone-router
@@ -32,5 +33,6 @@ export const appConfig: ApplicationConfig = {
             withComponentInputBinding(),
             inMemoryScrollingFeature,
         ),
+        provideCustomTitleStrategy,
     ],
 };
