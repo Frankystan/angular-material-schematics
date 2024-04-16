@@ -6,14 +6,13 @@ import { MatIconModule } from '@angular/material/icon';
 import { map, distinctUntilChanged } from 'rxjs';
 
 @Component({
-  selector: 'app-fab-scroll-to-top',
-  standalone: true,
-  imports: [MatIconModule, MatButtonModule, ScrollingModule],
-  templateUrl: './fab-scroll-to-top.component.html',
-  styleUrl: './fab-scroll-to-top.component.scss'
+    selector: 'app-fab-scroll-to-top',
+    standalone: true,
+    imports: [MatIconModule, MatButtonModule, ScrollingModule],
+    templateUrl: './fab-scroll-to-top.component.html',
+    styleUrl: './fab-scroll-to-top.component.scss',
 })
 export class FabScrollToTopComponent {
-
     #scrollDispatcher = inject(ScrollDispatcher);
 
     offSet: number = 300;
