@@ -15,7 +15,6 @@ import { FabScrollToTopComponent } from '@layout/fab-scroll-to-top/fab-scroll-to
 import { SidenavBodyComponent } from '@layout/sidenav-body/sidenav-body.component';
 import { SidenavHeaderComponent } from '@layout/sidenav-header/sidenav-header.component';
 
-
 /*
 **OPCIONAL**
 DISABLE SCROLL WHEN SIDENAV IS OPENED
@@ -29,10 +28,10 @@ he copiado esta linea en consola y funciona:
     selector: 'app-nav-toolbar',
     standalone: true,
     imports: [
-      BtnProfileComponent,
-      MatIconModule,
-      MatToolbarModule,
-      MatButtonModule,
+        BtnProfileComponent,
+        MatIconModule,
+        MatToolbarModule,
+        MatButtonModule,
     ],
     templateUrl: './nav-toolbar.component.html',
     styleUrl: './nav-toolbar.component.scss',

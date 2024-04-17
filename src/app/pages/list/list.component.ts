@@ -1,12 +1,14 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
+import { MatDialog } from '@angular/material/dialog';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { MatMenuModule } from '@angular/material/menu';
 import { RouterModule } from '@angular/router';
 import { faker } from '@faker-js/faker/locale/es';
+import { DeleteItemDialogComponent } from '@layout/delete-item-dialog/delete-item-dialog.component';
 
 @Component({
     selector: 'app-list',
@@ -25,6 +27,8 @@ import { faker } from '@faker-js/faker/locale/es';
     styleUrl: './list.component.scss',
 })
 export class ListComponent {
+    dialog = inject(MatDialog);
+
     // DUMMY DATA
     list: Array<any> = Array.from({ length: 100 }).map((value, i) => {
         return {
@@ -40,7 +44,16 @@ export class ListComponent {
         };
     });
 
-    showInfo(text: string) {
-        console.log('text');
+    openDialog(): void {
+        this.dialog.open(DeleteItemDialogComponent, {
+            
+            panelClass: 'delete-dialog-panel',
+            id:'dialogTrasparent',
+            data: "sdsfsdf"
+        });
+    }
+
+    delete(id: string) {
+        this.openDialog();
     }
 }

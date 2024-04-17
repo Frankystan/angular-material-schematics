@@ -26,8 +26,6 @@ export interface Fruit {
     name: string;
 }
 
-
-
 /*
 https://www.youtube.com/watch?v=OR7AHU4u-AM
 https://stackblitz.com/edit/angular-9gjwo4-h4f9ux?file=app/chips-input-example.ts
