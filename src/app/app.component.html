@@ -1,0 +1,27 @@
+<mat-sidenav-container class="sidenav-container">
+    <mat-sidenav
+        #drawer
+        class="sidenav"
+        fixedInViewport
+        [fixedTopGap]="isMobile() ? '0' : '64'"
+        [attr.role]="isMobile() ? 'dialog' : 'navigation'"
+        [mode]="isMobile() ? 'over' : 'side'"
+        [opened]="isMobile() === false"
+    >
+        @if (isMobile()) {
+            <app-sidenav-header (click)="close()" />
+        }
+
+        <app-sidenav-body (click)="close()" />
+    </mat-sidenav>
+
+    <mat-sidenav-content >
+        <app-nav-toolbar [isMobile]="isMobile()" [drawer]="drawer" />
+
+        <!-- Add Content Here -->
+
+        <router-outlet></router-outlet>
+
+        <app-fab-scroll-to-top />
+    </mat-sidenav-content>
+</mat-sidenav-container>

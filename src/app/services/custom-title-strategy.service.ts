@@ -14,7 +14,6 @@ export class CustomTitleStrategyService extends TitleStrategy {
         if (title) {
             this.#title.setTitle(`AMS | ${title}`);
         } else {
-
             this.#title.setTitle('AMS');
         }
     }
