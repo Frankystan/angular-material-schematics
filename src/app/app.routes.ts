@@ -8,13 +8,17 @@ import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { ProfileComponent } from '@pages/profile/profile.component';
 import { ListComponent } from '@pages/list/list.component';
 import { FormComponent } from '@pages/form/form.component';
+import { CardComponent } from '@pages/card/card.component';
+import { GridComponent } from '@pages/grid/grid.component';
 
 export const APP_ROUTES: Routes = [
     { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
 
     { path: 'tree', component: TreeComponent, title: 'Tree' },
     { path: 'form', component: FormComponent, title: 'Form' },
+    { path: 'card', component: CardComponent, title: 'Card' },
     { path: 'list', component: ListComponent, title: 'List' },
+    { path: 'grid', component: GridComponent, title: 'Grid' },
     { path: 'table', component: TableComponent, title: 'Table' },
     { path: '404', component: NotFoundComponent, title: '404' },
     { path: 'address', component: AddressComponent, title: 'Address' },

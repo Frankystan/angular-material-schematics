@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, DestroyRef, OnInit, inject } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import {
     FormControl,
@@ -75,6 +75,8 @@ https://stackblitz.com/edit/angular-6g9jz1-zkc8ak?file=src%2Fapp%2Fchips-input-e
 export class FormComponent implements OnInit {
     readonly separatorKeysCodes = [ENTER, COMMA] as const;
 
+    #destroyRef = inject(DestroyRef);
+
     form!: FormGroup;
     email = new FormControl('', [Validators.required, Validators.email]);
     password = new FormControl('', [
@@ -93,7 +95,7 @@ export class FormComponent implements OnInit {
 
     constructor() {
         merge(this.email.statusChanges, this.email.valueChanges)
-            .pipe(takeUntilDestroyed())
+            .pipe(takeUntilDestroyed(this.#destroyRef))
             .subscribe(() => this.updateErrorMessage());
     }
 

@@ -1,6 +1,12 @@
 <h2 mat-dialog-title>Delete file</h2>
-<mat-dialog-content> Would you like to delete cat.jpeg? </mat-dialog-content>
+<mat-dialog-content>
+    Would you like to delete item #{{ data }} ?
+</mat-dialog-content>
 <mat-dialog-actions align="end">
-    <button mat-button mat-dialog-close>No</button>
-    <button mat-button mat-dialog-close cdkFocusInitial>Ok</button>
+    <button mat-raised-button mat-dialog-close tabindex="-1" color="warn">
+        CANCEL
+    </button>
+    <button mat-button tabindex="2" [mat-dialog-close]="data" cdkFocusInitial>
+        ACCEPT
+    </button>
 </mat-dialog-actions>
