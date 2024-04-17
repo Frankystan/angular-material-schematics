@@ -1,11 +1,31 @@
+<mat-toolbar color="primary" class="mat-elevation-z8" [ngStyle]="{'z-index':drawer.opened  ? '1' : '2' }">
+    @if (isMobile()) {
+        <button
+            type="button"
+            aria-label="Toggle sidenav"
+            mat-icon-button
+            (click)="drawerToggle()"
+        >
+            <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+        </button>
+    }
+    <span>Angular Material Schematics by Fran</span>
+    <span class="flex-spacer"></span>
+
+    @if (!isMobile()) {
+        <app-btn-profile />
+    }
+</mat-toolbar>
+
 <mat-sidenav-container class="sidenav-container">
     <mat-sidenav
         #drawer
         class="sidenav"
         fixedInViewport
+        [fixedTopGap]="isMobile() ? '0' : '64'"
         [attr.role]="isMobile() ? 'dialog' : 'navigation'"
         [mode]="isMobile() ? 'over' : 'side'"
-        [opened]="isMobile() === false"
+        ([opened])="isMobile() === false"
     >
         @if (isMobile()) {
             <app-sidenav-header (click)="close()" />
@@ -13,25 +33,8 @@
 
         <app-sidenav-body (click)="close()" />
     </mat-sidenav>
-    <mat-sidenav-content>
-        <mat-toolbar color="primary" class="mat-elevation-z8">
-            @if (isMobile()) {
-                <button
-                    type="button"
-                    aria-label="Toggle sidenav"
-                    mat-icon-button
-                    (click)="drawer.toggle()"
-                >
-                    <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
-                </button>
-            }
-            <span>Angular Material Schematics by Fran</span>
-            <span class="flex-spacer"></span>
-
-            @if (!isMobile()) {
-                <app-btn-profile />
-            }
-        </mat-toolbar>
+    <mat-sidenav-content (scroll)="onSideNavScroll($event)">
+        
 
         <!-- Add Content Here -->
 

@@ -13,5 +13,18 @@
 .mat-toolbar.mat-primary {
     position: sticky;
     top: 0;
-    z-index: 1;
+    // z-index: 1;
 }
+
+
+mat-sidenav-content{
+    height: calc(100vh - 64px);
+}
+
+// .mat-drawer:not(.mat-drawer-side) {
+//     position: fixed;
+// }
+
+// .mat-drawer-backdrop {
+//     position: fixed !important;
+// }

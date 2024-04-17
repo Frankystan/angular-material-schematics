@@ -16,6 +16,7 @@ import { Router } from '@angular/router';
                 background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
                 background-size: cover;
                 border: 2px whitesmoke inset;
+                margin: 0 1rem;
             }
         `,
     ],

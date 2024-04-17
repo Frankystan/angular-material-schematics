@@ -1,14 +1,26 @@
 import { Component } from '@angular/core';
+import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
+import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
+import { MatMenuModule } from '@angular/material/menu';
 import { RouterModule } from '@angular/router';
 import { faker } from '@faker-js/faker/locale/es';
 
 @Component({
     selector: 'app-list',
     standalone: true,
-    imports: [MatListModule, MatIconModule, RouterModule, MatCardModule],
+    imports: [
+        MatListModule,
+        MatIconModule,
+        RouterModule,
+        MatCardModule,
+        MatMenuModule,
+        MatButtonModule,
+        MatDividerModule,
+        RouterModule,
+    ],
     templateUrl: './list.component.html',
     styleUrl: './list.component.scss',
 })
@@ -24,7 +36,12 @@ export class ListComponent {
             },
             created_at: faker.date.anytime().toLocaleDateString(),
             content: faker.lorem.paragraph(3),
-            image: faker.image.avatar(),
+            image: 'https://material.angular.io/assets/img/examples/shiba1.jpg',
         };
     });
+
+    showInfo(text: string) {
+        console.log('text');
+    }
 }
+

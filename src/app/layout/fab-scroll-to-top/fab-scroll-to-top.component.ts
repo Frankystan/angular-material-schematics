@@ -35,7 +35,7 @@ export class FabScrollToTopComponent {
 
     visible = toSignal(
         this.#scrollDispatcher.scrolled().pipe(
-            map((event: any) => event.getElementRef().nativeElement),
+            map((event: any) => event?.getElementRef().nativeElement),
             map((el: HTMLElement) => {
                 this.currentPosition = el.scrollTop;
                 let show: boolean = false;
