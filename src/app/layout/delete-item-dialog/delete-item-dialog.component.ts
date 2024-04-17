@@ -1,13 +1,17 @@
 import { Component, inject } from '@angular/core';
 import {
-    MatDialog,
     MatDialogRef,
     MatDialogActions,
     MatDialogClose,
     MatDialogTitle,
     MatDialogContent,
+    MAT_DIALOG_DATA,
 } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
+
+/*
+https://stackoverflow.com/questions/48688614/angular-custom-style-to-mat-dialog
+*/
 
 @Component({
     selector: 'app-delete-item-dialog',
@@ -24,4 +28,5 @@ import { MatButtonModule } from '@angular/material/button';
 })
 export class DeleteItemDialogComponent {
     dialogRef = inject(MatDialogRef<DeleteItemDialogComponent>);
+    data = inject(MAT_DIALOG_DATA);
 }

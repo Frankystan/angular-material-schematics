@@ -10,6 +10,10 @@ import { RouterModule } from '@angular/router';
 import { faker } from '@faker-js/faker/locale/es';
 import { DeleteItemDialogComponent } from '@layout/delete-item-dialog/delete-item-dialog.component';
 
+/*
+https://stackoverflow.com/questions/48688614/angular-custom-style-to-mat-dialog
+*/
+
 @Component({
     selector: 'app-list',
     standalone: true,
@@ -46,10 +50,8 @@ export class ListComponent {
 
     openDialog(): void {
         this.dialog.open(DeleteItemDialogComponent, {
-            
             panelClass: 'delete-dialog-panel',
-            id:'dialogTrasparent',
-            data: "sdsfsdf"
+            data: 'sdsfsdf',
         });
     }
 
