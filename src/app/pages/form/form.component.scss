@@ -1,8 +1,16 @@
-:host {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
+// OPCION 1.
+// en cada pages>componente poner esta regla "host"
+// :host {
+//     display: flex;
+//     align-items: center;
+//     justify-content: center;
+// }
+
+// OPCION 2
+// en APP.scss
+// <div class="horizontally-centered-content">
+// <router-outlet></router-outlet>
+// </div>
 
 mat-card {
     max-width: 500px;
