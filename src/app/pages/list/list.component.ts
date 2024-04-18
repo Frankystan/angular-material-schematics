@@ -57,6 +57,7 @@ export class ListComponent {
 
     private openDialog(id: string) {
         let dialogRef = this.dialog.open(DeleteItemDialogComponent, {
+            panelClass: 'delete-dialog-panel',
             data: id,
         });
 
