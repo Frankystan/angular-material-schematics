@@ -1,5 +1,5 @@
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { NgStyle } from '@angular/common';
+import { NgClass, NgStyle } from '@angular/common';
 import { Component, Signal, ViewChild, inject } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { MatButtonModule } from '@angular/material/button';
@@ -39,6 +39,7 @@ https://juri.dev/blog/2018/05/dynamic-ui-with-cdk-portals/
         MatSidenavModule,
         SidenavBodyComponent,
         SidenavHeaderComponent,
+        NgClass,
     ],
     templateUrl: './app.component.html',
     styleUrl: './app.component.scss',
