@@ -64,3 +64,17 @@ mat-grid-list {
         }
     }
 }
+
+:host {
+    display: contents;
+}
+
+.grid-container {
+    margin: 20px;
+    height: 100%;
+    width: 100%;
+}
+
+mat-grid-tile {
+    background: lightblue;
+}

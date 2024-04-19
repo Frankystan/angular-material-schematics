@@ -1,4 +1,4 @@
-<mat-grid-list
+<!-- <mat-grid-list
     [rowHeight]="rowHeight"
     cols="{{ cols$ | async }}"
     gutterSize="1rem"
@@ -39,4 +39,14 @@
             </mat-grid-tile-footer>
         </mat-grid-tile>
     </a>
-</mat-grid-list>
+</mat-grid-list> -->
+
+<div class="grid-container">
+    <mat-grid-list [cols]="columns()" rowHeight="2:1">
+        @for (item of items; track item.id) {
+            <mat-grid-tile>1</mat-grid-tile>
+        } @empty {
+            <li>There are no items.</li>
+        }
+    </mat-grid-list>
+</div>

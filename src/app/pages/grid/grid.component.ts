@@ -1,9 +1,22 @@
-import { BreakpointObserver } from '@angular/cdk/layout';
-import { Component, Input, OnInit, inject } from '@angular/core';
+import {
+    BreakpointObserver,
+    BreakpointState,
+    Breakpoints,
+    MediaMatcher,
+} from '@angular/cdk/layout';
+import {
+    Component,
+    DestroyRef,
+    Input,
+    OnInit,
+    Signal,
+    inject,
+} from '@angular/core';
 import { Observable } from 'rxjs';
-import { map, startWith } from 'rxjs/operators';
+import { map, startWith, tap } from 'rxjs/operators';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { faker } from '@faker-js/faker/locale/es';
+import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
 
 /*
 mi ejemplo:
@@ -26,14 +39,53 @@ https://material.angular.io/cdk/layout/overview
     styleUrl: './grid.component.scss',
 })
 export class GridComponent implements OnInit {
-    #screen = inject(MediaObserver);
-
+    #destroyRef = inject(DestroyRef);
     #breakpointObserver = inject(BreakpointObserver);
 
-    // @Input('data') data: Post[] = [];
+    grid = [
+        Breakpoints.XSmall,
+        Breakpoints.Small,
+        Breakpoints.Medium,
+        Breakpoints.Large,
+    ];
+
+    cols = new Map([
+        [Breakpoints.XSmall, 1],
+        [Breakpoints.Small, 1],
+        [Breakpoints.Medium, 2],
+        [Breakpoints.Large, 3],
+        [Breakpoints.XLarge, 4],
+    ]);
+
+    rowHeight: string = '240px';
+
+    columns: Signal<number> = toSignal(
+        this.#breakpointObserver.observe(this.grid).pipe(
+            map((result) => {
+                switch (true) {
+                    case this.#breakpointObserver.isMatched(Breakpoints.XSmall):
+                        return this.cols.get(Breakpoints.XSmall) as number;
+
+                    case this.#breakpointObserver.isMatched(Breakpoints.Small):
+                        return this.cols.get(Breakpoints.Small) as number;
+
+                    case this.#breakpointObserver.isMatched(Breakpoints.Medium):
+                        return this.cols.get(Breakpoints.Medium) as number;
+
+                    case this.#breakpointObserver.isMatched(Breakpoints.Large):
+                        return this.cols.get(Breakpoints.Large) as number;
+
+                    default:
+                        return 4;
+                }
+            }),
+            takeUntilDestroyed(this.#destroyRef),
+        ),
+        { initialValue: 0 },
+    );
 
     // DUMMY DATA
-    data: Array<any> = Array.from({ length: 100 }).map((value, i) => {
+    items: Array<any> = Array.from({ length: 100 }).map((value, i) => {
         return {
             id: `${i + 1}`,
             title: `${i + 1} - ${faker.lorem.paragraph(1)}`,
@@ -47,64 +99,5 @@ export class GridComponent implements OnInit {
         };
     });
 
-    rowHeight: string = '240px';
-    cols$!: Observable<number>;
-
-    ngOnInit(): void {
-        this.setGrid();
-    }
-
-    setGrid() {
-        let start: number;
-
-        const grid = new Map([
-            ['xs', 2],
-            ['sm', 2],
-            ['md', 3],
-            ['lg', 4],
-            ['xl', 5],
-        ]);
-
-        grid.forEach((cols, mqAlias) => {
-            if (this.screen.isActive(mqAlias)) {
-                start = cols;
-            }
-        });
-        this.cols$ = this.screen.media$.pipe(
-            map((change) => {
-                // console.log(change);
-                // console.log(grid.get(change.mqAlias));
-                return grid.get(change.mqAlias);
-            }),
-            startWith(start),
-        );
-    }
-
-    setGrid2() {
-        // https://youtu.be/w9InzT-SdIE?t=6m20s
-        this.cols$ = this.screen.media$.pipe(
-            map((change: MediaChange) => {
-                let cols = 0;
-                switch (change.mqAlias) {
-                    case 'xs':
-                        cols = 2; // 'screen and (max-width: 599px)'
-                        break;
-                    case 'sm':
-                        cols = 3; // 'screen and (min-width: 600px) and (max-width: 959px)'
-                        break;
-                    case 'md':
-                        cols = 3; // 'screen and (min-width: 960px) and (max-width: 1279px)'
-                        break;
-                    case 'lg':
-                        cols = 4; // 'screen and (min-width: 1280px) and (max-width: 1919px)'
-                        break;
-                }
-                return cols;
-            }),
-        );
-    }
-
-    trackByIdx(i) {
-        return i;
-    }
+    ngOnInit(): void {}
 }
