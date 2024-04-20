@@ -6,6 +6,10 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatSidenavContent } from '@angular/material/sidenav';
 import { map, distinctUntilChanged, filter } from 'rxjs/operators';
 
+/*
+https://github.com/Frankistan/ng8fireblog/blob/master/src/app/layout/fabs/fab-scroll-to-top.component.ts
+*/
+
 @Component({
     selector: 'app-fab-scroll-to-top',
     standalone: true,
