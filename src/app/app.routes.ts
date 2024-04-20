@@ -10,6 +10,7 @@ import { ListComponent } from '@pages/list/list.component';
 import { FormComponent } from '@pages/form/form.component';
 import { CardComponent } from '@pages/card/card.component';
 import { GridComponent } from '@pages/grid/grid.component';
+import { GridListDemoComponent } from '@pages/grid-list-demo/grid-list-demo.component';
 
 export const APP_ROUTES: Routes = [
     { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
@@ -19,6 +20,11 @@ export const APP_ROUTES: Routes = [
     { path: 'card', component: CardComponent, title: 'Card' },
     { path: 'list', component: ListComponent, title: 'List' },
     { path: 'grid', component: GridComponent, title: 'Grid' },
+    {
+        path: 'grid-demo',
+        component: GridListDemoComponent,
+        title: 'Grid List Demo',
+    },
     { path: 'table', component: TableComponent, title: 'Table' },
     { path: '404', component: NotFoundComponent, title: '404' },
     { path: 'address', component: AddressComponent, title: 'Address' },

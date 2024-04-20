@@ -1,5 +1,10 @@
 <mat-nav-list>
-    @for (item of menuItems(); track item) {
+    @for (
+        item of menuItems();
+        track item;
+        let i = $index;
+        let first = $first, last = $last
+    ) {
         @if (item.title == "") {
             <mat-divider></mat-divider>
         } @else if (item.title != "Logout") {

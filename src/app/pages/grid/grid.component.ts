@@ -17,6 +17,10 @@ import { map, startWith, tap } from 'rxjs/operators';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { faker } from '@faker-js/faker/locale/es';
 import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
+import { FormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatIconModule } from '@angular/material/icon';
 
 /*
 mi ejemplo:
@@ -34,13 +38,33 @@ https://material.angular.io/cdk/layout/overview
 @Component({
     selector: 'app-grid',
     standalone: true,
-    imports: [MatGridListModule],
+    imports: [
+        MatGridListModule,
+        FormsModule,
+        MatButtonModule,
+        MatCardModule,
+        MatGridListModule,
+        MatIconModule,
+    ],
     templateUrl: './grid.component.html',
     styleUrl: './grid.component.scss',
 })
 export class GridComponent implements OnInit {
-    #destroyRef = inject(DestroyRef);
+    // #destroyRef = inject(DestroyRef);
     #breakpointObserver = inject(BreakpointObserver);
+
+    images = [
+        'nature',
+        'sky',
+        'grass',
+        'mountains',
+        'rivers',
+        'glacier',
+        'forest',
+        'streams',
+        'rain',
+        'clouds',
+    ];
 
     grid = [
         Breakpoints.XSmall,
@@ -79,7 +103,6 @@ export class GridComponent implements OnInit {
                         return 4;
                 }
             }),
-            takeUntilDestroyed(this.#destroyRef),
         ),
         { initialValue: 0 },
     );
@@ -95,9 +118,14 @@ export class GridComponent implements OnInit {
             },
             created_at: faker.date.anytime().toLocaleDateString(),
             content: faker.lorem.paragraph(3),
-            image: 'https://material.angular.io/assets/img/examples/shiba1.jpg',
+            image: this.getRandomArbitrary(1, this.images.length),
         };
     });
 
     ngOnInit(): void {}
+
+    getRandomArbitrary(min: number, max: number) {
+        let index = Math.floor(Math.random() * (max - min) + min);
+        return `https://source.unsplash.com/random/500X500?${this.images[index]}`;
+    }
 }

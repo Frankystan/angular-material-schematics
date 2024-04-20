@@ -1,52 +1,30 @@
-<!-- <mat-grid-list
-    [rowHeight]="rowHeight"
-    cols="{{ cols$ | async }}"
-    gutterSize="1rem"
->
-    <a
-        [routerLink]="['/posts', i]"
-        *ngFor="let post of data; let i = index; trackBy: trackByIdx"
-    >
-        <mat-grid-tile>
-            <mat-grid-tile-header>
-                <ngx-avatar
-                    size="52"
-                    [name]="post.title?.split(' ', 2).join(' ')"
-                    [round]="false"
-                >
-                </ngx-avatar>
-            </mat-grid-tile-header>
-
-            <div class="mat-grid-tile-content">
-                #{{ i + 1 + " - " + post.title }}
-            </div>
-
-            <mat-grid-tile-footer>
-                <p matLine>
-                    <span>
-                        <mat-icon matListIcon>access_time</mat-icon>
-                        {{
-                            post.created_at * 1000
-                                | amDateFormat: "DD-MM-YYYY HH:mm"
-                        }}
-                    </span>
-                    <span class="interpunct">&#183;</span>
-                    <span>
-                        <mat-icon class="custom-icon">person</mat-icon>
-                        {{ post.authorName }}
-                    </span>
-                </p>
-            </mat-grid-tile-footer>
-        </mat-grid-tile>
-    </a>
-</mat-grid-list> -->
-
 <div class="grid-container">
-    <mat-grid-list [cols]="columns()" rowHeight="2:1">
-        @for (item of items; track item.id) {
-            <mat-grid-tile>1</mat-grid-tile>
-        } @empty {
-            <li>There are no items.</li>
-        }
-    </mat-grid-list>
+    <mat-card>
+        <mat-card-title>Grid list with footer</mat-card-title>
+        <mat-card-content>
+            <mat-grid-list
+                [cols]="columns()"
+                rowHeight="32rem"
+                gutterSize="1rem"
+            >
+                @for (
+                    item of items;
+                    track item.id;
+                    let i = $index;
+                    let first = $first, last = $last
+                ) {
+                    <mat-grid-tile>
+                        <img [alt]="item.title" [src]="item.image" />
+                        <mat-grid-tile-footer>
+                            <h3 mat-line>{{ item.author.displayName }}</h3>
+                            <span mat-line>Human: {{ item.content }}</span>
+                            <mat-icon>star_border</mat-icon>
+                        </mat-grid-tile-footer>
+                    </mat-grid-tile>
+                } @empty {
+                    <li>There are no items.</li>
+                }
+            </mat-grid-list>
+        </mat-card-content>
+    </mat-card>
 </div>
