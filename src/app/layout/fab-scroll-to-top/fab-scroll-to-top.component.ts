@@ -1,9 +1,10 @@
 import { ScrollDispatcher, ScrollingModule } from '@angular/cdk/scrolling';
-import { Component, Signal, effect, inject } from '@angular/core';
+import { Component, Input, NgZone, inject } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { map, distinctUntilChanged } from 'rxjs';
+import { MatSidenavContent } from '@angular/material/sidenav';
+import { map, distinctUntilChanged, filter } from 'rxjs/operators';
 
 @Component({
     selector: 'app-fab-scroll-to-top',
@@ -14,58 +15,55 @@ import { map, distinctUntilChanged } from 'rxjs';
 })
 export class FabScrollToTopComponent {
     #scrollDispatcher = inject(ScrollDispatcher);
+    #zone = inject(NgZone);
 
-    offSet: number = 300;
-    lastPosition: number = 0;
-    currentPosition: number = 0;
-    isVisible: boolean = false;
+    @Input() viewport!: MatSidenavContent;
 
-    constructor() {
-        effect(() => {
-            this.isVisible = this.visible();
-        });
-    }
+    lastScrollPosition: number = 0;
+    offSet: number = 500;
 
-    viewport: Signal<HTMLElement | undefined> = toSignal(
+    show = toSignal(
         this.#scrollDispatcher.scrolled().pipe(
-            map((event: any) => event.getElementRef().nativeElement),
-            distinctUntilChanged(),
-        ),
-    );
+            filter((event: any) =>
+                (<HTMLElement>event.getElementRef().nativeElement).tagName ===
+                'MAT-SIDENAV-CONTENT'
+                    ? true
+                    : false,
+            ),
+            map((cdk: any) => {
+                let visible = false;
+                this.#zone.run(() => {
+                    let scroll = cdk.measureScrollOffset('top');
 
-    visible = toSignal(
-        this.#scrollDispatcher.scrolled().pipe(
-            map((event: any) => event?.getElementRef().nativeElement),
-            map((el: HTMLElement) => {
-                this.currentPosition = el.scrollTop;
-                let show: boolean = false;
+                    switch (true) {
+                        case scroll == 0:
+                            visible = false;
+                            break;
 
-                switch (true) {
-                    case this.currentPosition == 0: // TOP
-                        show = false;
-                        break;
-                    case this.currentPosition > this.lastPosition: // DOWN
-                        show = false;
-                        break;
-                    case this.lastPosition - this.offSet >= 0: // UP
-                        show = true;
-                        break;
+                        case scroll > this.lastScrollPosition:
+                            visible = false;
+                            break;
+                        case this.lastScrollPosition - this.offSet > 0:
+                            visible = true;
+                            break;
 
-                    default:
-                        show = false;
-                        break;
-                }
+                        default:
+                            visible = false;
+                            break;
+                    }
 
-                this.lastPosition = this.currentPosition;
+                    this.lastScrollPosition = scroll;
+                });
 
-                return show;
+                return visible;
             }),
+            distinctUntilChanged(),
         ),
         { initialValue: false },
     );
 
     scrollToTop() {
-        this.viewport()?.scroll({
+        this.viewport.scrollTo({
             top: 0,
             left: 0,
             behavior: 'smooth',

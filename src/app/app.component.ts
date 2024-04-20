@@ -5,7 +5,11 @@ import { toSignal } from '@angular/core/rxjs-interop';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
-import { MatDrawer, MatSidenavModule } from '@angular/material/sidenav';
+import {
+    MatDrawer,
+    MatSidenavContent,
+    MatSidenavModule,
+} from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { RouterModule } from '@angular/router';
 import { BtnProfileComponent } from '@layout/btn-profile/btn-profile.component';
@@ -48,6 +52,8 @@ export class AppComponent {
     #breakpointObserver = inject(BreakpointObserver);
 
     @ViewChild('drawer', { static: true }) public drawer!: MatDrawer;
+    @ViewChild(MatSidenavContent, { static: true })
+    public content!: MatSidenavContent;
     // drawer: Signal<MatSidenav | undefined> = viewChild('drawer');
 
     isMobile: Signal<boolean> = toSignal(
