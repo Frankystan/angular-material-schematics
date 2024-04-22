@@ -1,11 +1,11 @@
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import {
     Directive,
-    Input,
     Signal,
     TemplateRef,
     ViewContainerRef,
     inject,
+    input,
 } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { map } from 'rxjs';
@@ -18,10 +18,12 @@ https://angular.io/guide/structural-directives
     selector: '[isVisible],[is-visible]',
     standalone: true,
 })
-export class IsVisibleDirective {
+export class isVisibleDirective {
     #breakpointObserver = inject(BreakpointObserver);
     #templateRef = inject(TemplateRef<any>);
     #viewContainer = inject(ViewContainerRef);
+
+    #hasView = false;
 
     isMobile: Signal<boolean> = toSignal(
         this.#breakpointObserver
@@ -30,17 +32,34 @@ export class IsVisibleDirective {
         { initialValue: false },
     );
 
-    private hasView = false;
-
-    constructor() {}
-
-    @Input() set isVisible(condition: boolean) {
-        if (condition && !this.hasView) {
-            this.#viewContainer.createEmbeddedView(this.#templateRef);
-            this.hasView = true;
-        } else {
-            this.#viewContainer.clear();
-            this.hasView = false;
-        }
-    }
+    isVisible = input.required({
+        transform: (condition: boolean) => {
+            console.log(
+                'isMobile: ',
+                this.isMobile(),
+                'hasView: ',
+                this.#hasView,
+                'condition: ',
+                condition,
+            );
+            // condition = <boolean>condition;
+            if (this.isMobile()) {
+                if (condition && !this.#hasView) {
+                    this.#viewContainer.createEmbeddedView(this.#templateRef);
+                    this.#hasView = true;
+                } else {
+                    this.#viewContainer.clear();
+                    this.#hasView = false;
+                }
+            } else {
+                if (condition && !this.#hasView) {
+                    this.#viewContainer.createEmbeddedView(this.#templateRef);
+                    this.#hasView = true;
+                } else {
+                    this.#viewContainer.clear();
+                    this.#hasView = false;
+                }
+            }
+        },
+    });
 }

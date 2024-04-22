@@ -1,19 +1,14 @@
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { NgClass, NgStyle } from '@angular/common';
+import { NgClass } from '@angular/common';
 import { Component, Signal, ViewChild, inject } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
-import { MatButtonModule } from '@angular/material/button';
-import { MatIconModule } from '@angular/material/icon';
-import { MatListModule } from '@angular/material/list';
 import {
     MatDrawer,
     MatSidenavContent,
     MatSidenavModule,
 } from '@angular/material/sidenav';
-import { MatToolbarModule } from '@angular/material/toolbar';
 import { RouterModule } from '@angular/router';
-import { BtnProfileComponent } from '@layout/btn-profile/btn-profile.component';
-import { IsVisibleDirective } from '@layout/directives/is-visible.directive';
+import { isVisibleDirective } from '@layout/directives/is-visible.directive';
 import { FabScrollToTopComponent } from '@layout/fab-scroll-to-top/fab-scroll-to-top.component';
 import { NavToolbarComponent } from '@layout/nav-toolbar/nav-toolbar.component';
 import { SidenavBodyComponent } from '@layout/sidenav-body/sidenav-body.component';
@@ -45,7 +40,7 @@ https://juri.dev/blog/2018/05/dynamic-ui-with-cdk-portals/
         SidenavBodyComponent,
         SidenavHeaderComponent,
         NgClass,
-        IsVisibleDirective,
+        isVisibleDirective,
     ],
     templateUrl: './app.component.html',
     styleUrl: './app.component.scss',

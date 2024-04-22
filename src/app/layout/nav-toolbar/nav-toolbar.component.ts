@@ -1,19 +1,9 @@
-import { NgStyle } from '@angular/common';
-import { Component, Input, Signal } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { MatListModule } from '@angular/material/list';
-import {
-    MatDrawer,
-    MatSidenav,
-    MatSidenavModule,
-} from '@angular/material/sidenav';
+import { MatDrawer } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { RouterModule } from '@angular/router';
 import { BtnProfileComponent } from '@layout/btn-profile/btn-profile.component';
-import { FabScrollToTopComponent } from '@layout/fab-scroll-to-top/fab-scroll-to-top.component';
-import { SidenavBodyComponent } from '@layout/sidenav-body/sidenav-body.component';
-import { SidenavHeaderComponent } from '@layout/sidenav-header/sidenav-header.component';
 
 /*
 **OPCIONAL**
