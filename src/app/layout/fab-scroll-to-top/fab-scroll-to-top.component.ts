@@ -1,10 +1,9 @@
 import { ScrollDispatcher, ScrollingModule } from '@angular/cdk/scrolling';
-import { Component, Input, NgZone, inject } from '@angular/core';
+import { Component, NgZone, inject } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { MatSidenavContent } from '@angular/material/sidenav';
-import { map, distinctUntilChanged, filter } from 'rxjs/operators';
+import { map, filter } from 'rxjs/operators';
 
 /*
 https://github.com/Frankistan/ng8fireblog/blob/master/src/app/layout/fabs/fab-scroll-to-top.component.ts
@@ -21,12 +20,12 @@ export class FabScrollToTopComponent {
     #scrollDispatcher = inject(ScrollDispatcher);
     #zone = inject(NgZone);
 
-    @Input() viewport!: MatSidenavContent;
-
-    lastScrollPosition: number = 0;
     offSet: number = 500;
+    currentPosition: number = 0;
+    lastPosition: number = 0;
+    viewport!: HTMLElement;
 
-    show = toSignal(
+    visible = toSignal(
         this.#scrollDispatcher.scrolled().pipe(
             filter((event: any) =>
                 (<HTMLElement>event.getElementRef().nativeElement).tagName ===
@@ -34,34 +33,33 @@ export class FabScrollToTopComponent {
                     ? true
                     : false,
             ),
-            map((cdk: any) => {
-                let visible = false;
+            map((event: any) => event?.getElementRef().nativeElement),
+            map((el: HTMLElement) => {
+                let show: boolean = false;
+                this.viewport = el;
                 this.#zone.run(() => {
-                    let scroll = cdk.measureScrollOffset('top');
+                    this.currentPosition = el.scrollTop;
 
                     switch (true) {
-                        case scroll == 0:
-                            visible = false;
+                        case this.currentPosition == 0: // TOP
+                            show = false;
                             break;
-
-                        case scroll > this.lastScrollPosition:
-                            visible = false;
+                        case this.currentPosition > this.lastPosition: // DOWN
+                            show = false;
                             break;
-                        case this.lastScrollPosition - this.offSet > 0:
-                            visible = true;
+                        case this.lastPosition - this.offSet >= 0: // UP
+                            show = true;
                             break;
 
                         default:
-                            visible = false;
+                            show = false;
                             break;
                     }
 
-                    this.lastScrollPosition = scroll;
+                    this.lastPosition = this.currentPosition;
                 });
-
-                return visible;
+                return show;
             }),
-            distinctUntilChanged(),
         ),
         { initialValue: false },
     );
