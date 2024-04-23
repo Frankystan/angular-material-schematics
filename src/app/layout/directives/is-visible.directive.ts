@@ -34,25 +34,16 @@ export class isVisibleDirective {
 
     isVisible = input.required({
         transform: (condition: boolean) => {
-            console.log(
-                'isMobile: ',
-                this.isMobile(),
-                'hasView: ',
-                this.#hasView,
-                'condition: ',
-                condition,
-            );
-            // condition = <boolean>condition;
-            if (this.isMobile()) {
-                if (condition && !this.#hasView) {
+            if (this.isMobile() && condition) {
+                if (!this.#hasView) {
                     this.#viewContainer.createEmbeddedView(this.#templateRef);
                     this.#hasView = true;
                 } else {
                     this.#viewContainer.clear();
                     this.#hasView = false;
                 }
-            } else {
-                if (condition && !this.#hasView) {
+            } else if (!this.isMobile() && !condition) {
+                if (!this.#hasView) {
                     this.#viewContainer.createEmbeddedView(this.#templateRef);
                     this.#hasView = true;
                 } else {
