@@ -1,13 +1,5 @@
 import { NgStyle } from '@angular/common';
-import {
-    Component,
-    Input,
-    OnInit,
-    Signal,
-    inject,
-    input,
-    signal,
-} from '@angular/core';
+import { Component, Signal, inject, input, signal } from '@angular/core';
 import { toSignal, toObservable } from '@angular/core/rxjs-interop';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -15,17 +7,13 @@ import { MatChipsModule } from '@angular/material/chips';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
 import { tPost } from '@app/custom-types/custom.type';
-import { DummyDataService } from '@shared/services/dummy-data.service';
 import { FabEditItemComponent } from '@layout/fab-edit-item/fab-edit-item.component';
-import { switchMap, of } from 'rxjs';
 import { SanitizePipe } from '@shared/pipes/sanitize.pipe';
-
-/*
-https://www.youtube.com/watch?v=DGk6rjD3AG0&t=456s
-*/
+import { DummyDataService } from '@shared/services/dummy-data.service';
+import { switchMap, of } from 'rxjs';
 
 @Component({
-    selector: 'app-card',
+    selector: 'app-post-show',
     standalone: true,
     imports: [
         MatChipsModule,
@@ -37,10 +25,10 @@ https://www.youtube.com/watch?v=DGk6rjD3AG0&t=456s
         NgStyle,
         SanitizePipe,
     ],
-    templateUrl: './card.component.html',
-    styleUrl: './card.component.scss',
+    templateUrl: './post-show.component.html',
+    styleUrl: './post-show.component.scss',
 })
-export class CardComponent {
+export class PostShowComponent {
     #dummyDataService = inject(DummyDataService);
 
     bookmarked = signal<boolean>(false);
@@ -52,14 +40,6 @@ export class CardComponent {
             switchMap((itemId) => of(this.#dummyDataService.getOne(itemId))),
         ),
     );
-
-    // OPCION 1 - con ngOnInit----------------
-    // @Input('id') id!: string;
-    // item!: tPost;
-
-    // ngOnInit() {
-    //     this.item = this.#dummyDataService.getOne(this.id);
-    // }
 
     bookmarkToogle() {
         this.bookmarked.set(!this.bookmarked());

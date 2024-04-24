@@ -1,0 +1,23 @@
+<mat-list>
+    @for (item of list; track item.id) {
+        <mat-list-item>
+            <img matListItemAvatar [src]="item.author.img" alt="..." />
+            <a [routerLink]="['/posts', item.id]">
+                <h4 matListItemTitle routerLink="/profile">{{ item.title }}</h4>
+                <span matListItemLine>{{ item.content }} </span>
+                <span matListItemLine
+                    >{{ item.createdAt }} - {{ item.author.displayName }}
+                </span>
+            </a>
+            <button
+                mat-icon-button
+                color="primary"
+                matListItemMeta
+                (click)="delete(item.id)"
+            >
+                <mat-icon> delete </mat-icon>
+            </button>
+        </mat-list-item>
+        <mat-divider></mat-divider>
+    }
+</mat-list>

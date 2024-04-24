@@ -11,10 +11,12 @@ import { FormComponent } from '@pages/form/form.component';
 import { CardComponent } from '@pages/card/card.component';
 import { GridComponent } from '@pages/grid/grid.component';
 import { GridListDemoComponent } from '@pages/grid-list-demo/grid-list-demo.component';
+import { PostComponent } from '@pages/posts/post.component';
+import { POST_ROUTES } from '@pages/posts/post.routes';
 
 export const APP_ROUTES: Routes = [
     { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
-
+    { path: 'card', component: CardComponent, title: 'Card' }, // profile
     { path: 'tree', component: TreeComponent, title: 'Tree' },
     { path: 'form', component: FormComponent, title: 'Form' },
     { path: 'list', component: ListComponent, title: 'List' },
@@ -30,7 +32,14 @@ export const APP_ROUTES: Routes = [
     { path: 'profile', component: ProfileComponent, title: 'Profile' },
     { path: 'drag-drop', component: DragDropComponent, title: 'Drag & Drop' },
     { path: 'dashboard', component: DashboardComponent, title: 'Dashboard' },
-    { path: 'card/:id', component: CardComponent, title: 'Card' },
+
+    {
+        path: 'posts',
+        component: PostComponent,
+        // Lazy load routes in a separate file
+        // loadChildren: () =>	import('./pages/posts/post.routes').then((r) => r.POST_ROUTES),
+        children: [...POST_ROUTES],
+    },
 
     { path: '**', redirectTo: '404', pathMatch: 'full' },
 ];

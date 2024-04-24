@@ -1,0 +1,26 @@
+mat-list-item {
+    height: 88px;
+
+    img {
+        margin: 1rem;
+    }
+
+    a {
+        text-decoration: none;
+        height: 88px;
+        display: inline-grid;
+        margin-top: 1.2rem;
+
+        h4 {
+            margin-bottom: -24px;
+        }
+        span:nth-child(2) {
+            margin-bottom: -20px;
+        }
+    }
+
+    .mdc-list-item__end {
+        display: flex;
+        align-self: center;
+    }
+}
