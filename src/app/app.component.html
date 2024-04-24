@@ -1,5 +1,6 @@
-<app-nav-toolbar [isMobile]="isMobile()" [drawer]="drawer" *isVisible="false" />
-
+@if (!isMobile()) {
+    <app-nav-toolbar [drawer]="drawer" />
+}
 <mat-sidenav-container [ngClass]="isMobile() ? 'is-mobile' : ''">
     <mat-sidenav
         #drawer
@@ -18,11 +19,9 @@
     </mat-sidenav>
 
     <mat-sidenav-content>
-        <app-nav-toolbar
-            [isMobile]="isMobile()"
-            [drawer]="drawer"
-            *isVisible="true"
-        />
+        @if (isMobile()) {
+            <app-nav-toolbar [drawer]="drawer" />
+        }
 
         <!-- Add Content Here -->
 

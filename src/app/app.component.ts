@@ -14,6 +14,7 @@ import { NavToolbarComponent } from '@layout/nav-toolbar/nav-toolbar.component';
 import { SidenavBodyComponent } from '@layout/sidenav-body/sidenav-body.component';
 import { SidenavHeaderComponent } from '@layout/sidenav-header/sidenav-header.component';
 import { map } from 'rxjs';
+import { LayoutService } from './services/layout.service';
 /*
 Scrolling
 https://stackoverflow.com/questions/47528852/angular-material-sidenav-cdkscrollable/50812763#50812763
@@ -46,19 +47,12 @@ https://juri.dev/blog/2018/05/dynamic-ui-with-cdk-portals/
     styleUrl: './app.component.scss',
 })
 export class AppComponent {
-    #breakpointObserver = inject(BreakpointObserver);
+    #layoutService = inject(LayoutService);
+    isMobile: Signal<boolean> = this.#layoutService.isMobile;
 
     @ViewChild('drawer', { static: true }) public drawer!: MatDrawer;
-    @ViewChild(MatSidenavContent, { static: true })
-    public content!: MatSidenavContent;
-    // drawer: Signal<MatSidenav | undefined> = viewChild('drawer');
 
-    isMobile: Signal<boolean> = toSignal(
-        this.#breakpointObserver
-            .observe(Breakpoints.XSmall)
-            .pipe(map((result) => result.matches)),
-        { initialValue: false },
-    );
+    // drawer: Signal<MatDrawer | undefined> = viewChild('drawer');
 
     close() {
         if (this.isMobile()) this.drawer.close();

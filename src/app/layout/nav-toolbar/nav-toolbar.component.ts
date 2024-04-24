@@ -1,8 +1,9 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Signal, inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDrawer } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { LayoutService } from '@app/services/layout.service';
 import { BtnProfileComponent } from '@layout/btn-profile/btn-profile.component';
 
 /*
@@ -27,8 +28,10 @@ he copiado esta linea en consola y funciona:
     styleUrl: './nav-toolbar.component.scss',
 })
 export class NavToolbarComponent {
-    @Input() isMobile!: boolean;
     @Input() drawer!: MatDrawer;
+
+    #layoutService = inject(LayoutService);
+    isMobile: Signal<boolean> = this.#layoutService.isMobile;
 
     // DISABLE SCROLL WHEN MAT-SIDENAV is opened
     // drawerToggle() {
