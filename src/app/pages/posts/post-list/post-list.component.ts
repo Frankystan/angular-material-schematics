@@ -8,7 +8,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { MatMenuModule } from '@angular/material/menu';
 import { RouterModule } from '@angular/router';
-import { tPost } from '@app/custom-types/custom.type';
+import { tPost } from '@shared/custom-types/custom.type';
 import { DeleteItemDialogComponent } from '@layout/delete-item-dialog/delete-item-dialog.component';
 import { DummyDataService } from '@shared/services/dummy-data.service';
 import { map } from 'rxjs';

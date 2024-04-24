@@ -27,9 +27,12 @@ export interface Fruit {
 }
 
 /*
+https://stackblitz.com/edit/angular-chip-with-autocomplete-and-validation?file=src%2Fapp%2Fapp.component.html
+
+
+
 https://www.youtube.com/watch?v=OR7AHU4u-AM
 https://stackblitz.com/edit/angular-9gjwo4-h4f9ux?file=app/chips-input-example.ts
-https://stackblitz.com/edit/angular-chip-with-autocomplete-and-validation?file=src%2Fapp%2Fapp.component.html
 https://dev.to/jdgamble555/validating-angular-material-chips-tags-43mp
 
 

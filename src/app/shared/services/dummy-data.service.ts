@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { tPost } from '@app/custom-types/custom.type';
+import { tPost } from '@shared/custom-types/custom.type';
 import { faker } from '@faker-js/faker/locale/es';
 
 @Injectable({

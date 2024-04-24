@@ -14,7 +14,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
-import { tPost } from '@app/custom-types/custom.type';
+import { tPost } from '@shared/custom-types/custom.type';
 import { DummyDataService } from '@shared/services/dummy-data.service';
 import { FabEditItemComponent } from '@layout/fab-edit-item/fab-edit-item.component';
 import { switchMap, of } from 'rxjs';
