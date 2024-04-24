@@ -1,12 +1,12 @@
 <mat-list>
-    @for (item of list; track item) {
+    @for (item of list; track item.id) {
         <mat-list-item>
-            <img matListItemAvatar [src]="item.image" alt="..." />
+            <img matListItemAvatar [src]="item.author.img" alt="..." />
             <a routerLink="/profile">
                 <h4 matListItemTitle routerLink="/profile">{{ item.title }}</h4>
                 <span matListItemLine>{{ item.content }} </span>
                 <span matListItemLine
-                    >{{ item.created_at }} - {{ item.author.displayName }}
+                    >{{ item.createdAt }} - {{ item.author.displayName }}
                 </span>
             </a>
             <button

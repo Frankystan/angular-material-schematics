@@ -12,6 +12,7 @@
         "lib": ["ES2022", "dom"],
         "module": "ES2022",
         "moduleResolution": "node",
+        "strictNullChecks": false,
         "noFallthroughCasesInSwitch": true,
         "noImplicitOverride": true,
         "noImplicitReturns": true,

@@ -1,0 +1,21 @@
+mat-card {
+    border-radius: 1rem;
+    margin: 0.5rem;
+
+    mat-card-content img {
+        max-width: 100%;
+    }
+
+    .post-card-header {
+        background-image: url("https://material.angular.io/assets/img/examples/shiba1.jpg");
+        background-size: cover;
+    }
+
+    .mdc-card__media {
+        align-self: center;
+    }
+
+    mat-card-actions {
+        padding: 1rem;
+    }
+}
