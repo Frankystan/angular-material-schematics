@@ -17,7 +17,6 @@ export const APP_ROUTES: Routes = [
 
     { path: 'tree', component: TreeComponent, title: 'Tree' },
     { path: 'form', component: FormComponent, title: 'Form' },
-    { path: 'card', component: CardComponent, title: 'Card' },
     { path: 'list', component: ListComponent, title: 'List' },
     { path: 'grid', component: GridComponent, title: 'Grid' },
     {
@@ -31,6 +30,7 @@ export const APP_ROUTES: Routes = [
     { path: 'profile', component: ProfileComponent, title: 'Profile' },
     { path: 'drag-drop', component: DragDropComponent, title: 'Drag & Drop' },
     { path: 'dashboard', component: DashboardComponent, title: 'Dashboard' },
+    { path: 'card/:id', component: CardComponent, title: 'Card' },
 
     { path: '**', redirectTo: '404', pathMatch: 'full' },
 ];

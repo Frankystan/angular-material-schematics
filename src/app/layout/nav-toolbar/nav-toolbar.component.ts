@@ -3,7 +3,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDrawer } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { LayoutService } from '@app/services/layout.service';
+import { LayoutService } from '@shared/services/layout.service';
 import { BtnProfileComponent } from '@layout/btn-profile/btn-profile.component';
 
 /*

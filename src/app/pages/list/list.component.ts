@@ -9,7 +9,7 @@ import { MatListModule } from '@angular/material/list';
 import { MatMenuModule } from '@angular/material/menu';
 import { RouterModule } from '@angular/router';
 import { tPost } from '@app/custom-types/custom.type';
-import { DummyDataService } from '@app/services/dummy-data.service';
+import { DummyDataService } from '@shared/services/dummy-data.service';
 import { faker } from '@faker-js/faker/locale/es';
 import { DeleteItemDialogComponent } from '@layout/delete-item-dialog/delete-item-dialog.component';
 import { map } from 'rxjs/operators';
@@ -39,7 +39,7 @@ export class ListComponent {
     #destroyRef = inject(DestroyRef);
     #dummyDataService = inject(DummyDataService);
 
-    list:tPost[] = this.#dummyDataService.getAll();
+    list: tPost[] = this.#dummyDataService.getAll();
 
     delete(id: string) {
         this.openDialog(id);

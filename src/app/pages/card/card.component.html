@@ -1,14 +1,13 @@
 <mat-card>
     <mat-card-header>
-        <div mat-card-avatar [src]="item.author.img"></div>
-        <mat-card-title>{{ item.title }}</mat-card-title>
-        <mat-card-subtitle
-            ><time>
-                {{ item.created_at * 1000 | amDateFormat: "DD-MM-YYYY HH:mm" }}
-                (
-                {{ item.created_at * 1000 | amLocale: locale() | amTimeAgo }} )
-            </time></mat-card-subtitle
-        >
+        <div
+            mat-card-avatar
+            class="card-avatar-header"
+            [ngStyle]="{  background: ' url(' + item()?.author.img + ')  no-repeat 0 0'  }"
+        ></div>
+        <mat-card-title>{{ item()?.title }}</mat-card-title>
+        <mat-card-subtitle>{{ item()?.createdAt }}</mat-card-subtitle>
+
         <span class="flex-spacer"></span>
         <div>
             <button mat-icon-button (click)="bookmarkToogle()">
@@ -19,22 +18,22 @@
         </div>
     </mat-card-header>
 
-    <!-- <img mat-card-image [ngSrc]="item.featured_image" height="240" width="400"/> -->
-    <img mat-card-image [src]="item.featured_image" />
+    <!-- <img mat-card-image [ngSrc]="item()?.featured_image" height="240" width="400"/> -->
+    <img mat-card-image [src]="item()?.featured_image" />
 
     <mat-card-content>
-        <div [innerHTML]="item.content | sanitize"></div>
+        <div [innerHTML]="item()?.content | sanitize"></div>
     </mat-card-content>
 
     <mat-divider class="inset"></mat-divider>
 
     <mat-card-actions>
         <mat-chip-listbox>
-            @for (tag of item.tags; track tag) {
-            <mat-chip>{{ tag }}</mat-chip>
+            @for (tag of item()?.tags; track tag) {
+                <mat-chip>{{ tag }}</mat-chip>
             }
         </mat-chip-listbox>
     </mat-card-actions>
 </mat-card>
 
-<fab-edit-post [id]="id" />
+<fab-edit-item [id]="id()" />

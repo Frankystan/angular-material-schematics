@@ -14,7 +14,7 @@ import { NavToolbarComponent } from '@layout/nav-toolbar/nav-toolbar.component';
 import { SidenavBodyComponent } from '@layout/sidenav-body/sidenav-body.component';
 import { SidenavHeaderComponent } from '@layout/sidenav-header/sidenav-header.component';
 import { map } from 'rxjs';
-import { LayoutService } from './services/layout.service';
+import { LayoutService } from './shared/services/layout.service';
 /*
 Scrolling
 https://stackoverflow.com/questions/47528852/angular-material-sidenav-cdkscrollable/50812763#50812763

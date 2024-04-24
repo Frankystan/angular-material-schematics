@@ -11,6 +11,10 @@ mat-card {
         background-size: cover;
     }
 
+    .card-avatar-header {
+        background-size: cover !important;
+    }
+
     .mdc-card__media {
         align-self: center;
     }

@@ -13,7 +13,7 @@ export const environment = {
         { link: 'grid', icon: 'grid_view', title: 'Grid' },
         { link: 'grid-demo', icon: 'grid_view', title: 'Grid List Demo' },
         { link: 'form', icon: 'description', title: 'Form' },
-        { link: 'card', icon: 'payment', title: 'Card' },
+        { link: 'card/70', icon: 'payment', title: 'Card' },
         { link: '', icon: '', title: '' },
         { link: 'settings', icon: 'settings', title: 'Settings' },
         { link: 'faq', icon: 'help', title: 'FAQ' },
