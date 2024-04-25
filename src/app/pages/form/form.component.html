@@ -1,7 +1,13 @@
 <mat-card class="example-card">
     <mat-card-header> </mat-card-header>
-    <form autocomplete="off" novalidate [formGroup]="form" (submit)="save()">
-        <mat-card-content>
+
+    <mat-card-content>
+        <form
+            [formGroup]="userForm"
+            (ngSubmit)="submitForm()"
+            autocomplete="off"
+            novalidate
+        >
             <!-- Firstname -->
             <mat-form-field appearance="outline">
                 <mat-label>Firstname *</mat-label>
@@ -11,9 +17,9 @@
                     id="firstName"
                     formControlName="firstName"
                 />
-                @if (form.invalid) {
+                @if (userForm.get("firstName")?.invalid) {
                     <mat-error>{{
-                        getErrorMessage("firstName", form)
+                        getErrorMessage("firstName", userForm)
                     }}</mat-error>
                 }
             </mat-form-field>
@@ -27,42 +33,44 @@
                     id="lastName"
                     formControlName="lastName"
                 />
-                @if (form.invalid) {
+                @if (userForm.get("lastName")?.invalid) {
                     <mat-error>{{
-                        getErrorMessage("lastName", form)
+                        getErrorMessage("lastName", userForm)
                     }}</mat-error>
                 }
             </mat-form-field>
 
-            <mat-form-field>
-                <mat-label>Favorite Fruits</mat-label>
-                <mat-chip-grid #chipGrid formArrayName="fruits">
-                    @for (
-                        fruit of fruits.controls;
-                        track fruit;
-                        let i = $index
-                    ) {
-                        <mat-chip-row (removed)="remove(i)">
-                            {{ fruit.value }}
+            <!-- Favorite fruits -->
+            <mat-form-field appearance="outline">
+                <mat-chip-grid #fruitList required formControlName="fruits">
+                    @for (fruit of user.fruits; track fruit) {
+                        <mat-chip-row
+                            [removable]="removable"
+                            (removed)="remove(fruit)"
+                        >
+                            {{ fruit }}
                             <button matChipRemove>
-                                <mat-icon>cancel</mat-icon>
+                                @if (removable) {
+                                    <mat-icon>cancel</mat-icon>
+                                }
                             </button>
                         </mat-chip-row>
                     }
+                    <input
+                        #fruitInput
+                        placeholder="Add your favorite fruits"
+                        [matChipInputFor]="fruitList"
+                        [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                        [matChipInputAddOnBlur]="addOnBlur"
+                        (matChipInputTokenEnd)="addFruit($event)"
+                        [matAutocomplete]="fruitsAutocomplete"
+                        formControlName="fruitInput"
+                    />
                 </mat-chip-grid>
 
-                <input
-                    #fruitInput
-                    placeholder="New Fruit..."
-                    (matChipInputTokenEnd)="add($event)"
-                    [matChipInputAddOnBlur]="addOnBlur"
-                    [matChipInputFor]="chipGrid"
-                    [matAutocomplete]="fruitsAutocomplete"
-                    formControlName="fruitInput"
-                />
                 <mat-autocomplete
                     #fruitsAutocomplete="matAutocomplete"
-                    (optionSelected)="selected($event)"
+                    (optionSelected)="selectFruit($event)"
                 >
                     @for (fruit of filteredFruits$ | async; track fruit) {
                         <mat-option [value]="fruit">
@@ -71,38 +79,22 @@
                     }
                 </mat-autocomplete>
 
-                <mat-autocomplete
-                    #fruitsAutocomplete="matAutocomplete"
-                    (optionSelected)="selected($event)"
-                >
-                    @for (fruit of filteredFruits$ | async; track fruit) {
-                        <mat-option [value]="fruit">
-                            {{ fruit }}
-                        </mat-option>
-                    }
-                </mat-autocomplete>
+                <mat-error>At least 1 fruit need to be added</mat-error>
             </mat-form-field>
 
             <!-- Submit -->
             <div class="button-wrapper">
-                <button mat-flat-button color="primary">Submit</button>
+                <button
+                    mat-flat-button
+                    color="primary"
+                    [disabled]="
+                        !userForm.valid &&
+                        (userForm.dirty || userForm.untouched)
+                    "
+                >
+                    Submit
+                </button>
             </div>
-        </mat-card-content>
-
-        <mat-divider></mat-divider>
-
-        <mat-card-actions align="end">
-            <button
-                type="submit"
-                color="primary"
-                mat-raised-button
-                [disabled]="!form.valid && (form.dirty || form.untouched)"
-            >
-                SAVE
-            </button>
-        </mat-card-actions>
-    </form>
-    <mat-card-footer>
-        <pre>{{ form.value | json }}</pre>
-    </mat-card-footer>
+        </form>
+    </mat-card-content>
 </mat-card>
