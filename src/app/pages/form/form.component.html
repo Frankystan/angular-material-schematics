@@ -5,10 +5,15 @@
             <!-- Firstname -->
             <mat-form-field appearance="outline">
                 <mat-label>Firstname *</mat-label>
-                <input matInput type="text" id="firstName" formControlName="firstName" />
+                <input
+                    matInput
+                    type="text"
+                    id="firstName"
+                    formControlName="firstName"
+                />
                 @if (form.invalid) {
-                <mat-error>{{
-                    getErrorMessage("firstName", form)
+                    <mat-error>{{
+                        getErrorMessage("firstName", form)
                     }}</mat-error>
                 }
             </mat-form-field>
@@ -16,10 +21,15 @@
             <!-- Lastname -->
             <mat-form-field appearance="outline">
                 <mat-label>LastName *</mat-label>
-                <input matInput type="text" id="lastName" formControlName="lastName" />
+                <input
+                    matInput
+                    type="text"
+                    id="lastName"
+                    formControlName="lastName"
+                />
                 @if (form.invalid) {
-                <mat-error>{{
-                    getErrorMessage("lastName", form)
+                    <mat-error>{{
+                        getErrorMessage("lastName", form)
                     }}</mat-error>
                 }
             </mat-form-field>
@@ -28,29 +38,48 @@
                 <mat-label>Favorite Fruits</mat-label>
                 <mat-chip-grid #chipGrid formArrayName="fruits">
                     @for (
-                    fruit of fruits.controls;
-                    track fruit;
-                    let i = $index
+                        fruit of fruits.controls;
+                        track fruit;
+                        let i = $index
                     ) {
-                    <mat-chip-row (removed)="remove(i)">
-                        {{ fruit.value }}
-                        <button matChipRemove>
-                            <mat-icon>cancel</mat-icon>
-                        </button>
-                    </mat-chip-row>
+                        <mat-chip-row (removed)="remove(i)">
+                            {{ fruit.value }}
+                            <button matChipRemove>
+                                <mat-icon>cancel</mat-icon>
+                            </button>
+                        </mat-chip-row>
                     }
                 </mat-chip-grid>
 
-                <input #fruitInput placeholder="New Fruit..." (matChipInputTokenEnd)="add($event)"
-                    [matChipInputAddOnBlur]="addOnBlur" [matChipInputFor]="chipGrid" [matAutocomplete]="fruitsAutocomplete"
-                    formControlName="fruitInput" />
-                <mat-autocomplete #fruitsAutocomplete="matAutocomplete" (optionSelected)="selected($event);">
-                    @for(fruit of filteredFruits | async;track fruit){
-                    <mat-option [value]="fruit">
-                        {{fruit}}
-                    </mat-option>
+                <input
+                    #fruitInput
+                    placeholder="New Fruit..."
+                    (matChipInputTokenEnd)="add($event)"
+                    [matChipInputAddOnBlur]="addOnBlur"
+                    [matChipInputFor]="chipGrid"
+                    [matAutocomplete]="fruitsAutocomplete"
+                    formControlName="fruitInput"
+                />
+                <mat-autocomplete
+                    #fruitsAutocomplete="matAutocomplete"
+                    (optionSelected)="selected($event)"
+                >
+                    @for (fruit of filteredFruits$ | async; track fruit) {
+                        <mat-option [value]="fruit">
+                            {{ fruit }}
+                        </mat-option>
                     }
+                </mat-autocomplete>
 
+                <mat-autocomplete
+                    #fruitsAutocomplete="matAutocomplete"
+                    (optionSelected)="selected($event)"
+                >
+                    @for (fruit of filteredFruits$ | async; track fruit) {
+                        <mat-option [value]="fruit">
+                            {{ fruit }}
+                        </mat-option>
+                    }
                 </mat-autocomplete>
             </mat-form-field>
 
@@ -63,8 +92,12 @@
         <mat-divider></mat-divider>
 
         <mat-card-actions align="end">
-            <button type="submit" color="primary" mat-raised-button
-                [disabled]="!form.valid && (form.dirty || form.untouched)">
+            <button
+                type="submit"
+                color="primary"
+                mat-raised-button
+                [disabled]="!form.valid && (form.dirty || form.untouched)"
+            >
                 SAVE
             </button>
         </mat-card-actions>

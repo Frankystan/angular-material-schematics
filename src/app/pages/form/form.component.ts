@@ -34,7 +34,7 @@ import {
     MatChipsModule,
 } from '@angular/material/chips';
 
-import { COMMA, ENTER } from '@angular/cdk/keycodes';
+import { COMMA, ENTER, R } from '@angular/cdk/keycodes';
 import { AsyncPipe, JsonPipe } from '@angular/common';
 import { tPost } from '@shared/custom-types/custom.type';
 import { getErrorMessage } from '@shared/utils';
@@ -46,12 +46,7 @@ import {
 export interface User {
     firstName: string;
     lastName: string;
-    fruits: Fruit[];
-}
-
-export interface Fruit {
-    id: number;
-    name: string;
+    fruits: string[];
 }
 
 /*
@@ -83,6 +78,9 @@ https://stackblitz.com/edit/ovb2sn?file=src%2Fapp%2Fchips-autocomplete-example.t
 https://github.com/angular/components/issues/26358
 
 https://stackblitz.com/edit/angular-6g9jz1-zkc8ak?file=src%2Fapp%2Fchips-input-example.ts,src%2Fapp%2Fchips-input-example.html
+
+
+https://stackoverflow.com/questions/46750182/angular-4-array-validation
 
 */
 
@@ -136,13 +134,11 @@ export class FormComponent implements OnInit {
     };
     addOnBlur = true;
     fruitCtrl = new FormControl('');
-    filteredFruits: Observable<string[]>;
+    filteredFruits$: Observable<string[]>;
 
     allFruits: string[] = ['Apple', 'Lemon', 'Lime', 'Orange', 'Strawberry'];
 
-    constructor() {
-
-    }
+    constructor() {}
 
     ngOnInit(): void {
         this.form = new FormGroup({
@@ -162,20 +158,10 @@ export class FormComponent implements OnInit {
                 (status) => (this.chipGrid.errorState = status === 'INVALID'),
             );
 
-        this.filteredFruits = this.form.get("fruitInput").valueChanges.pipe(
-            startWith(""),
-            map(value => this.fruitFilter(value))
+        this.filteredFruits$ = this.form.get('fruitInput').valueChanges.pipe(
+            startWith(''),
+            map((value) => this.fruitFilter(value)),
         );
-
-
-        // this.filteredFruits = this.form.get('fruitInput').valueChanges.pipe(
-        //     startWith(null),
-        //     tap(fruit => console.log("fruta: ", fruit)
-        //     ),
-        //     map((fruit: string | null) =>
-        //         fruit ? this._filter(fruit) : this.allFruits.slice(),
-        //     ),
-        // );
     }
 
     get fruits() {
@@ -195,70 +181,80 @@ export class FormComponent implements OnInit {
         event.chipInput!.clear();
     }
 
-    remove(index: any): void {
-        this.fruits.removeAt(index);
-        console.log(`Fruta eliminada: ${index}`);
-    }
+    // remove(index: any): void {
+    //     this.fruits.removeAt(index);
+    //     console.log(`Fruta eliminada: ${index}`);
+    // }
 
-    public selected(event: MatAutocompleteSelectedEvent): void {
+    selected(event: MatAutocompleteSelectedEvent): void {
         if (!event.option) {
             return;
         }
 
         const value = event.option.value;
-        console.log(
-            '🚀 ~ file: linea:208 ~ value :',
-            value,
-        );
+        console.log('🚀 ~ file: linea:208 ~ value :', value);
 
-        if (
-            value &&
-            !this.user.fruits.includes(value)
-        ) {
-            console.log("paso por aki");
-            
+        if (value && !this.user.fruits.includes(value)) {
+            console.log('paso por aki');
+
             this.fruits.push(new FormControl(event.option.viewValue));
             // this.form.get('fruits').setValue(this.user.fruits);
             this.form.get('fruitInput').setValue('');
         }
     }
 
+    // private fruitFilter(value: any) {
+    //     const filterValue =
+    //         value === null || value instanceof Object
+    //             ? ''
+    //             : value.toLowerCase();
+    //     const matches = this.allFruits.filter((fruit) =>
+    //         fruit.toLowerCase().includes(filterValue),
+    //     );
+    //     const formValue = this.form.get('fruits').value;
+
+    //     let f =
+    //         formValue === null
+    //             ? matches
+    //             : matches.filter((x) => !formValue.find((y: any) => y === x));
+    //     return [...f];
+    // }
+
+    remove(index: any): void {
+        this.fruits.removeAt(index);
+        if (index >= 0) {
+            this.user.fruits.splice(index, 1);
+            //   this.form.get("fruits").setValue(this.user.fruits);
+            this.form.setControl(
+                'fuits',
+                this.#fb.array(this.user.fruits || []),
+            );
+            this.form.get('fruitInput').setValue('');
+        }
+    }
+
     private fruitFilter(value: any) {
         const filterValue =
-          value === null || value instanceof Object ? "" : value.toLowerCase();
-        const matches = this.allFruits.filter(fruit =>
-          fruit.toLowerCase().includes(filterValue)
+            value === null || value instanceof Object
+                ? ''
+                : value.toLowerCase();
+        const matches = this.allFruits.filter((fruit) =>
+            fruit.toLowerCase().includes(filterValue),
         );
-        const formValue = this.form.get("fruits").value;
+        const formValue = this.form.get('fruits').value;
 
-        let f = formValue === null
-        ? matches
-        : matches.filter(x => !formValue.find((y:any) => y === x));
-        return [...f]
-      }
+        let r =
+            formValue === null
+                ? matches
+                : matches.filter((x) => !formValue.find((y: any) => y === x));
+
+        return r;
+    }
 
     save() {
         console.log(
             '🚀 ~ file: linea:198 ~ Formulario ~ save:',
             this.form.value,
         );
-    }
-
-    removeItem<T>(arr: Array<T>, value: T): Array<T> {
-        const index = arr.indexOf(value);
-        if (index > -1) {
-            arr.splice(index, 1);
-        }
-        return arr;
-    }
-
-    private validateFruits(fruits: FormControl) {
-        if (fruits.value && fruits.value.length === 0) {
-            return {
-                validateFruitsArray: { valid: false },
-            };
-        }
-
-        return null;
     }
 }
