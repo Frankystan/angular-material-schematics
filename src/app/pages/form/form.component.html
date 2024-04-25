@@ -1,72 +1,56 @@
 <mat-card class="example-card">
-    <mat-card-header>
-        <mat-card-title>Login Form</mat-card-title>
-        <!-- <mat-card-subtitle>Dog Breed</mat-card-subtitle> -->
-    </mat-card-header>
+    <mat-card-header> </mat-card-header>
     <form autocomplete="off" novalidate [formGroup]="form" (submit)="save()">
         <mat-card-content>
-            <mat-form-field>
-                <mat-label>Enter your email</mat-label>
+            <!-- Firstname -->
+
+            <mat-form-field appearance="outline">
+                <mat-label>Firstname *</mat-label>
                 <input
                     matInput
-                    (blur)="updateErrorMessage()"
-                    required
-                    formControlName="email"
+                    type="text"
+                    id="firstName"
+                    formControlName="firstName"
                 />
-                @if (email.invalid) {
-                    <mat-error>{{ errorMessage }}</mat-error>
+
+                @if (form.invalid) {
+                    <mat-error>{{
+                        getErrorMessage("firstName", form)
+                    }}</mat-error>
                 }
             </mat-form-field>
-            <mat-form-field>
-                <mat-label>Enter your password</mat-label>
+
+            <!-- Lastname -->
+
+            <mat-form-field appearance="outline">
+                <mat-label>lastName *</mat-label>
                 <input
                     matInput
-                    [type]="hide ? 'password' : 'text'"
-                    formControlName="password"
+                    type="text"
+                    id="lastName"
+                    formControlName="lastName"
                 />
-                <button
-                    mat-icon-button
-                    matSuffix
-                    (click)="hide = !hide"
-                    [attr.aria-label]="'Hide password'"
-                    [attr.aria-pressed]="hide"
-                >
-                    <mat-icon>{{
-                        hide ? "visibility_off" : "visibility"
-                    }}</mat-icon>
-                </button>
+
+                @if (form.invalid) {
+                    <mat-error>{{
+                        getErrorMessage("lastName", form)
+                    }}</mat-error>
+                }
             </mat-form-field>
 
-            <!-- <mat-form-field class="example-chip-list">
-        <mat-label>Favorite Fruits</mat-label>
-        <mat-chip-grid #chipGrid aria-label="Enter fruits">
-          @for (fruit of fruits; track fruit) {
-          <mat-chip-row (removed)="remove(fruit)">
-            {{ fruit.name }}
-            <button matChipRemove [attr.aria-label]="'remove ' + fruit.name">
-              <mat-icon>cancel</mat-icon>
-            </button>
-          </mat-chip-row>
-          }
-          <input
-            placeholder="New fruit..."
-            [matChipInputFor]="chipGrid"
-            [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-            [matChipInputAddOnBlur]="addOnBlur"
-            (matChipInputTokenEnd)="add($event)"
-          />
-        </mat-chip-grid>
-      </mat-form-field> -->
-
-            <mat-form-field class="example-form-field">
-                <mat-label>Video keywords</mat-label>
-                <mat-chip-grid #chipGrid aria-label="Enter keywords">
-                    @for (keyword of keywords; track keyword) {
-                        <mat-chip-row (removed)="removeKeyword(keyword)">
-                            {{ keyword }}
+            <mat-form-field class="example-chip-list">
+                <mat-label>Favorite Fruits</mat-label>
+                <mat-chip-grid
+                    #chipGrid
+                    aria-label="Fruit selection"
+                    formArrayName="fruits"
+                >
+                    @for (fruit of fruits; track fruit) {
+                        <mat-chip-row (removed)="remove(fruit)">
+                            {{ fruit }}
                             <button
                                 matChipRemove
-                                aria-label="'remove ' + keyword"
+                                [attr.aria-label]="'remove ' + fruit"
                             >
                                 <mat-icon>cancel</mat-icon>
                             </button>
@@ -74,15 +58,26 @@
                     }
                 </mat-chip-grid>
                 <input
-                    placeholder="New keyword..."
-                    formControlName="kwControl"
+                    placeholder="New Fruit..."
+                    #fruitInput
                     [matChipInputFor]="chipGrid"
-                    [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-                    [matChipInputAddOnBlur]="addOnBlur"
-                    [matChipInputFor]="chipGrid"
+                    [matAutocomplete]="auto"
                     (matChipInputTokenEnd)="add($event)"
                 />
+                <mat-autocomplete
+                    #auto="matAutocomplete"
+                    (optionSelected)="selected($event)"
+                >
+                    @for (fruit of filteredFruits | async; track fruit) {
+                        <mat-option [value]="fruit">{{ fruit }}</mat-option>
+                    }
+                </mat-autocomplete>
             </mat-form-field>
+
+            <!-- Submit -->
+            <div class="button-wrapper">
+                <button mat-flat-button color="primary">Submit</button>
+            </div>
         </mat-card-content>
 
         <mat-divider></mat-divider>

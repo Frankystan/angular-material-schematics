@@ -16,23 +16,18 @@ import { POST_ROUTES } from '@pages/posts/post.routes';
 
 export const APP_ROUTES: Routes = [
     { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
-    { path: 'card', component: CardComponent, title: 'Card' }, // profile
-    { path: 'tree', component: TreeComponent, title: 'Tree' },
+    // { path: 'card', component: CardComponent, title: 'Card' },
+    // { path: 'tree', component: TreeComponent, title: 'Tree' },
     { path: 'form', component: FormComponent, title: 'Form' },
-    { path: 'list', component: ListComponent, title: 'List' },
-    { path: 'grid', component: GridComponent, title: 'Grid' },
-    {
-        path: 'grid-demo',
-        component: GridListDemoComponent,
-        title: 'Grid List Demo',
-    },
-    { path: 'table', component: TableComponent, title: 'Table' },
+    // { path: 'list', component: ListComponent, title: 'List' },
+    // { path: 'grid', component: GridComponent, title: 'Grid' },
     { path: '404', component: NotFoundComponent, title: '404' },
-    { path: 'address', component: AddressComponent, title: 'Address' },
-    { path: 'profile', component: ProfileComponent, title: 'Profile' },
-    { path: 'drag-drop', component: DragDropComponent, title: 'Drag & Drop' },
-    { path: 'dashboard', component: DashboardComponent, title: 'Dashboard' },
-
+    // { path: 'table', component: TableComponent, title: 'Table' },
+    // { path: 'address', component: AddressComponent, title: 'Address' },
+    // { path: 'profile', component: ProfileComponent, title: 'Profile' },
+    // { path: 'dashboard', component: DashboardComponent, title: 'Dashboard' },
+    // { path: 'drag-drop', component: DragDropComponent, title: 'Drag & Drop' },
+    // { path: 'grid-demo', component: GridListDemoComponent, title: 'Grid List Demo' },
     {
         path: 'posts',
         component: PostComponent,
