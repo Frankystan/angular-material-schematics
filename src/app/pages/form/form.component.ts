@@ -64,12 +64,14 @@ https://stackblitz.com/edit/angular-9gjwo4-h4f9ux?file=app/chips-input-example.t
 https://dev.to/jdgamble555/validating-angular-material-chips-tags-43mp
 
 
-
+https://medium.com/@akaravale/angular-reactive-formarray-adding-multiple-validation-rules-to-one-input-field-175b08d5bac9
+https://www.samarpaninfotech.com/blog/angular-n-level-formarray-with-reactive-form-validation/
 */
 
 /*
 FORMULARIO CON VALIDACIONES
 https://www.lindseybroos.be/2020/06/angular-material-chiplist-with-autocomplete-and-validation/
+
 
 
 https://stackoverflow.com/questions/56492325/how-to-setup-angular-material-chip-contol-with-reactive-forms
@@ -126,14 +128,15 @@ export class FormComponent implements OnInit {
 
     // separatorKeysCodes: number[] = [ENTER, COMMA];
     form!: FormGroup;
-    user: User = {
-        firstName: 'Lindsey',
-        lastName: 'Broos',
-        fruits: [],
-    };
+    // user: User = {
+    //     firstName: 'Lindsey',
+    //     lastName: 'Broos',
+    //     fruits: [],
+    // };
+    addOnBlur = true;
     fruitCtrl = new FormControl('');
     filteredFruits: Observable<string[]>;
-    fruits: string[] = ['Lemon'];
+
     allFruits: string[] = ['Apple', 'Lemon', 'Lime', 'Orange', 'Strawberry'];
 
     constructor() {
@@ -146,43 +149,45 @@ export class FormComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.form = this.#fb.group({
-            firstName: [this.user.firstName, Validators.required],
-            lastName: [this.user.lastName, Validators.required],
+        // this.form = this.#fb.group({
+        //     firstName: [this.user.firstName, Validators.required],
+        //     lastName: [this.user.lastName, Validators.required],
 
-            // fruits: this.#fb.array( [this.user.fruits, this.validateFruits])
-            fruits: this.#fb.array(this.user.fruits),
+        //     fruits: this.#fb.array( [this.user.fruits, this.validateFruits])
+        //     fruits: this.#fb.array([]),
+        // });
+
+        this.form = new FormGroup({
+            fruits: new FormArray([]),
         });
     }
 
+    get fruits() {
+        return this.form.controls['fruits'] as FormArray;
+    }
+
     add(event: MatChipInputEvent): void {
+        const input = event.chipInput?.inputElement;
+
         const value = (event.value || '').trim();
 
-        // Add our fruit
         if (value) {
-            this.fruits.push(value);
+            this.fruits.push(new FormControl(value));
         }
 
         // Clear the input value
         event.chipInput!.clear();
-
-        this.fruitCtrl.setValue(null);
     }
 
-    remove(fruit: string): void {
-        const index = this.fruits.indexOf(fruit);
-
-        if (index >= 0) {
-            this.fruits.splice(index, 1);
-
-            console.log(`Fruta eliminada: ${fruit}`);
-        }
+    remove(index: any): void {
+        this.fruits.removeAt(index);
+        console.log(`Fruta eliminada: ${index}`);
     }
 
     selected(event: MatAutocompleteSelectedEvent): void {
-        this.fruits.push(event.option.viewValue);
+        this.fruits.push(new FormControl(event.option.viewValue));
         this.fruitInput.nativeElement.value = '';
-        this.fruitCtrl.setValue(null);
+        // this.fruitCtrl.setValue(null);
     }
 
     private _filter(value: string): string[] {
