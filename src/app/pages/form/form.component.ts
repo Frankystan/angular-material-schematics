@@ -6,7 +6,6 @@ import {
     ViewChild,
     inject,
 } from '@angular/core';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import {
     FormArray,
     FormBuilder,
@@ -16,6 +15,20 @@ import {
     ReactiveFormsModule,
     Validators,
 } from '@angular/forms';
+import {
+    MAT_CHIPS_DEFAULT_OPTIONS,
+    MatChipGrid,
+    MatChipInputEvent,
+    MatChipsModule,
+} from '@angular/material/chips';
+import {
+    MatAutocompleteSelectedEvent,
+    MatAutocompleteModule,
+} from '@angular/material/autocomplete';
+import { AsyncPipe, JsonPipe } from '@angular/common';
+import { COMMA, ENTER } from '@angular/cdk/keycodes';
+import { getErrorMessage } from '@shared/utils';
+import { map, startWith } from 'rxjs/operators';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatDividerModule } from '@angular/material/divider';
@@ -23,31 +36,13 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { Observable } from 'rxjs';
-import { map, startWith, tap } from 'rxjs/operators';
-import {
-    MAT_CHIPS_DEFAULT_OPTIONS,
-    MatChipEditedEvent,
-    MatChipGrid,
-    MatChipInputEvent,
-    MatChipListbox,
-    MatChipOption,
-    MatChipsModule,
-} from '@angular/material/chips';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
-import { COMMA, ENTER, R } from '@angular/cdk/keycodes';
-import { AsyncPipe, JsonPipe } from '@angular/common';
-import { tPost } from '@shared/custom-types/custom.type';
-import { getErrorMessage } from '@shared/utils';
-import {
-    MatAutocompleteSelectedEvent,
-    MatAutocompleteModule,
-} from '@angular/material/autocomplete';
-
-export interface User {
+export type User = {
     firstName: string;
     lastName: string;
-    fruits: string[];
-}
+    fruits: Array<string>;
+};
 
 /*
 https://stackblitz.com/edit/angular-chip-with-autocomplete-and-validation?file=src%2Fapp%2Fapp.component.html
@@ -94,10 +89,6 @@ https://stackoverflow.com/questions/46750182/angular-4-array-validation
         MatAutocompleteModule,
         MatButtonModule,
         MatCardModule,
-        MatChipGrid,
-        MatChipListbox,
-        MatChipOption,
-        MatChipOption,
         MatChipsModule,
         MatDividerModule,
         MatFormFieldModule,
@@ -125,43 +116,43 @@ export class FormComponent implements OnInit {
 
     getErrorMessage = getErrorMessage;
 
-    // separatorKeysCodes: number[] = [ENTER, COMMA];
     form!: FormGroup;
     user: User = {
-        firstName: 'Lindsey',
-        lastName: 'Broos',
+        firstName: '',
+        lastName: '',
         fruits: [],
     };
     addOnBlur = true;
-    fruitCtrl = new FormControl('');
-    filteredFruits$: Observable<string[]>;
-
     allFruits: string[] = ['Apple', 'Lemon', 'Lime', 'Orange', 'Strawberry'];
 
-    constructor() {}
+    filteredFruits$: Observable<string[]>;
 
     ngOnInit(): void {
-        this.form = new FormGroup({
-            firstName: new FormControl(this.user.firstName, [
-                Validators.required,
-            ]),
-            lastName: new FormControl(this.user.lastName, [
-                Validators.required,
-            ]),
-            fruitInput: new FormControl(null),
-            fruits: new FormArray([]),
-        });
+        this.buildForm();
 
         this.form
             .get('fruits')
-            .statusChanges.subscribe(
+            .statusChanges.pipe(takeUntilDestroyed(this.#destroyRef))
+            .subscribe(
                 (status) => (this.chipGrid.errorState = status === 'INVALID'),
             );
 
         this.filteredFruits$ = this.form.get('fruitInput').valueChanges.pipe(
             startWith(''),
             map((value) => this.fruitFilter(value)),
+            takeUntilDestroyed(this.#destroyRef),
         );
+    }
+
+    buildForm() {
+        this.form = new FormGroup({
+            firstName: new FormControl('Fran', [Validators.required]),
+            lastName: new FormControl('Fontanes Fernandez', [
+                Validators.required,
+            ]),
+            fruitInput: new FormControl(null),
+            fruits: new FormArray([]),
+        });
     }
 
     get fruits() {
@@ -170,55 +161,35 @@ export class FormComponent implements OnInit {
 
     add(event: MatChipInputEvent): void {
         const input = event.chipInput?.inputElement;
-
         const value = (event.value || '').trim();
 
         if (value) {
-            this.fruits.push(new FormControl(value));
+            let matches = this.allFruits.filter(
+                (fruit) => fruit.toLowerCase() === value,
+            );
+            let formValue = this.form.get('fruits').value;
+            let matchesNotYetSelected =
+                formValue === null
+                    ? matches
+                    : matches.filter(
+                          (x) => !formValue.find((y: any) => y === x),
+                      );
+            if (matchesNotYetSelected.length === 1) {
+                this.user.fruits.push(matchesNotYetSelected[0]);
+
+                // this.form.get("fruits").setValue(this.user.fruits);
+                this.fruits.push(new FormControl(value));
+
+                this.form.get('fruitInput').setValue('');
+            }
         }
 
-        // Clear the input value
-        event.chipInput!.clear();
-    }
-
-    // remove(index: any): void {
-    //     this.fruits.removeAt(index);
-    //     console.log(`Fruta eliminada: ${index}`);
-    // }
-
-    selected(event: MatAutocompleteSelectedEvent): void {
-        if (!event.option) {
-            return;
-        }
-
-        const value = event.option.value;
-        console.log('🚀 ~ file: linea:208 ~ value :', value);
-
-        if (value && !this.user.fruits.includes(value)) {
-            console.log('paso por aki');
-
-            this.fruits.push(new FormControl(event.option.viewValue));
-            // this.form.get('fruits').setValue(this.user.fruits);
-            this.form.get('fruitInput').setValue('');
+        // Reset the input value
+        if (input) {
+            input.value = '';
+            // event.chipInput!.clear();
         }
     }
-
-    // private fruitFilter(value: any) {
-    //     const filterValue =
-    //         value === null || value instanceof Object
-    //             ? ''
-    //             : value.toLowerCase();
-    //     const matches = this.allFruits.filter((fruit) =>
-    //         fruit.toLowerCase().includes(filterValue),
-    //     );
-    //     const formValue = this.form.get('fruits').value;
-
-    //     let f =
-    //         formValue === null
-    //             ? matches
-    //             : matches.filter((x) => !formValue.find((y: any) => y === x));
-    //     return [...f];
-    // }
 
     remove(index: any): void {
         this.fruits.removeAt(index);
@@ -226,7 +197,24 @@ export class FormComponent implements OnInit {
             this.user.fruits.splice(index, 1);
             //   this.form.get("fruits").setValue(this.user.fruits);
             this.form.setControl(
-                'fuits',
+                'fruits',
+                this.#fb.array(this.user.fruits || []),
+            );
+            this.form.get('fruitInput').setValue('');
+        }
+    }
+
+    public selected(event: MatAutocompleteSelectedEvent): void {
+        if (!event.option) {
+            return;
+        }
+
+        const value = event.option.value;
+
+        if (value && !this.user.fruits.includes(value)) {
+            this.user.fruits.push(value);
+            this.form.setControl(
+                'fruits',
                 this.#fb.array(this.user.fruits || []),
             );
             this.form.get('fruitInput').setValue('');
@@ -234,27 +222,15 @@ export class FormComponent implements OnInit {
     }
 
     private fruitFilter(value: any) {
-        const filterValue =
-            value === null || value instanceof Object
-                ? ''
-                : value.toLowerCase();
+        const filterValue = value === null ? '' : value.toLowerCase();
         const matches = this.allFruits.filter((fruit) =>
             fruit.toLowerCase().includes(filterValue),
         );
         const formValue = this.form.get('fruits').value;
-
-        let r =
-            formValue === null
-                ? matches
-                : matches.filter((x) => !formValue.find((y: any) => y === x));
-
-        return r;
+        return formValue === null
+            ? matches
+            : matches.filter((x) => !formValue.find((y: any) => y === x));
     }
 
-    save() {
-        console.log(
-            '🚀 ~ file: linea:198 ~ Formulario ~ save:',
-            this.form.value,
-        );
-    }
+    save() {}
 }
