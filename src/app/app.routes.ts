@@ -13,12 +13,16 @@ import { GridComponent } from '@pages/grid/grid.component';
 import { GridListDemoComponent } from '@pages/grid-list-demo/grid-list-demo.component';
 import { PostComponent } from '@pages/posts/post.component';
 import { POST_ROUTES } from '@pages/posts/post.routes';
+import { LoginComponent } from '@pages/auth/login/login.component';
+import { RegisterComponent } from '@pages/auth/register/register.component';
 
 export const APP_ROUTES: Routes = [
     { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
     // { path: 'card', component: CardComponent, title: 'Card' },
     // { path: 'tree', component: TreeComponent, title: 'Tree' },
     { path: 'form', component: FormComponent, title: 'Form' },
+    { path: 'login', component: LoginComponent, title: 'Login Form' },
+    { path: 'register', component: RegisterComponent, title: 'Register Form' },
     // { path: 'list', component: ListComponent, title: 'List' },
     // { path: 'grid', component: GridComponent, title: 'Grid' },
     { path: '404', component: NotFoundComponent, title: '404' },

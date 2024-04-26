@@ -1,0 +1,19 @@
+mat-card {
+    border-radius: 1rem;
+    margin: 0.5rem;
+
+    min-width: 28rem;
+
+    mat-card-title {
+        display: flex;
+        width: max-content;
+    }
+
+    mat-form-field {
+        width: 100%;
+    }
+
+    mat-card-actions {
+        padding: 1rem;
+    }
+}

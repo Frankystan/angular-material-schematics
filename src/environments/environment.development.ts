@@ -2,6 +2,8 @@ export const environment = {
     sidenav: [
         { link: 'form', icon: 'description', title: 'Form' },
         { link: 'list', icon: 'dns', title: 'List' },
+        { link: 'login', icon: 'edit_document', title: 'Login form' },
+        { link: 'register', icon: 'edit_document', title: 'Register form' },
         // { link: 'table', icon: 'table', title: 'Table' },
         // { link: 'card', icon: 'payment', title: 'Card' },
         // { link: 'grid', icon: 'grid_view', title: 'Grid' },
