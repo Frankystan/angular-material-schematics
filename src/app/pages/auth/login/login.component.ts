@@ -1,5 +1,5 @@
 import { JsonPipe } from '@angular/common';
-import { Component, OnInit, signal } from '@angular/core';
+import { Component, OnInit, computed, signal } from '@angular/core';
 import {
     FormGroup,
     FormControl,
@@ -36,10 +36,10 @@ https://briantree.se/using-the-angular-cdk-trap-focus-directive/
     styleUrl: './login.component.scss',
 })
 export class LoginComponent implements OnInit {
-    hide: boolean = true;
-    form!: FormGroup;
-
     getErrorMessage = getErrorMessage;
+
+    hide = signal(true);
+    form!: FormGroup;
 
     ngOnInit(): void {
         this.buildForm();
@@ -58,10 +58,6 @@ export class LoginComponent implements OnInit {
                 Validators.maxLength(25),
             ]),
         });
-    }
-
-    hiding(event: any) {
-        this.hide = event;
     }
 
     save() {}

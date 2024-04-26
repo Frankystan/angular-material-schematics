@@ -40,12 +40,16 @@
                     type="password"
                     matInput
                     formControlName="password"
-                    [type]="hide ? 'password' : 'text'"
+                    [type]="hide() ? 'password' : 'text'"
                     tabindex="3"
                 />
-                <mat-icon matSuffix (click)="hide = !hide">{{
-                    hide ? "visibility" : "visibility_off"
-                }}</mat-icon>
+                
+                <mat-icon
+                    matSuffix
+                    visibilityPasswordIcon
+                    (onChange)="hide.set($event)"
+                ></mat-icon>
+                
                 @if (form.get("password")?.invalid) {
                     <mat-error>{{
                         getErrorMessage("password", form)
@@ -59,12 +63,14 @@
                     type="password"
                     matInput
                     formControlName="confirmPassword"
-                    [type]="hide ? 'password' : 'text'"
+                    [type]="hide() ? 'password' : 'text'"
                     tabindex="4"
                 />
-                <mat-icon matSuffix (click)="hide = !hide">{{
-                    hide ? "visibility" : "visibility_off"
-                }}</mat-icon>
+                <mat-icon
+                    matSuffix
+                    visibilityPasswordIcon
+                    (onChange)="hide.set($event)"
+                ></mat-icon>
                 @if (form.get("confirmPassword")?.invalid) {
                     <mat-error>{{
                         getErrorMessage("confirmPassword", form)

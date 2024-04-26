@@ -28,14 +28,14 @@
                     type="password"
                     matInput
                     formControlName="password"
-                    [type]="hide ? 'password' : 'text'"
+                    [type]="hide() ? 'password' : 'text'"
                     tabindex="2"
                 />
 
                 <mat-icon
                     matSuffix
                     visibilityPasswordIcon
-                    (onChange)="hiding($event)"
+                    (onChange)="hide.set($event)"
                 ></mat-icon>
 
                 @if (form.get("password")?.invalid) {

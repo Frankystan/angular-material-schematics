@@ -1,6 +1,6 @@
 import { A11yModule } from '@angular/cdk/a11y';
 import { JsonPipe } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, signal } from '@angular/core';
 import {
     FormGroup,
     FormControl,
@@ -11,6 +11,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
+import { VisibilityPasswordIconDirective } from '@shared/directives/visibility-password-icon.directive';
 import { getErrorMessage } from '@shared/utils';
 import { matchValidator } from '@shared/validators/match-password.validator';
 
@@ -25,15 +26,16 @@ import { matchValidator } from '@shared/validators/match-password.validator';
         JsonPipe,
         ReactiveFormsModule,
         A11yModule,
+        VisibilityPasswordIconDirective
     ],
     templateUrl: './register.component.html',
     styleUrl: './register.component.scss',
 })
 export class RegisterComponent implements OnInit {
-    hide: boolean = true;
-    form!: FormGroup;
-
     getErrorMessage = getErrorMessage;
+
+    hide = signal(true);
+    form!: FormGroup;
 
     ngOnInit(): void {
         this.buildForm();
