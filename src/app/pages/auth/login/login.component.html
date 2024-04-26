@@ -4,18 +4,23 @@
     </mat-card-header>
     <form autocomplete="off" novalidate [formGroup]="form" (submit)="save()">
         <mat-card-content>
-            <mat-form-field>
-                <mat-label>Email</mat-label>
-                <input
-                    type="email"
-                    matInput
-                    formControlName="email"
-                    placeholder="Ex. example@domain.com"
-                />
-                @if (form.get("email")?.invalid) {
-                    <mat-error>{{ getErrorMessage("email", form) }}</mat-error>
-                }
-            </mat-form-field>
+            <div cdkTrapFocus [cdkTrapFocusAutoCapture]="true">
+                <mat-form-field>
+                    <mat-label>Email</mat-label>
+                    <input
+                        type="email"
+                        matInput
+                        formControlName="email"
+                        placeholder="Ex. example@domain.com"
+                        tabindex="1"
+                    />
+                    @if (form.get("email")?.invalid) {
+                        <mat-error>{{
+                            getErrorMessage("email", form)
+                        }}</mat-error>
+                    }
+                </mat-form-field>
+            </div>
 
             <mat-form-field>
                 <mat-label>Password</mat-label>
@@ -24,10 +29,13 @@
                     matInput
                     formControlName="password"
                     [type]="hide ? 'password' : 'text'"
+                    tabindex="2"
                 />
-                <mat-icon matSuffix (click)="hide = !hide">{{
-                    hide ? "visibility" : "visibility_off"
-                }}</mat-icon>
+                <!-- <mat-icon matSuffix (click)="changeVisibility()">{{
+                    visibilityIcon()
+                }}</mat-icon> -->
+                <mat-icon matSuffix visibilityPasswordIcon>mode_edit</mat-icon>
+                <!-- <mat-icon matSuffix *>mode_edit</mat-icon> -->
                 @if (form.get("password")?.invalid) {
                     <mat-error>{{
                         getErrorMessage("password", form)

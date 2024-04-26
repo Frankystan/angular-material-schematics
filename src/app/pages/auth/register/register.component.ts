@@ -1,3 +1,4 @@
+import { A11yModule } from '@angular/cdk/a11y';
 import { JsonPipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import {
@@ -23,6 +24,7 @@ import { matchValidator } from '@shared/validators/match-password.validator';
         MatInputModule,
         JsonPipe,
         ReactiveFormsModule,
+        A11yModule,
     ],
     templateUrl: './register.component.html',
     styleUrl: './register.component.scss',
@@ -34,6 +36,10 @@ export class RegisterComponent implements OnInit {
     getErrorMessage = getErrorMessage;
 
     ngOnInit(): void {
+        this.buildForm();
+    }
+
+    buildForm() {
         this.form = new FormGroup({
             displayName: new FormControl('Fran', [Validators.required]),
             email: new FormControl('fffernandez84@gmail.com', [
