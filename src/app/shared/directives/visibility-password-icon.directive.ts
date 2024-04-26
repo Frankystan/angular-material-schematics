@@ -1,7 +1,10 @@
 import {
     Directive,
     ElementRef,
+    EventEmitter,
     HostListener,
+    OnInit,
+    Output,
     Renderer2,
     inject,
     signal,
@@ -16,34 +19,38 @@ https://medium.com/@shachsan/property-event-binding-with-custom-attribute-direct
     selector: '[visibilityPasswordIcon],[visibility-password-icon]',
     standalone: true,
 })
-export class VisibilityPasswordIconDirective {
+export class VisibilityPasswordIconDirective implements OnInit {
     eleRef = inject(ElementRef);
     renderer = inject(Renderer2);
 
     hide: boolean = true;
-    visibilityIcon = signal('visibility_off');
+    visibilityIcon = 'visibility';
 
-    @HostListener('click') onClick() {
-        this.eleRef.nativeElement.textContent = 'visibility_off';
-        let n = this.renderer.createText('visibility_off');
-        this.renderer.appendChild(this.eleRef.nativeElement, n);
-        this.hide = !this.hide;
+    @Output() onChange: EventEmitter<boolean> = new EventEmitter();
+
+    ngOnInit(): void {
         this.changeVisibility();
     }
 
-    // @HostListener("click", [('$event')]) onClick(event) {
-    //     if (this.allowEdit) {
-    //         this.makeEditable();
-    //     }
-    // }
+    @HostListener('click') onClick() {
+        this.hide = !this.hide;
+        let visibilityIcon = this.hide ? 'visibility' : 'visibility_off';
+        this.setValue(visibilityIcon);
+    }
 
     private changeVisibility() {
-        this.hide
-            ? this.visibilityIcon.set('visibility')
-            : this.visibilityIcon.set('visibility_off');
+        console.log(
+            '🚀 ~ VisibilityPasswordIconDirective ~ changeVisibility HIDE :',
+            this.hide,
+        );
+        let t = this.renderer.createText(this.visibilityIcon);
+        this.renderer.appendChild(this.eleRef.nativeElement, t);
+    }
 
-        // this.eleRef.nativeElement.innerText = "visibility_off";
-        this.eleRef.nativeElement.textContent = 'visibility_off';
-        return 'visibility_off';
+    setValue(value: string): string {
+        this.eleRef.nativeElement.innerText = value;
+        this.visibilityIcon = value;
+        this.onChange.emit(this.hide);
+        return this.visibilityIcon;
     }
 }

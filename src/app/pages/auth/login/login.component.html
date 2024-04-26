@@ -31,11 +31,13 @@
                     [type]="hide ? 'password' : 'text'"
                     tabindex="2"
                 />
-                <!-- <mat-icon matSuffix (click)="changeVisibility()">{{
-                    visibilityIcon()
-                }}</mat-icon> -->
-                <mat-icon matSuffix visibilityPasswordIcon>mode_edit</mat-icon>
-                <!-- <mat-icon matSuffix *>mode_edit</mat-icon> -->
+
+                <mat-icon
+                    matSuffix
+                    visibilityPasswordIcon
+                    (onChange)="hiding($event)"
+                ></mat-icon>
+
                 @if (form.get("password")?.invalid) {
                     <mat-error>{{
                         getErrorMessage("password", form)

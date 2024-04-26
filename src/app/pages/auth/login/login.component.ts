@@ -45,8 +45,6 @@ export class LoginComponent implements OnInit {
         this.buildForm();
     }
 
-    visibilityIcon = signal('visibility_off');
-
     buildForm() {
         this.form = new FormGroup({
             email: new FormControl('fffernandez84@gmail.com', [
@@ -62,11 +60,8 @@ export class LoginComponent implements OnInit {
         });
     }
 
-    changeVisibility() {
-        this.hide = !this.hide;
-        this.hide
-            ? this.visibilityIcon.set('visibility')
-            : this.visibilityIcon.set('visibility_off');
+    hiding(event: any) {
+        this.hide = event;
     }
 
     save() {}
