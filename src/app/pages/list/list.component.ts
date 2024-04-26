@@ -11,7 +11,7 @@ import { RouterModule } from '@angular/router';
 import { tPost } from '@shared/custom-types/custom.type';
 import { DummyDataService } from '@shared/services/dummy-data.service';
 import { faker } from '@faker-js/faker/locale/es';
-import { DeleteItemDialogComponent } from '@layout/delete-item-dialog/delete-item-dialog.component';
+import { DeleteItemDialogComponent } from '@layout/dialogs/delete-item-dialog/delete-item-dialog.component';
 import { map } from 'rxjs/operators';
 
 /*

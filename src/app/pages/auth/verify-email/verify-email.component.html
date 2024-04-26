@@ -1,0 +1,32 @@
+<mat-card data-flex-sm="100" data-flex-gt-sm="65" data-flex-gt-md="50">
+    <mat-card-header>
+        <mat-card-title>
+            <h3>
+                {{ "page.verify-email.title" | translate }}
+            </h3>
+            <strong>{{ user()?.email }}</strong>
+        </mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
+        <p>
+            {{ "page.verify-email.content" | translate }}
+        </p>
+    </mat-card-content>
+
+    <mat-card-actions>
+        <button
+            type="button"
+            color="primary"
+            mat-raised-button
+            (click)="onClick()"
+        >
+            <mat-icon>refresh</mat-icon>
+            {{ "input.resend-email" | translate }}
+        </button>
+    </mat-card-actions>
+
+    <button color="primary" routerLink="/auth/login" mat-button>
+        {{ "input.back-to-login" | translate }}
+    </button>
+</mat-card>

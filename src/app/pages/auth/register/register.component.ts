@@ -26,7 +26,7 @@ import { matchValidator } from '@shared/validators/match-password.validator';
         JsonPipe,
         ReactiveFormsModule,
         A11yModule,
-        VisibilityPasswordIconDirective
+        VisibilityPasswordIconDirective,
     ],
     templateUrl: './register.component.html',
     styleUrl: './register.component.scss',

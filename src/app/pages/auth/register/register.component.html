@@ -43,13 +43,13 @@
                     [type]="hide() ? 'password' : 'text'"
                     tabindex="3"
                 />
-                
+
                 <mat-icon
                     matSuffix
                     visibilityPasswordIcon
                     (onChange)="hide.set($event)"
                 ></mat-icon>
-                
+
                 @if (form.get("password")?.invalid) {
                     <mat-error>{{
                         getErrorMessage("password", form)
@@ -77,7 +77,37 @@
                     }}</mat-error>
                 }
             </mat-form-field>
+
+            <mat-form-field>
+                <input
+                    #photoURL
+                    matInput
+                    [placeholder]="'input.image' | translate"
+                    formControlName="photoURL"
+                />
+                @if (form.get("photoURL")?.invalid) {
+                    <mat-error>{{
+                        getErrorMessage("photoURL", form) | translate
+                    }}</mat-error>
+                }
+            </mat-form-field>
         </mat-card-content>
+
+        @if (photoURL.value) {
+            <figure>
+                <img [src]="photoURL.value" />
+                <figcaption>
+                    <button
+                        mat-mini-fab
+                        color="primary"
+                        (click)="form.get('photoURL')?.setValue('')"
+                    >
+                        <mat-icon>close</mat-icon>
+                    </button>
+                </figcaption>
+            </figure>
+        }
+
         <mat-card-actions align="end">
             <button
                 mat-flat-button

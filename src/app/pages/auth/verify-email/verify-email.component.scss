@@ -1,0 +1,19 @@
+mat-card {
+    border-radius: 1rem;
+    margin: 0.5rem;
+
+    .mat-mdc-card-header {
+        display: block;
+        text-align: center;
+    }
+    mat-card-content {
+        text-align: center;
+
+        p {
+            padding: 1rem 0;
+        }
+    }
+    mat-card-actions {
+        justify-content: center;
+    }
+}

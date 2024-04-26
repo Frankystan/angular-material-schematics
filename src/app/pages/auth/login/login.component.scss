@@ -2,18 +2,71 @@ mat-card {
     border-radius: 1rem;
     margin: 0.5rem;
 
-    width: 28rem;
+    width: 36rem;
 
-    mat-card-title {
-        display: flex;
-        width: max-content;
+    mat-card-content img {
+        max-width: 100%;
     }
 
     mat-form-field {
         width: 100%;
+        margin: 0.5rem 0;
     }
 
     mat-card-actions {
         padding: 1rem;
+        flex-direction: column;
+
+        .mat-mdc-raised-button {
+            width: 100%;
+        }
+    }
+
+    .auth-options {
+        align-items: center;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        justify-content: space-between;
+        padding: 1rem;
+
+        a {
+            flex: 0 1 40%;
+        }
+    }
+
+    .or-divider {
+        display: flex;
+        align-self: stretch;
+        place-content: space-between;
+        align-items: center;
+
+        mat-divider {
+            width: 100%;
+            display: inline-flex;
+        }
+
+        span {
+            font-weight: 500;
+            display: flex;
+            padding: 0 1rem;
+        }
+    }
+
+    div.social-section {
+        padding: 1rem;
+        display: flex;
+        align-self: stretch;
+        place-content: space-between;
+
+        .mat-mdc-outlined-button:not(:disabled) {
+            border-color: var(--mdc-outlined-button-outline-color);
+            flex: 1 1 100%;
+            max-width: 30%;
+
+            .mat-icon {
+                display: flex;
+            }
+        }
     }
 }

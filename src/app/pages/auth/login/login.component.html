@@ -47,9 +47,10 @@
         </mat-card-content>
         <mat-card-actions align="end">
             <button
-                mat-flat-button
                 color="primary"
+                mat-raised-button
                 [disabled]="!form.valid && (form.dirty || form.untouched)"
+                tabindex="3"
             >
                 Submit
             </button>
@@ -58,4 +59,61 @@
             <pre>{{ form.value | json }}</pre>
         </mat-card-footer>
     </form>
+    <div class="auth-options">
+        <a
+            mat-stroked-button
+            color="primary"
+            routerLink="/auth/register"
+            tabindex="4"
+        >
+            REGISTRARSE
+        </a>
+        <a
+            mat-stroked-button
+            color="primary"
+            routerLink="/auth/forgotten-password"
+            tabindex="5"
+        >
+            CONTRASEÑA OLVIDADA
+        </a>
+    </div>
+
+    <div class="or-divider">
+        <mat-divider></mat-divider>
+        <span> OR </span>
+        <mat-divider></mat-divider>
+    </div>
+
+    <div class="social-section">
+        <button
+            mat-stroked-button
+            mat-raised-button
+            (click)="socialLogin('google.com')"
+            class="social-button"
+            tabindex="6"
+        >
+            <mat-icon><i class="fa-brands fa-google"></i></mat-icon>
+            Google
+        </button>
+        <button
+            mat-stroked-button
+            mat-raised-button
+            (click)="socialLogin('facebook.com')"
+            class="social-button"
+            tabindex="7"
+        >
+            <mat-icon><i class="fa-brands fa-facebook"></i></mat-icon>
+            Facebook
+        </button>
+        <button
+            mat-stroked-button
+            mat-raised-button
+            (click)="socialLogin('github.com')"
+            class="social-button"
+            tabindex="8"
+        >
+            <mat-icon><i class="fa-brands fa-github-alt"></i></mat-icon>
+            Github
+        </button>
+    </div>
 </mat-card>

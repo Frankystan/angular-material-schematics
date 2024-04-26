@@ -13,6 +13,8 @@ import { MatInputModule } from '@angular/material/input';
 import { getErrorMessage } from '@shared/utils';
 import { A11yModule } from '@angular/cdk/a11y';
 import { VisibilityPasswordIconDirective } from '@shared/directives/visibility-password-icon.directive';
+import { MatDividerModule } from '@angular/material/divider';
+import { RouterModule } from '@angular/router';
 
 /*
 https://hackernoon.com/es/como-usar-la-directiva-de-enfoque-trampa-cdk-angular
@@ -31,6 +33,8 @@ https://briantree.se/using-the-angular-cdk-trap-focus-directive/
         ReactiveFormsModule,
         A11yModule,
         VisibilityPasswordIconDirective,
+        MatDividerModule,
+        RouterModule,
     ],
     templateUrl: './login.component.html',
     styleUrl: './login.component.scss',
@@ -61,4 +65,8 @@ export class LoginComponent implements OnInit {
     }
 
     save() {}
+
+    socialLogin(provider: string) {
+        console.log('social login: ', provider);
+    }
 }

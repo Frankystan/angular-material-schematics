@@ -7,7 +7,6 @@ import {
     Output,
     Renderer2,
     inject,
-    signal,
 } from '@angular/core';
 
 /*
@@ -39,10 +38,6 @@ export class VisibilityPasswordIconDirective implements OnInit {
     }
 
     private changeVisibility() {
-        console.log(
-            '🚀 ~ VisibilityPasswordIconDirective ~ changeVisibility HIDE :',
-            this.hide,
-        );
         let t = this.renderer.createText(this.visibilityIcon);
         this.renderer.appendChild(this.eleRef.nativeElement, t);
     }
