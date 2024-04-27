@@ -9,6 +9,9 @@ import {
 } from '@angular/router';
 import { APP_ROUTES } from './app.routes';
 import { provideCustomTitleStrategy } from './providers/custom-title-strategy.provider';
+import { provideCustomTranslate } from './providers/custom-translate.provider';
+import { provideHttpClient } from '@angular/common/http';
+import { provideCustomInitializer } from './providers/custom-initializer.provider';
 
 /*
 https://stackoverflow.com/questions/76318742/configuring-scroll-restoration-for-angular-standalone-router
@@ -27,6 +30,7 @@ const inMemoryScrollingFeature: InMemoryScrollingFeature =
 
 export const appConfig: ApplicationConfig = {
     providers: [
+        provideHttpClient(),
         provideAnimationsAsync(),
         provideRouter(
             APP_ROUTES,
@@ -34,5 +38,7 @@ export const appConfig: ApplicationConfig = {
             inMemoryScrollingFeature,
         ),
         provideCustomTitleStrategy,
+        provideCustomTranslate,
+        provideCustomInitializer,
     ],
 };

@@ -7,7 +7,7 @@
     ) {
         @if (item.title == "") {
             <mat-divider></mat-divider>
-        } @else if (item.title != "Logout") {
+        } @else if (item.title != "sidenav.logout") {
             <a
                 #rla="routerLinkActive"
                 mat-list-item
@@ -25,12 +25,12 @@
                     "
                     >{{ item.icon }}
                 </mat-icon>
-                <span matListItemTitle>{{ item.title }}</span>
+                <span matListItemTitle [translate]="item.title"></span>
             </a>
         } @else {
             <mat-list-item (click)="logout()">
                 <mat-icon matListItemIcon mdListIcon>{{ item.icon }}</mat-icon>
-                {{ item.title }}
+                {{ item.title | translate }}
             </mat-list-item>
         }
     }

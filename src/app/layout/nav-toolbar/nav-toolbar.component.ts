@@ -5,6 +5,7 @@ import { MatDrawer } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { LayoutService } from '@shared/services/layout.service';
 import { BtnProfileComponent } from '@layout/btn-profile/btn-profile.component';
+import { BtnLanguageSelectorComponent } from '@layout/btn-language-selector/btn-language-selector.component';
 
 /*
 **OPCIONAL**
@@ -23,6 +24,7 @@ he copiado esta linea en consola y funciona:
         MatIconModule,
         MatToolbarModule,
         MatButtonModule,
+        BtnLanguageSelectorComponent,
     ],
     templateUrl: './nav-toolbar.component.html',
     styleUrl: './nav-toolbar.component.scss',

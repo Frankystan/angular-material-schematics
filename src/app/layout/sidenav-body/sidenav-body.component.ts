@@ -3,6 +3,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { Router, RouterModule } from '@angular/router';
 import { environment } from '@env/environment.development';
+import { TranslateModule } from '@ngx-translate/core';
 
 export type SidenavListItem = {
     icon: string;
@@ -13,7 +14,7 @@ export type SidenavListItem = {
 @Component({
     selector: 'app-sidenav-body',
     standalone: true,
-    imports: [MatIconModule, MatListModule, RouterModule],
+    imports: [TranslateModule, RouterModule, MatListModule, MatIconModule],
     templateUrl: './sidenav-body.component.html',
 })
 export class SidenavBodyComponent {

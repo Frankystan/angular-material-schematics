@@ -8,7 +8,6 @@ import {
     MatSidenavModule,
 } from '@angular/material/sidenav';
 import { RouterModule } from '@angular/router';
-import { isVisibleDirective } from '@layout/directives/is-visible.directive';
 import { FabScrollToTopComponent } from '@layout/fab-scroll-to-top/fab-scroll-to-top.component';
 import { NavToolbarComponent } from '@layout/nav-toolbar/nav-toolbar.component';
 import { SidenavBodyComponent } from '@layout/sidenav-body/sidenav-body.component';
@@ -41,7 +40,6 @@ https://juri.dev/blog/2018/05/dynamic-ui-with-cdk-portals/
         SidenavBodyComponent,
         SidenavHeaderComponent,
         NgClass,
-        isVisibleDirective,
     ],
     templateUrl: './app.component.html',
     styleUrl: './app.component.scss',

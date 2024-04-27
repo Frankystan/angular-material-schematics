@@ -1,0 +1,330 @@
+{
+    "validation": {
+        "email": "Email no válido",
+        "url": "URL no válida",
+        "maxlength": "Demasiado largo",
+        "minlength": "Demasiado corto",
+        "pwd_match": "Las contraseñas no coinciden",
+        "required": "Campo obligatorio",
+        "search-minlength": "La búsqueda debe tener al menos 3 caracteres.",
+        "file-not-supported": "Tipo de archivo no soportado"
+    },
+    "input": {
+        "confirm_password": "Confirma contraseña",
+        "email": "Correo electrónico",
+        "featured_image": "Imagen destacada",
+        "forgotten_pwd_link": "¿Contraseña olvidada?",
+        "image": "Imagen URL",
+        "login": "Iniciar sesión",
+        "name": "Nombre",
+        "password": "Contraseña",
+        "register_link": "¿No tienes una cuenta?",
+        "register": "Registrarse",
+        "tags": "Nueva etiqueta...",
+        "title": "Título",
+        "save": "Guardar",
+        "crop": "Recortar",
+        "rotate": "Girar",
+        "flip": "Voltear",
+        "zoom": "Zoom",
+        "zoomIn": "Agrandar",
+        "zoomOut": "Encoger",
+        "reset": "Reiniciar",
+        "upload": "Subir",
+        "contain": "Sin ajuste de relleno",
+        "fill": "Con ajuste de relleno",
+        "back": "Atrás",
+        "browse": "Buscar una imagen...",
+        "reset_password": "reiniciar contraseña",
+        "back-to-login": "Volver a iniciar sesión",
+        "accept": "Aceptar",
+        "cancel": "Cancelar",
+        "resend-email": "Reenviar email de verificación"
+    },
+    "page": {
+        "settings": {
+            "breadcrumb": "Ajustes",
+            "appearance": {
+                "section": "Apariencia",
+                "title": "Cambiar el tema actual",
+                "subtitle": "Elige entre tema claro y oscuro"
+            },
+            "others": {
+                "section": "Otros",
+                "title": "Cambia el idioma de la aplicación",
+                "subtitle": "Selecciona idioma"
+            }
+        },
+        "login": {
+            "section": "Por favor, inicia sesión",
+            "breadcrumb": "Iniciar sesión",
+            "social-divider": "o"
+        },
+        "register": {
+            "section": "Registro de nuevo usuario",
+            "breadcrumb": "Registro"
+        },
+        "forgotten-password": {
+            "title": "¿Olvidaste tu contraseña?",
+            "content": "Pon tu email y te enviaremos las instrucciones para crear una nueva"
+        },
+        "verify-email": {
+            "title": "Hemos enviado un correo electrónico de confirmación a",
+            "content": "Por favor, revisa tu bandeja de entrada y haz clic en el enlace para verificar tu dirección de correo electrónico"
+        },
+        "account": {
+            "reset-password-title": "Resetear contraseña",
+            "reset-password-content": "Crea una nueva contraseña segura para poder entrar en tu cuenta de",
+            "reset-password-error": "Lo sentimos, el código de reinicio de contraseña ya ha sido usado o ha expirado",
+            "verify-email-success": "¡Tu email ha sido verificado con éxito!",
+            "verify-email-error": "Lo sentimos, el código de verificación de email ya ha sido usado o ha expirado"
+        }
+    },
+    "tooltips": {
+        "menu": "Menú principal",
+        "search": "Búsqueda",
+        "sort-by": "Ordenar",
+        "filter": "Filtros",
+        "view-list": "Vista de lista",
+        "view-grid": "Vista de cuadrícula",
+        "language": "Idioma",
+        "login": "Inicia Sesión",
+        "more": "Más acciones"
+    },
+    "toast": {
+        "apps": {
+            "calling": "Codificación grabada correctamente",
+            "ticket": "Incidencia grabada correctamente",
+            "complaint": "Reclamación grabada correctamente"
+        },
+        "settings_saved": "Ajustes guardados",
+        "image": {
+            "created": "Imagen subida correctamente!",
+            "liked": "Añadida a tus favoritas",
+            "not_liked": "Eliminada de tus favoritas",
+            "deleted": "Imagen borrada"
+        },
+        "logged_in": "Ya estás logueado",
+        "close": "CERRAR",
+        "profile": "Tu perfil ha sido actualizado",
+        "reset_pwd": "Email enviado, revisa tu correo",
+        "signup": "Registrado correctamente, iniciando sesión",
+        "firebase": {
+            "auth/account-exists-with-different-credential": "La cuenta existe con credenciales distintas",
+            "auth/email-already-in-use": "El email ya lo usa otro usuario.",
+            "auth/invalid-credential": "Credenciales no válidas",
+            "auth/operation-not-allowed": "Operación no autorizada",
+            "auth/popup-closed-by-user": "Ventana cerrada por el usuario",
+            "auth/requires-recent-login": "Esta operación es sensible y requiere que te re-autentiques. Inicia sesión nuevamente",
+            "auth/user-cancelled": "Inicio de sesión cancelada por el usuario",
+            "auth/user-not-found": "Las credenciales no corresponden a ningún usuario. El usuario no existe o fue eliminado.",
+            "auth/weak-password": "La contraseña debe ser de al menos 6 caracteres",
+            "auth/wrong-password": "La contraseña no es válida o el usuario no existe",
+            "storage/canceled": "Almacenamiento en Firebase: El usuario canceló la subida.",
+            "storage/object-not-found": "Almacenamiento en Firebase: La imagen no existe."
+        },
+        "server": {
+            "access_denied": "Acceso denegado"
+        },
+        "auth": {
+            "login": "Has iniciado sesión con éxito!",
+            "social_login": "Has iniciado sesión correctamente con ",
+            "pwd_sent": "¡Recordatorio de contraseña enviado!",
+            "pwd_user": "No podemos encontrar a un usuario con ese correo electrónico",
+            "access_denied": "Acceso denegado",
+            "email_confirmed": "Your email have been verified"
+        },
+        "post": {
+            "created": "Post Creado!",
+            "updated": "Post Actualizado!",
+            "deleted": "Post Eliminado!"
+        },
+        "cropper": {
+            "failed": "Error al cargar la imagen"
+        },
+        "upload": {
+            "camera_access_denied": "Acceso a la cámara denegado",
+            "camera_click_anywhere": "Haz clic en cualquier parte para hacer una foto"
+        },
+        "camera": {
+            "not_allowed_error": "Acceso a la cámara bloqueado por el usuario!"
+        }
+    },
+    "dialog": {
+        "delete_image": {
+            "title": "¿Deseas borrar la imagen?",
+            "subtitle": "La imagen se eliminará de forma permanente. Esta acción no se puede deshacer."
+        },
+        "delete_post": "¿Deseas eliminar el post?",
+        "discard_changes": "¿Descartar los cambios?",
+        "avatar": {
+            "title": "Añade una imagen de perfil",
+            "subtitle": "Recorta la imagen"
+        },
+        "action": {
+            "delete": "Borrar",
+            "cancel": "Cancelar",
+            "upload": "Subir",
+            "confirm": "Aceptar"
+        },
+        "password-reset-confirm-title": "¡Email enviado!",
+        "password-reset-confirm-subtitle": "Consulta las instrucciones para cambiar la contraseña"
+    },
+    "title": {
+        "app": "Workfield",
+        "apps": "Aplicaciones",
+        "favorites": "Favoritas",
+        "home": "Workfield",
+        "image_editor": "Editor de Imágenes",
+        "login": "Inicia Sesión",
+        "page-not-found": "Pagína no encontrada",
+        "posts": {
+            "edit": "Editar Post",
+            "create": "Crear Post",
+            "show": "Mostrando Post",
+            "list": "Posts recientes"
+        },
+        "profile": "Tu Perfil",
+        "profile-visiting": "Visitando perfil",
+        "reset_password": "Resetear Contraseña",
+        "settings": "Ajustes",
+        "signup": "Regístrate",
+        "uploads": "Subir imagen"
+    },
+    "navbar": {
+        "language": "Idioma",
+        "sort-by": {
+            "date": "Fecha",
+            "title": "Título"
+        },
+        "search": "Buscar...",
+        "login": "Inicia Sesión",
+        "more": {
+            "delete": "Eliminar",
+            "sorting": "Ordenar por",
+            "filters": "Filtros",
+            "show": "Mostrar",
+            "view-list": "Vista de lista",
+            "view-grid": "Vista de cuadrícula"
+        }
+    },
+    "sidenav": {
+        "events": "Eventos",
+        "apps": "Aplicaciones",
+        "business": "Negocio",
+        "corporate": "Corporativo",
+        "dashboard": "Inicio",
+        "documents": "Documentos",
+        "favorites": "Favoritas",
+        "feeds": "Blogs",
+        "help": "Ayuda",
+        "home": "Inicio",
+        "image_editor": "Editor de Imágenes",
+        "login": "Inicia Sesión",
+        "logout": "Desconexión",
+        "profile": "Mi Perfil",
+        "policy": "Política de privacidad",
+        "polls": "Encuestas",
+        "settings": "Ajustes",
+        "signup": "Regístrate",
+        "uploads": "Subir imagen",
+        "wall": "Muro"
+    },
+    "settings": {
+        "button": "Guardar Cambios",
+        "appearance": {
+            "section": "Apariencia",
+            "title": "Cambia el tema actual",
+            "description": "Elige entre tema oscuro o claro"
+        },
+        "language": {
+            "title": "Cambia el idioma de la aplicación",
+            "description": "Selecciona idioma",
+            "input": "Idioma"
+        },
+        "other": "Otros"
+    },
+    "auth": {
+        "login": {
+            "button": "Entrar",
+            "forgotten_pwd": "Contraseña olvidada",
+            "register": "¿No tienes cuenta?",
+            "title": "Hola Invitado, por favor, inicia sesión"
+        },
+        "register": {
+            "button": "Unirme"
+        },
+        "reset_pwd": {
+            "title": "Para resetar tu contraseña, introduce el email que usas para entrar en Yunity.",
+            "button": "Enviar"
+        },
+        "input": {
+            "email": "Correo electrónico",
+            "img_url": "URL de imagen",
+            "name": "Nombre",
+            "password_confirm": "Confirma contraseña",
+            "password": "Contraseña"
+        }
+    },
+    "post": {
+        "input": {
+            "title": "Título",
+            "content": "Contenido",
+            "featured_image": "Imagen destacada",
+            "tags": "Etiquetas",
+            "save": "Guardar"
+        },
+        "filters": {
+            "all-authors": "Todos",
+            "begin-date": "Fecha de inicio",
+            "end-date": "Fecha de fin",
+            "save": "Hecho",
+            "reset": "Limpiar"
+        },
+        "end-search": "Búsqueda sin resultados",
+        "end-list": "No hay más posts!",
+        "go-to-original": "Ir al post original"
+    },
+    "upload": {
+        "action": {
+            "crop": "Recortar",
+            "rotate": "Girar",
+            "flip": "Voltear",
+            "zoom": "Zoom",
+            "zoomIn": "Agrandar",
+            "zoomOut": "Encoger",
+            "reset": "Reiniciar",
+            "upload": "Subir",
+            "containWithinAspectRatio": "Sin ajuste de relleno",
+            "fillAspectRatio": "Con ajuste de relleno"
+        },
+        "back": "Atrás",
+        "browse": "Buscar una imagen...",
+        "button": "Subir",
+        "drag_and_drop": "Arrastra y suelta aquí una imagen",
+        "label": "selecciona o suelta imagen aquí",
+        "progress": "Progreso: {{progress}} %",
+        "dialog": {
+            "camera": "Cámara",
+            "pc": "Ordenador"
+        },
+        "url": {
+            "title": "Pega aquí la URL de una imagen:",
+            "subtitle": "Si la URL es correcta, verás una vista previa de la imagen aquí. Las imágenes grandes pueden tardar unos minutos en aparecer."
+        }
+    },
+    "profile": {
+        "employeeId": "ID Empleado",
+        "workPlace": "Centro de Trabajo",
+        "location": "Ubicación",
+        "location_not_available": "Ubicación no disponible",
+        "lastLogin": "Hora de última conexión",
+        "lastLoginLocation": "Ubicación de última conexión",
+        "input": {
+            "new_password": "Nueva contraseña",
+            "new_password_confirm": "Confirma nueva contraseña",
+            "save_changes": "Guardar Cambios",
+            "change_password": "Cambiar contraseña"
+        }
+    }
+}

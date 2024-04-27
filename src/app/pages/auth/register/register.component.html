@@ -82,12 +82,12 @@
                 <input
                     #photoURL
                     matInput
-                    [placeholder]="'input.image' | translate"
+                    [placeholder]="'input.image'"
                     formControlName="photoURL"
                 />
                 @if (form.get("photoURL")?.invalid) {
                     <mat-error>{{
-                        getErrorMessage("photoURL", form) | translate
+                        getErrorMessage("photoURL", form)
                     }}</mat-error>
                 }
             </mat-form-field>
