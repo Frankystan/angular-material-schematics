@@ -21,14 +21,13 @@
 <mat-menu #langMenu="matMenu">
     <ng-template matMenuContent>
         @for (language of languages; track language) {
+            <button mat-menu-item (click)="setLanguage(language)">
+                <span
+                    class="fi fi-{{ language.split('-')[1].toLowerCase() }} fib"
+                ></span>
 
-        <button mat-menu-item (click)="setLanguage(language)">
-            <span
-                class="fi fi-{{ language.split('-')[1].toLowerCase() }} fib"
-            ></span>
-
-            {{ language.split("-")[1] == "ES" ? "Español" : "English" }}
-        </button>
+                {{ language.split("-")[1] == "ES" ? "Español" : "English" }}
+            </button>
         }
     </ng-template>
 </mat-menu>

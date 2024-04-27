@@ -41,8 +41,8 @@ export class IfViewportMatchDirective implements OnDestroy {
     constructor(
         private templateRef: TemplateRef<any>,
         private viewContainer: ViewContainerRef,
-        private bpObserver: BreakpointObserver
-    ) { }
+        private bpObserver: BreakpointObserver,
+    ) {}
 
     @Input() set appIfViewportMatch(mq: BreakpointSizes) {
         if (this.subscription) return;

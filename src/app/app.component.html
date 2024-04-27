@@ -1,6 +1,6 @@
-
-    <app-nav-toolbar [drawer]="drawer" *ifViewportSize="'web'" />
-
+@if (!isMobile()) {
+    <app-nav-toolbar [drawer]="drawer" />
+}
 <mat-sidenav-container [ngClass]="isMobile() ? 'is-mobile' : ''">
     <mat-sidenav
         #drawer
@@ -19,9 +19,9 @@
     </mat-sidenav>
 
     <mat-sidenav-content>
-
-            <app-nav-toolbar [drawer]="drawer" *ifViewportSize="'mobile'"/>
-        
+        @if (isMobile()) {
+            <app-nav-toolbar [drawer]="drawer" />
+        }
 
         <!-- Add Content Here -->
 
