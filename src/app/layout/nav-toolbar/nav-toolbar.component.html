@@ -1,18 +1,11 @@
 <!-- <mat-toolbar color="primary" class="mat-elevation-z8" [ngStyle]="{'z-index':drawer.opened  ? '1' : '2' }"> -->
 <mat-toolbar color="primary" class="mat-elevation-z8">
-    <button
-        type="button"
-        aria-label="Toggle sidenav"
-        mat-icon-button
-        (click)="drawer.toggle()"
-        *ifViewportSize="'mobile'"
-    >
-        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
-    </button>
+    <btn-menu [drawer]="drawer" />
 
     <span>AMS by Fran</span>
     <span class="flex-spacer"></span>
+
     <btn-language-selector />
 
-    <app-btn-profile *ifViewportSize="'web'" />
+    <app-btn-profile />
 </mat-toolbar>

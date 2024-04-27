@@ -7,6 +7,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatButtonModule } from '@angular/material/button';
 import { IfViewportMatchDirective } from '@shared/directives/if-viewport-match.directive';
+import { IfMobileDirective } from '@shared/directives/if-mobile.directive';
 
 @Component({
     selector: 'btn-language-selector',
@@ -19,6 +20,7 @@ import { IfViewportMatchDirective } from '@shared/directives/if-viewport-match.d
         MatButtonModule,
         IfViewportSizeDirective,
         IfViewportMatchDirective,
+        IfMobileDirective,
     ],
     templateUrl: './btn-language-selector.component.html',
     styleUrl: './btn-language-selector.component.scss',

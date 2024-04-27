@@ -1,6 +1,5 @@
 import {
     Directive,
-    OnDestroy,
     Input,
     ViewContainerRef,
     TemplateRef,
@@ -12,7 +11,6 @@ import {
     Breakpoints,
     BreakpointState,
 } from '@angular/cdk/layout';
-import { Subscription } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 /*
