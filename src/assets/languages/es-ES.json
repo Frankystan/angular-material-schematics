@@ -4,21 +4,21 @@
         "url": "URL no válida",
         "maxlength": "Demasiado largo",
         "minlength": "Demasiado corto",
-        "pwd_match": "Las contraseñas no coinciden",
+        "pwd-match": "Las contraseñas no coinciden",
         "required": "Campo obligatorio",
         "search-minlength": "La búsqueda debe tener al menos 3 caracteres.",
         "file-not-supported": "Tipo de archivo no soportado"
     },
     "input": {
-        "confirm_password": "Confirma contraseña",
+        "confirm-password": "Confirma contraseña",
+        "display-name": "Nombre",
         "email": "Correo electrónico",
-        "featured_image": "Imagen destacada",
-        "forgotten_pwd_link": "¿Contraseña olvidada?",
+        "featured-image": "Imagen destacada",
+        "forgotten-pwd-link": "¿Contraseña olvidada?",
         "image": "Imagen URL",
         "login": "Iniciar sesión",
-        "name": "Nombre",
         "password": "Contraseña",
-        "register_link": "¿No tienes una cuenta?",
+        "register-link": "¿No tienes una cuenta?",
         "register": "Registrarse",
         "tags": "Nueva etiqueta...",
         "title": "Título",
@@ -35,7 +35,7 @@
         "fill": "Con ajuste de relleno",
         "back": "Atrás",
         "browse": "Buscar una imagen...",
-        "reset_password": "reiniciar contraseña",
+        "reset-password": "reiniciar contraseña",
         "back-to-login": "Volver a iniciar sesión",
         "accept": "Aceptar",
         "cancel": "Cancelar",
@@ -97,17 +97,17 @@
             "ticket": "Incidencia grabada correctamente",
             "complaint": "Reclamación grabada correctamente"
         },
-        "settings_saved": "Ajustes guardados",
+        "settings-saved": "Ajustes guardados",
         "image": {
             "created": "Imagen subida correctamente!",
             "liked": "Añadida a tus favoritas",
-            "not_liked": "Eliminada de tus favoritas",
+            "not-liked": "Eliminada de tus favoritas",
             "deleted": "Imagen borrada"
         },
-        "logged_in": "Ya estás logueado",
+        "logged-in": "Ya estás logueado",
         "close": "CERRAR",
         "profile": "Tu perfil ha sido actualizado",
-        "reset_pwd": "Email enviado, revisa tu correo",
+        "reset-pwd": "Email enviado, revisa tu correo",
         "signup": "Registrado correctamente, iniciando sesión",
         "firebase": {
             "auth/account-exists-with-different-credential": "La cuenta existe con credenciales distintas",
@@ -124,15 +124,15 @@
             "storage/object-not-found": "Almacenamiento en Firebase: La imagen no existe."
         },
         "server": {
-            "access_denied": "Acceso denegado"
+            "access-denied": "Acceso denegado"
         },
         "auth": {
             "login": "Has iniciado sesión con éxito!",
-            "social_login": "Has iniciado sesión correctamente con ",
-            "pwd_sent": "¡Recordatorio de contraseña enviado!",
-            "pwd_user": "No podemos encontrar a un usuario con ese correo electrónico",
-            "access_denied": "Acceso denegado",
-            "email_confirmed": "Your email have been verified"
+            "social-login": "Has iniciado sesión correctamente con ",
+            "pwd-sent": "¡Recordatorio de contraseña enviado!",
+            "pwd-user": "No podemos encontrar a un usuario con ese correo electrónico",
+            "access-denied": "Acceso denegado",
+            "email-confirmed": "Your email have been verified"
         },
         "post": {
             "created": "Post Creado!",
@@ -143,20 +143,20 @@
             "failed": "Error al cargar la imagen"
         },
         "upload": {
-            "camera_access_denied": "Acceso a la cámara denegado",
-            "camera_click_anywhere": "Haz clic en cualquier parte para hacer una foto"
+            "camera-access-denied": "Acceso a la cámara denegado",
+            "camera-click-anywhere": "Haz clic en cualquier parte para hacer una foto"
         },
         "camera": {
-            "not_allowed_error": "Acceso a la cámara bloqueado por el usuario!"
+            "not-allowed-error": "Acceso a la cámara bloqueado por el usuario!"
         }
     },
     "dialog": {
-        "delete_image": {
+        "delete-image": {
             "title": "¿Deseas borrar la imagen?",
             "subtitle": "La imagen se eliminará de forma permanente. Esta acción no se puede deshacer."
         },
-        "delete_post": "¿Deseas eliminar el post?",
-        "discard_changes": "¿Descartar los cambios?",
+        "delete-post": "¿Deseas eliminar el post?",
+        "discard-changes": "¿Descartar los cambios?",
         "avatar": {
             "title": "Añade una imagen de perfil",
             "subtitle": "Recorta la imagen"
@@ -175,7 +175,7 @@
         "apps": "Aplicaciones",
         "favorites": "Favoritas",
         "home": "Workfield",
-        "image_editor": "Editor de Imágenes",
+        "image-editor": "Editor de Imágenes",
         "login": "Inicia Sesión",
         "page-not-found": "Pagína no encontrada",
         "posts": {
@@ -186,7 +186,8 @@
         },
         "profile": "Tu Perfil",
         "profile-visiting": "Visitando perfil",
-        "reset_password": "Resetear Contraseña",
+        "register": "Registrarse",
+        "reset-password": "Resetear Contraseña",
         "settings": "Ajustes",
         "signup": "Regístrate",
         "uploads": "Subir imagen"
@@ -219,7 +220,7 @@
         "feeds": "Blogs",
         "help": "Ayuda",
         "home": "Inicio",
-        "image_editor": "Editor de Imágenes",
+        "image-editor": "Editor de Imágenes",
         "login": "Inicia Sesión",
         "logout": "Desconexión",
         "profile": "Mi Perfil",
@@ -247,22 +248,22 @@
     "auth": {
         "login": {
             "button": "Entrar",
-            "forgotten_pwd": "Contraseña olvidada",
+            "forgotten-pwd": "Contraseña olvidada",
             "register": "¿No tienes cuenta?",
             "title": "Hola Invitado, por favor, inicia sesión"
         },
         "register": {
             "button": "Unirme"
         },
-        "reset_pwd": {
+        "reset-pwd": {
             "title": "Para resetar tu contraseña, introduce el email que usas para entrar en Yunity.",
             "button": "Enviar"
         },
         "input": {
             "email": "Correo electrónico",
-            "img_url": "URL de imagen",
+            "img-url": "URL de imagen",
             "name": "Nombre",
-            "password_confirm": "Confirma contraseña",
+            "password-confirm": "Confirma contraseña",
             "password": "Contraseña"
         }
     },
@@ -270,7 +271,7 @@
         "input": {
             "title": "Título",
             "content": "Contenido",
-            "featured_image": "Imagen destacada",
+            "featured-image": "Imagen destacada",
             "tags": "Etiquetas",
             "save": "Guardar"
         },
@@ -301,7 +302,7 @@
         "back": "Atrás",
         "browse": "Buscar una imagen...",
         "button": "Subir",
-        "drag_and_drop": "Arrastra y suelta aquí una imagen",
+        "drag-and-drop": "Arrastra y suelta aquí una imagen",
         "label": "selecciona o suelta imagen aquí",
         "progress": "Progreso: {{progress}} %",
         "dialog": {
@@ -317,14 +318,14 @@
         "employeeId": "ID Empleado",
         "workPlace": "Centro de Trabajo",
         "location": "Ubicación",
-        "location_not_available": "Ubicación no disponible",
+        "location-not-available": "Ubicación no disponible",
         "lastLogin": "Hora de última conexión",
         "lastLoginLocation": "Ubicación de última conexión",
         "input": {
-            "new_password": "Nueva contraseña",
-            "new_password_confirm": "Confirma nueva contraseña",
-            "save_changes": "Guardar Cambios",
-            "change_password": "Cambiar contraseña"
+            "new-password": "Nueva contraseña",
+            "new-password-confirm": "Confirma nueva contraseña",
+            "save-changes": "Guardar Cambios",
+            "change-password": "Cambiar contraseña"
         }
     }
 }

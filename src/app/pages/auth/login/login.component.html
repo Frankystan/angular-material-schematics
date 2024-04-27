@@ -1,29 +1,28 @@
 <mat-card>
     <mat-card-header>
-        <mat-card-title>Login</mat-card-title>
+        <mat-card-title>{{ "page.login.section" | translate }}</mat-card-title>
     </mat-card-header>
     <form autocomplete="off" novalidate [formGroup]="form" (submit)="save()">
         <mat-card-content>
             <div cdkTrapFocus [cdkTrapFocusAutoCapture]="true">
                 <mat-form-field>
-                    <mat-label>Email</mat-label>
+                    <mat-label>{{ "input.email" | translate }}</mat-label>
                     <input
                         type="email"
                         matInput
                         formControlName="email"
-                        placeholder="Ex. example@domain.com"
                         tabindex="1"
                     />
-                    @if (form.get("email")?.invalid) {
-                        <mat-error>{{
-                            getErrorMessage("email", form)
-                        }}</mat-error>
+                    @if (!form.get("email").valid) {
+                        <mat-error>
+                            {{ getErrorMessage("email", form) | translate }}
+                        </mat-error>
                     }
                 </mat-form-field>
             </div>
 
             <mat-form-field>
-                <mat-label>Password</mat-label>
+                <mat-label>{{ "input.password" | translate }}</mat-label>
                 <input
                     type="password"
                     matInput
@@ -38,9 +37,9 @@
                     (onChange)="hide.set($event)"
                 ></mat-icon>
 
-                @if (form.get("password")?.invalid) {
+                @if (!form.get("password").valid) {
                     <mat-error>{{
-                        getErrorMessage("password", form)
+                        getErrorMessage("password", form) | translate
                     }}</mat-error>
                 }
             </mat-form-field>
@@ -52,7 +51,7 @@
                 [disabled]="!form.valid && (form.dirty || form.untouched)"
                 tabindex="3"
             >
-                Submit
+                {{ "input.login" | translate }}
             </button>
         </mat-card-actions>
         <mat-card-footer>
@@ -66,7 +65,7 @@
             routerLink="/auth/register"
             tabindex="4"
         >
-            REGISTRARSE
+            {{ "input.register-link" | translate }}
         </a>
         <a
             mat-stroked-button
@@ -74,13 +73,13 @@
             routerLink="/auth/forgotten-password"
             tabindex="5"
         >
-            CONTRASEÑA OLVIDADA
+            {{ "input.forgotten-pwd-link" | translate }}
         </a>
     </div>
 
     <div class="or-divider">
         <mat-divider></mat-divider>
-        <span> OR </span>
+        <span> {{ "page.login.social-divider" | translate }} </span>
         <mat-divider></mat-divider>
     </div>
 

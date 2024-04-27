@@ -4,21 +4,21 @@
         "url": "Invalid URL",
         "maxlength": "Too long",
         "minlength": "Too short",
-        "pwd_match": "Passwords do not match",
+        "pwd-match": "Passwords do not match",
         "required": "Required field",
         "search-minlength": "Search text must be at least 3 characters long.",
         "file-not-supported": "File type not supported"
     },
     "input": {
-        "confirm_password": "Confirm password",
+        "confirm-password": "Confirm password",
+        "display-name": "Display Name",
         "email": "Email",
-        "featured_image": "Featured image",
-        "forgotten_pwd_link": "Forgotten password",
+        "featured-image": "Featured image",
+        "forgotten-pwd-link": "Forgotten password",
         "image": "Image URL",
         "login": "Login",
-        "name": "Name",
         "password": "Password",
-        "register_link": "Don't have an account?",
+        "register-link": "Don't have an account?",
         "register": "Register",
         "tags": "New tag...",
         "title": "Title",
@@ -35,7 +35,7 @@
         "fill": "Fill aspect ratio",
         "back": "Go back",
         "browse": "Browse for an image...",
-        "reset_password": "Send reset link",
+        "reset-password": "Send reset link",
         "back-to-login": "Back to login",
         "accept": "Accept",
         "cancel": "Cancel",
@@ -97,16 +97,16 @@
             "ticket": "Incidencia grabada correctamente",
             "complaint": "Reclamación grabada correctamente"
         },
-        "settings_saved": "Settings saved",
+        "settings-saved": "Settings saved",
         "image": {
             "created": "Image uploaded correctly!",
             "liked": "Added to favorites",
-            "not_liked": "Removed from favorites",
+            "not-liked": "Removed from favorites",
             "deleted": "Image deleted"
         },
-        "logged_in": "You are already logged in",
+        "logged-in": "You are already logged in",
         "close": "CLOSE",
-        "reset_pwd": "Email sent, please check your inbox",
+        "reset-pwd": "Email sent, please check your inbox",
         "signup": "Registered correctly, now loggining",
         "profile": "Your Profile has been updated",
         "firebase": {
@@ -124,15 +124,15 @@
             "storage/object-not-found": "Firebase Storage: Object 'uploads/avatar' does not exist."
         },
         "server": {
-            "access_denied": "Access denied"
+            "access-denied": "Access denied"
         },
         "auth": {
             "login": "You have successfully signed in",
-            "social_login": "You have successfully signed in with ",
-            "pwd_sent": "We have e-mailed your password reset link!",
-            "pwd_user": "We can't find a user with that e-mail address.",
-            "access_denied": "Access denied",
-            "email_confirmed": "Your email have been verified"
+            "social-login": "You have successfully signed in with ",
+            "pwd-sent": "We have e-mailed your password reset link!",
+            "pwd-user": "We can't find a user with that e-mail address.",
+            "access-denied": "Access denied",
+            "email-confirmed": "Your email have been verified"
         },
         "post": {
             "created": "Post Created!",
@@ -143,20 +143,20 @@
             "failed": "Fail on loading image"
         },
         "upload": {
-            "camera_access_denied": "Camera access denied",
-            "camera_click_anywhere": "Click anywhere to take a photo"
+            "camera-access-denied": "Camera access denied",
+            "camera-click-anywhere": "Click anywhere to take a photo"
         },
         "camera": {
-            "not_allowed_error": "Camera access was not allowed by user!"
+            "not-allowed-error": "Camera access was not allowed by user!"
         }
     },
     "dialog": {
-        "delete_image": {
+        "delete-image": {
             "title": "Would you delete this Image?",
             "subtitle": "This will permanently delete all data. After you delete this, it can't be recovered."
         },
-        "delete_post": "Delete this post?",
-        "discard_changes": "Do you want to discard the changes?",
+        "delete-post": "Delete this post?",
+        "discard-changes": "Do you want to discard the changes?",
         "avatar": {
             "title": "Add a new profile image",
             "subtitle": "Crop the image"
@@ -175,7 +175,7 @@
         "apps": "Applications",
         "favorites": "Favorites",
         "home": "Workfield",
-        "image_editor": "Image Editor",
+        "image-editor": "Image Editor",
         "login": "Login",
         "page-not-found": "Page not found",
         "posts": {
@@ -186,7 +186,8 @@
         },
         "profile": "Your Profile",
         "profile-visiting": "Visiting profile",
-        "reset_password": "Reset Password",
+        "register": "Register",
+        "reset-password": "Reset Password",
         "settings": "Settings",
         "signup": "Sign Up",
         "uploads": "Upload Image"
@@ -219,7 +220,7 @@
         "feeds": "Feeds",
         "gallery": "Gallery",
         "help": "Help",
-        "image_editor": "Image Editor",
+        "image-editor": "Image Editor",
         "login": "Login",
         "logout": "Logout",
         "profile": "My Profile",
@@ -247,22 +248,22 @@
     "auth": {
         "login": {
             "button": "Login",
-            "forgotten_pwd": "Forgotten password",
+            "forgotten-pwd": "Forgotten password",
             "register": "Don't have an account?",
             "title": "Howdy guest, please login"
         },
         "register": {
             "button": "Join in"
         },
-        "reset_pwd": {
+        "reset-pwd": {
             "title": "To reset your password, enter the email address you use to sign in to Yunity.",
             "button": "Send"
         },
         "input": {
             "email": "Email",
-            "img_url": "Image URL",
+            "img-url": "Image URL",
             "name": "Name",
-            "password_confirm": "Confirm Password",
+            "password-confirm": "Confirm Password",
             "password": "Password"
         }
     },
@@ -270,7 +271,7 @@
         "input": {
             "title": "Title",
             "content": "Content",
-            "featured_image": "Featured image",
+            "featured-image": "Featured image",
             "tags": "Tags",
             "save": "Save"
         },
@@ -301,7 +302,7 @@
         "back": "Go back",
         "browse": "Browse for an image...",
         "button": "Upload",
-        "drag_and_drop": "Drag and Drop your image file here",
+        "drag-and-drop": "Drag and Drop your image file here",
         "label": "select an image",
         "progress": "Progress: {{progress}} %",
         "dialog": {
@@ -317,14 +318,14 @@
         "employeeId": "EmployeeID",
         "workPlace": "Work Place",
         "location": "Location",
-        "location_not_available": "Location not available",
+        "location-not-available": "Location not available",
         "lastLogin": "Last login",
         "lastLoginLocation": "Last login location",
         "input": {
-            "new_password": "New password",
-            "new_password_confirm": "Confirm new password",
-            "save_changes": "Save changes",
-            "change_password": "Change password"
+            "new-password": "New password",
+            "new-password-confirm": "Confirm new password",
+            "save-changes": "Save changes",
+            "change-password": "Change password"
         }
     }
 }

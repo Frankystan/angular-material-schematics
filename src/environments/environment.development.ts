@@ -3,6 +3,7 @@ export const environment = {
         { link: 'profile', icon: 'account_circle', title: 'sidenav.profile' },
         { link: '', icon: '', title: '' },
         { link: 'posts', icon: 'home', title: 'sidenav.wall' },
+        { link: 'auth', icon: 'admin_panel_settings', title: 'Authentication' },
         {
             link: 'dashboard',
             icon: 'dashboard',

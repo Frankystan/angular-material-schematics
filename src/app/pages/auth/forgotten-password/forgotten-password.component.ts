@@ -11,7 +11,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { ForgottenPasswordEmailSentDialogComponent } from '@layout/dialogs/forgotten-password-email-sent.dialog/forgotten-password-email-sent.dialog.component';
-// import { TranslateModule } from '@ngx-translate/core';
+import { TranslateModule } from '@ngx-translate/core';
 import { getErrorMessage } from '@shared/utils';
 
 @Component({
@@ -20,7 +20,7 @@ import { getErrorMessage } from '@shared/utils';
     imports: [
         MatCardModule,
         MatInputModule,
-        // TranslateModule,
+        TranslateModule,
         ReactiveFormsModule,
         MatFormFieldModule,
         MatButtonModule,
@@ -29,11 +29,11 @@ import { getErrorMessage } from '@shared/utils';
     styleUrl: './forgotten-password.component.scss',
 })
 export class ForgottenPasswordComponent implements OnInit {
+    #dialog = inject(MatDialog);
+
     form!: FormGroup;
     getErrorMessage: any = getErrorMessage;
     hide: boolean = true;
-
-    #dialog = inject(MatDialog);
 
     ngOnInit(): void {
         this.buildForm();

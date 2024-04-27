@@ -15,6 +15,8 @@ import { PostComponent } from '@pages/posts/post.component';
 import { POST_ROUTES } from '@pages/posts/post.routes';
 import { LoginComponent } from '@pages/auth/login/login.component';
 import { RegisterComponent } from '@pages/auth/register/register.component';
+import { AuthComponent } from '@pages/auth/auth.component';
+import { AUTH_ROUTES } from '@pages/auth/auth.routes';
 
 export const APP_ROUTES: Routes = [
     { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
@@ -32,6 +34,15 @@ export const APP_ROUTES: Routes = [
     // { path: 'dashboard', component: DashboardComponent, title: 'Dashboard' },
     // { path: 'drag-drop', component: DragDropComponent, title: 'Drag & Drop' },
     // { path: 'grid-demo', component: GridListDemoComponent, title: 'Grid List Demo' },
+    {
+        path: 'auth',
+        component: AuthComponent,
+
+        children: [
+            // Eager loading routes in a separate file
+            ...AUTH_ROUTES,
+        ],
+    },
     {
         path: 'posts',
         component: PostComponent,

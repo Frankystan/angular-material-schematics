@@ -1,45 +1,52 @@
 <mat-card>
     <mat-card-header>
-        <mat-card-title>Register</mat-card-title>
+        <mat-card-title
+            >{{ "page.register.section" | translate }}
+        </mat-card-title>
     </mat-card-header>
     <form autocomplete="off" novalidate [formGroup]="form" (submit)="save()">
         <mat-card-content>
             <div cdkTrapFocus [cdkTrapFocusAutoCapture]="true">
                 <mat-form-field>
+                    <mat-label>{{
+                        "input.display-name" | translate
+                    }}</mat-label>
                     <input
                         type="text"
                         matInput
                         formControlName="displayName"
                         tabindex="1"
                     />
-                    @if (form.get("displayName")?.invalid) {
+                    @if (!form.get("displayName").valid) {
                         <mat-error>{{
-                            getErrorMessage("displayName", form)
+                            getErrorMessage("displayName", form) | translate
                         }}</mat-error>
                     }
                 </mat-form-field>
             </div>
 
             <mat-form-field>
-                <mat-label>Email</mat-label>
+                <mat-label>{{ "input.email" | translate }}</mat-label>
                 <input
                     type="email"
                     matInput
                     formControlName="email"
-                    placeholder="Ex. example@domain.com"
                     tabindex="2"
                 />
-                @if (form.get("email")?.invalid) {
-                    <mat-error>{{ getErrorMessage("email", form) }}</mat-error>
+                @if (!form.get("email").valid) {
+                    <mat-error>
+                        {{ getErrorMessage("email", form) | translate }}
+                    </mat-error>
                 }
             </mat-form-field>
 
             <mat-form-field>
-                <mat-label>Password</mat-label>
+                <mat-label>{{ "input.password" | translate }}</mat-label>
                 <input
                     type="password"
                     matInput
                     formControlName="password"
+                    [placeholder]="'input.password' | translate"
                     [type]="hide() ? 'password' : 'text'"
                     tabindex="3"
                 />
@@ -50,15 +57,17 @@
                     (onChange)="hide.set($event)"
                 ></mat-icon>
 
-                @if (form.get("password")?.invalid) {
-                    <mat-error>{{
-                        getErrorMessage("password", form)
-                    }}</mat-error>
+                @if (!form.get("password").valid) {
+                    <mat-error>
+                        {{ getErrorMessage("password", form) | translate }}
+                    </mat-error>
                 }
             </mat-form-field>
 
             <mat-form-field>
-                <mat-label>Confirm password</mat-label>
+                <mat-label>{{
+                    "input.confirm_password" | translate
+                }}</mat-label>
                 <input
                     type="password"
                     matInput
@@ -71,24 +80,24 @@
                     visibilityPasswordIcon
                     (onChange)="hide.set($event)"
                 ></mat-icon>
-                @if (form.get("confirmPassword")?.invalid) {
-                    <mat-error>{{
-                        getErrorMessage("confirmPassword", form)
-                    }}</mat-error>
+                @if (!form.get("confirmPassword").valid) {
+                    <mat-error>
+                        {{
+                            getErrorMessage("confirmPassword", form) | translate
+                        }}
+                    </mat-error>
                 }
             </mat-form-field>
 
             <mat-form-field>
-                <input
-                    #photoURL
-                    matInput
-                    [placeholder]="'input.image'"
-                    formControlName="photoURL"
-                />
-                @if (form.get("photoURL")?.invalid) {
-                    <mat-error>{{
-                        getErrorMessage("photoURL", form)
-                    }}</mat-error>
+                <mat-label>{{ "input.image" | translate }}</mat-label>
+                <input #photoURL matInput formControlName="photoURL" />
+                @if (!form.get("photoURL").valid) {
+                    <mat-error>
+                        {{
+                            getErrorMessage("photoURL", form) | translate
+                        }}</mat-error
+                    >
                 }
             </mat-form-field>
         </mat-card-content>
@@ -115,7 +124,7 @@
                 [disabled]="!form.valid && (form.dirty || form.untouched)"
                 tabindex="5"
             >
-                Submit
+                {{ "input.register" | translate }}
             </button>
         </mat-card-actions>
         <mat-card-footer>

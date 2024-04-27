@@ -43,10 +43,6 @@ export class PostShowComponent {
         ),
     );
 
-
-
-
-
     ngOnInit() {
         // do something with the id
         console.log('🚀 ~ PostShowComponent ~ id:', this.id());

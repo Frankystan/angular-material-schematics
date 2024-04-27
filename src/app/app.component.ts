@@ -4,7 +4,7 @@ import { IfMobileDirective } from '@shared/directives/if-mobile.directive';
 import { IfViewportMatchDirective } from '@shared/directives/if-viewport-match.directive';
 import { IfViewportSizeDirective } from '@shared/directives/if-viewport-size.directive';
 import { LayoutService } from './shared/services/layout.service';
-import { MatDrawer, MatSidenavModule, } from '@angular/material/sidenav';
+import { MatDrawer, MatSidenavModule } from '@angular/material/sidenav';
 import { NavToolbarComponent } from '@layout/nav-toolbar/nav-toolbar.component';
 import { NgClass } from '@angular/common';
 import { RouterModule } from '@angular/router';

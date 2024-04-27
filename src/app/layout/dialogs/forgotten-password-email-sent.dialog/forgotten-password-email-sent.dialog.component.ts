@@ -3,17 +3,12 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatDialogRef, MatDialogModule } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-// import { TranslateModule } from '@ngx-translate/core';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
     selector: 'app-forgotten-password-email-sent.dialog',
     standalone: true,
-    imports: [
-        // TranslateModule,
-        MatCardModule,
-        MatDialogModule,
-        MatButtonModule,
-    ],
+    imports: [TranslateModule, MatCardModule, MatDialogModule, MatButtonModule],
     template: `
         <h2 mat-dialog-title>
             {{ 'dialog.password-reset-confirm-title' | translate }}

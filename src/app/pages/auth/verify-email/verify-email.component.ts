@@ -6,7 +6,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { Observable } from 'rxjs';
 import { RouterModule } from '@angular/router';
 import { toSignal } from '@angular/core/rxjs-interop';
-// import { TranslateModule } from '@ngx-translate/core';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
     selector: 'app-verify-email',
@@ -14,7 +14,7 @@ import { toSignal } from '@angular/core/rxjs-interop';
     imports: [
         MatCardModule,
         MatButtonModule,
-        // TranslateModule,
+        TranslateModule,
         MatIconModule,
         RouterModule,
     ],
@@ -29,9 +29,6 @@ export class VerifyEmailComponent {
     // user = toSignal(this.user$, { initialValue: null });
 
     onClick() {
-        console.log(
-            '🚀 ~ VerifyEmailComponent ~ onClick ~ onClick: this.#auth.sendEmailVerification',
-        );
         // this.#auth.sendEmailVerification();
     }
 }

@@ -1,20 +1,21 @@
-import { JsonPipe } from '@angular/common';
-import { Component, OnInit, computed, signal } from '@angular/core';
+import { A11yModule } from '@angular/cdk/a11y';
+import { Component, OnInit, signal } from '@angular/core';
 import {
     FormGroup,
     FormControl,
     Validators,
     ReactiveFormsModule,
 } from '@angular/forms';
+import { getErrorMessage } from '@shared/utils';
+import { JsonPipe } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
+import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
-import { getErrorMessage } from '@shared/utils';
-import { A11yModule } from '@angular/cdk/a11y';
-import { VisibilityPasswordIconDirective } from '@shared/directives/visibility-password-icon.directive';
-import { MatDividerModule } from '@angular/material/divider';
 import { RouterModule } from '@angular/router';
+import { VisibilityPasswordIconDirective } from '@shared/directives/visibility-password-icon.directive';
+import { TranslateModule } from '@ngx-translate/core';
 
 /*
 https://hackernoon.com/es/como-usar-la-directiva-de-enfoque-trampa-cdk-angular
@@ -25,16 +26,17 @@ https://briantree.se/using-the-angular-cdk-trap-focus-directive/
     selector: 'app-login',
     standalone: true,
     imports: [
-        MatCardModule,
+        A11yModule,
+        JsonPipe,
         MatButtonModule,
+        MatCardModule,
+        MatDividerModule,
         MatIconModule,
         MatInputModule,
-        JsonPipe,
         ReactiveFormsModule,
-        A11yModule,
-        VisibilityPasswordIconDirective,
-        MatDividerModule,
         RouterModule,
+        VisibilityPasswordIconDirective,
+        TranslateModule,
     ],
     templateUrl: './login.component.html',
     styleUrl: './login.component.scss',
