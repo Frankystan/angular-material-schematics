@@ -6,6 +6,8 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { LayoutService } from '@shared/services/layout.service';
 import { BtnProfileComponent } from '@layout/btn-profile/btn-profile.component';
 import { BtnLanguageSelectorComponent } from '@layout/btn-language-selector/btn-language-selector.component';
+import { IfViewportMatchDirective } from '@shared/directives/if-viewport-match.directive';
+import { IfViewportSizeDirective } from '@shared/directives/if-viewport-size.directive';
 
 /*
 **OPCIONAL**
@@ -25,6 +27,8 @@ he copiado esta linea en consola y funciona:
         MatToolbarModule,
         MatButtonModule,
         BtnLanguageSelectorComponent,
+        IfViewportMatchDirective,
+        IfViewportSizeDirective,
     ],
     templateUrl: './nav-toolbar.component.html',
     styleUrl: './nav-toolbar.component.scss',

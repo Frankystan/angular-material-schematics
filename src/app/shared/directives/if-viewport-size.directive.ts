@@ -1,55 +1,67 @@
 import {
     Directive,
+    OnDestroy,
     Input,
     ViewContainerRef,
-    TemplateRef,
-    DestroyRef,
-    inject,
-} from '@angular/core';
+    TemplateRef
+} from "@angular/core";
 import {
     BreakpointObserver,
     Breakpoints,
-    BreakpointState,
-} from '@angular/cdk/layout';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { tap } from 'rxjs/operators';
+    BreakpointState
+} from "@angular/cdk/layout";
+import { Subscription } from "rxjs";
 
-/* FUENTE:
-https://stackoverflow.com/questions/63151191/angular-directive-for-detect-screen-size
+/*
+https://stackblitz.com/edit/angular-ivy-jrtbsa?file=src%2Fapp%2Fif-viewport-size.directive.ts
 */
 
-type Size = 'mobile' | 'large';
+/*
+type Size = "small" | "medium" | "large" ;
+
+const config = {
+    small: [Breakpoints.Small, Breakpoints.XSmall],
+    medium: [Breakpoints.Medium],
+    large: [Breakpoints.Large, Breakpoints.XLarge]    
+};
+*/
+
+type Size = "mobile" | "web";
 
 const config = {
     mobile: [Breakpoints.XSmall, Breakpoints.Small],
-    large: [Breakpoints.Medium, Breakpoints.Large, Breakpoints.XLarge],
+    web: [Breakpoints.Medium, Breakpoints.Large, Breakpoints.XLarge, Breakpoints.Handset]
 };
 
 @Directive({
-    selector: '[ifViewportSize][if-viewport-size]',
     standalone: true,
+    selector: "[ifViewportSize]"
 })
-export class IfViewportSizeDirective {
-    #destroyRef = inject(DestroyRef);
-    #observer = inject(BreakpointObserver);
-    #vcRef = inject(ViewContainerRef);
-    #templateRef = inject(TemplateRef<any>);
+export class IfViewportSizeDirective implements OnDestroy {
+    private subscription = new Subscription();
 
-    @Input('ifViewportSize') set size(value: Size) {
-        this.#observer
+    @Input("ifViewportSize") set size(value: Size) {
+        this.subscription.unsubscribe();
+        this.subscription = this.observer
             .observe(config[value])
-            .pipe(
-                tap( value => console.log("value: ",value)
-                ),
-                takeUntilDestroyed(this.#destroyRef))
             .subscribe(this.updateView);
     }
 
+    constructor(
+        private observer: BreakpointObserver,
+        private vcRef: ViewContainerRef,
+        private templateRef: TemplateRef<any>
+    ) { }
+
     updateView = ({ matches }: BreakpointState) => {
-        if (matches && !this.#vcRef.length) {
-            this.#vcRef.createEmbeddedView(this.#templateRef);
-        } else if (!matches && this.#vcRef.length) {
-            this.#vcRef.clear();
+        if (matches && !this.vcRef.length) {
+            this.vcRef.createEmbeddedView(this.templateRef);
+        } else if (!matches && this.vcRef.length) {
+            this.vcRef.clear();
         }
     };
+
+    ngOnDestroy() {
+        this.subscription.unsubscribe();
+    }
 }

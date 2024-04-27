@@ -20,11 +20,11 @@ export class CustomTitleStrategyService extends TitleStrategy {
 
         if (title) {
             this.#translateService.get(title).subscribe((translatedTitle) => {
-                this.#title.setTitle(`NG173 | ${translatedTitle}`);
+                this.#title.setTitle(`AMS by Fran | ${translatedTitle}`);
             });
         } else {
             // this.title.setTitle('DEFAULT_TITLE');
-            this.#title.setTitle('NG173');
+            this.#title.setTitle('AMS by Fran');
         }
     }
 }

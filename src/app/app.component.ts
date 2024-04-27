@@ -14,6 +14,8 @@ import { SidenavBodyComponent } from '@layout/sidenav-body/sidenav-body.componen
 import { SidenavHeaderComponent } from '@layout/sidenav-header/sidenav-header.component';
 import { map } from 'rxjs';
 import { LayoutService } from './shared/services/layout.service';
+import { IfViewportMatchDirective } from '@shared/directives/if-viewport-match.directive';
+import { IfViewportSizeDirective } from '@shared/directives/if-viewport-size.directive';
 /*
 Scrolling
 https://stackoverflow.com/questions/47528852/angular-material-sidenav-cdkscrollable/50812763#50812763
@@ -40,6 +42,8 @@ https://juri.dev/blog/2018/05/dynamic-ui-with-cdk-portals/
         SidenavBodyComponent,
         SidenavHeaderComponent,
         NgClass,
+        IfViewportMatchDirective,
+        IfViewportSizeDirective,
     ],
     templateUrl: './app.component.html',
     styleUrl: './app.component.scss',

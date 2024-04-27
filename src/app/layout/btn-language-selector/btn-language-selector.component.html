@@ -1,34 +1,34 @@
 <button
-	mat-stroked-button
-	ifViewportSize="'large'"
-	[matMenuTriggerFor]="langMenu"
+    mat-stroked-button
+    *ifViewportSize="'web'"
+    [matMenuTriggerFor]="langMenu"
 >
-	<mat-icon class="lang-icon">language</mat-icon>
-	<span>{{ 'navbar.language' | translate }}</span>
-	<mat-icon iconPositionEnd>arrow_drop_down</mat-icon>
+    <mat-icon class="lang-icon">language</mat-icon>
+    <span>{{ "navbar.language" | translate }}</span>
+    <mat-icon iconPositionEnd>arrow_drop_down</mat-icon>
 </button>
 
 <button
-	mat-icon-button
-	ifViewportSize="'mobile'"
-	matTooltip="{{ 'tooltips.language' | translate }}"
-	[matTooltipClass]="'tooltip'"
-	[matMenuTriggerFor]="langMenu"
+    mat-icon-button
+    *ifViewportSize="'mobile'"
+    matTooltip="{{ 'tooltips.language' | translate }}"
+    [matTooltipClass]="'tooltip'"
+    [matMenuTriggerFor]="langMenu"
 >
-	<mat-icon>language</mat-icon>
+    <mat-icon>language</mat-icon>
 </button>
 
 <mat-menu #langMenu="matMenu">
-	<ng-template matMenuContent>
-		@for (language of languages; track language) {
+    <ng-template matMenuContent>
+        @for (language of languages; track language) {
 
-		<button mat-menu-item (click)="setLanguage(language)">
-			<span
-				class="fi fi-{{ language.split('-')[1].toLowerCase() }} fib"
-			></span>
+        <button mat-menu-item (click)="setLanguage(language)">
+            <span
+                class="fi fi-{{ language.split('-')[1].toLowerCase() }} fib"
+            ></span>
 
-			{{ language.split('-')[1] == 'ES' ? 'Español' : 'English' }}
-		</button>
-		}
-	</ng-template>
+            {{ language.split("-")[1] == "ES" ? "Español" : "English" }}
+        </button>
+        }
+    </ng-template>
 </mat-menu>

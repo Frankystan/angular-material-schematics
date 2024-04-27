@@ -1,20 +1,19 @@
 <!-- <mat-toolbar color="primary" class="mat-elevation-z8" [ngStyle]="{'z-index':drawer.opened  ? '1' : '2' }"> -->
 <mat-toolbar color="primary" class="mat-elevation-z8">
-    @if (isMobile()) {
+
         <button
             type="button"
             aria-label="Toggle sidenav"
             mat-icon-button
             (click)="drawer.toggle()"
+            *ifViewportSize="'mobile'"
         >
             <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
         </button>
-    }
-    <span>Angular Material Schematics by Fran</span>
+    
+    <span >AMS by Fran</span>
     <span class="flex-spacer"></span>
     <btn-language-selector />
 
-    @if (!isMobile()) {
-        <app-btn-profile />
-    }
+    <app-btn-profile *ifViewportSize="'web'"/>
 </mat-toolbar>
