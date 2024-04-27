@@ -1,26 +1,19 @@
-mat-list-item {
-    height: 88px;
+.mat-mdc-list-item:not(.mat-mdc-list-item-interactive) {
+    cursor: pointer;
 
-    img {
-        margin: 1rem;
-    }
-
-    a {
-        text-decoration: none;
-        height: 88px;
-        display: inline-grid;
-        margin-top: 1.2rem;
-
-        h4 {
-            margin-bottom: -24px;
-        }
-        span:nth-child(2) {
-            margin-bottom: -20px;
+    .post-list-item-line {
+        .mat-icon.list-item-icon {
+            vertical-align: sub;
+            height: 18px;
+            width: 18px;
+            margin-right: 2px;
+            font-size: 18px;
         }
     }
+}
 
-    .mdc-list-item__end {
-        display: flex;
-        align-self: center;
-    }
+.mat-mdc-list-item.mdc-list-item--with-leading-avatar.mdc-list-item--with-two-lines,
+.mat-mdc-list-item.mdc-list-item--with-leading-checkbox.mdc-list-item--with-two-lines,
+.mat-mdc-list-item.mdc-list-item--with-leading-icon.mdc-list-item--with-two-lines {
+    height: auto; // 78px
 }

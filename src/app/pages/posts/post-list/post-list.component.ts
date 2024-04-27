@@ -12,6 +12,7 @@ import { tPost } from '@shared/custom-types/custom.type';
 import { DeleteItemDialogComponent } from '@layout/dialogs/delete-item-dialog/delete-item-dialog.component';
 import { DummyDataService } from '@shared/services/dummy-data.service';
 import { map } from 'rxjs';
+import { MomentModule } from 'ngx-moment';
 
 @Component({
     selector: 'app-post-list',
@@ -25,6 +26,7 @@ import { map } from 'rxjs';
         MatButtonModule,
         MatDividerModule,
         RouterModule,
+        MomentModule,
     ],
     templateUrl: './post-list.component.html',
     styleUrl: './post-list.component.scss',
