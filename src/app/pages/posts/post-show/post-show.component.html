@@ -8,7 +8,17 @@
             }"
         ></div>
         <mat-card-title>{{ item()?.title }}</mat-card-title>
-        <mat-card-subtitle>{{ item()?.createdAt }}</mat-card-subtitle>
+        <mat-card-subtitle
+            ><time>
+                {{
+                    item()?.created_at * 1000 | amDateFormat: "DD-MM-YYYY HH:mm"
+                }}
+                (
+                {{ item()?.created_at * 1000 | amLocale: locale() | amTimeAgo }}
+                )
+            </time></mat-card-subtitle
+        >
+        <span class="flex-spacer"></span>
 
         <span class="flex-spacer"></span>
         <div>

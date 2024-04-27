@@ -19,7 +19,7 @@ import { IfMobileDirective } from '@shared/directives/if-mobile.directive';
     styles: [
         `
             button.profile {
-                background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+                background-image: url('https://www.dhresource.com/webp/m/0x0/f2/albu/g16/M01/A8/58/rBVa4F-vxAKAN-Y1AAHXktw9e8E200.jpg');
                 background-size: cover;
                 border: 2px whitesmoke inset;
                 margin: 0 1rem;

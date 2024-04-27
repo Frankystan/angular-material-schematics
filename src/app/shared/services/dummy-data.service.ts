@@ -18,8 +18,8 @@ export class DummyDataService {
                 uid: faker.string.uuid(),
                 img: 'https://www.smashbros.com/wiiu-3ds/sp/images/character/toon_link/main.png',
             },
-            createdAt: faker.date.anytime().toLocaleDateString(),
-            // created_at: 1549981020,
+            // createdAt: faker.date.anytime().toLocaleDateString(),
+            created_at: 1549981020,
             featured_image:
                 'https://pokemon-project.com/img/web/escarlata_purpura.webp',
             tags: ['pokemon', 'scarlet', 'violet'],
@@ -37,8 +37,8 @@ export class DummyDataService {
                     uid: faker.string.uuid(),
                     img: 'https://www.smashbros.com/wiiu-3ds/sp/images/character/toon_link/main.png',
                 },
-                createdAt: faker.date.anytime().toLocaleDateString(),
-                // created_at: 1549981020,
+                // createdAt: faker.date.anytime().toLocaleDateString(),
+                created_at: 1549981020,
                 content: faker.lorem.paragraph(3),
                 tags: ['pokemon', 'scarlet', 'violet'],
                 featured_image:
