@@ -1,21 +1,16 @@
-import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { NgClass } from '@angular/common';
 import { Component, Signal, ViewChild, inject } from '@angular/core';
-import { toSignal } from '@angular/core/rxjs-interop';
-import {
-    MatDrawer,
-    MatSidenavContent,
-    MatSidenavModule,
-} from '@angular/material/sidenav';
-import { RouterModule } from '@angular/router';
 import { FabScrollToTopComponent } from '@layout/fab-scroll-to-top/fab-scroll-to-top.component';
-import { NavToolbarComponent } from '@layout/nav-toolbar/nav-toolbar.component';
-import { SidenavBodyComponent } from '@layout/sidenav-body/sidenav-body.component';
-import { SidenavHeaderComponent } from '@layout/sidenav-header/sidenav-header.component';
-import { map } from 'rxjs';
-import { LayoutService } from './shared/services/layout.service';
+import { IfMobileDirective } from '@shared/directives/if-mobile.directive';
 import { IfViewportMatchDirective } from '@shared/directives/if-viewport-match.directive';
 import { IfViewportSizeDirective } from '@shared/directives/if-viewport-size.directive';
+import { LayoutService } from './shared/services/layout.service';
+import { MatDrawer, MatSidenavModule, } from '@angular/material/sidenav';
+import { NavToolbarComponent } from '@layout/nav-toolbar/nav-toolbar.component';
+import { NgClass } from '@angular/common';
+import { RouterModule } from '@angular/router';
+import { SidenavBodyComponent } from '@layout/sidenav-body/sidenav-body.component';
+import { SidenavHeaderComponent } from '@layout/sidenav-header/sidenav-header.component';
+
 /*
 Scrolling
 https://stackoverflow.com/questions/47528852/angular-material-sidenav-cdkscrollable/50812763#50812763
@@ -36,14 +31,15 @@ https://juri.dev/blog/2018/05/dynamic-ui-with-cdk-portals/
     standalone: true,
     imports: [
         FabScrollToTopComponent,
-        RouterModule,
-        NavToolbarComponent,
-        MatSidenavModule,
-        SidenavBodyComponent,
-        SidenavHeaderComponent,
-        NgClass,
+        IfMobileDirective,
         IfViewportMatchDirective,
         IfViewportSizeDirective,
+        MatSidenavModule,
+        NavToolbarComponent,
+        NgClass,
+        RouterModule,
+        SidenavBodyComponent,
+        SidenavHeaderComponent,
     ],
     templateUrl: './app.component.html',
     styleUrl: './app.component.scss',
