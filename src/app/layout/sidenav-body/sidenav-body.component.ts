@@ -16,6 +16,7 @@ export type SidenavListItem = {
     standalone: true,
     imports: [TranslateModule, RouterModule, MatListModule, MatIconModule],
     templateUrl: './sidenav-body.component.html',
+    styleUrl: './sidenav-body.component.scss',
 })
 export class SidenavBodyComponent {
     #router = inject(Router);
