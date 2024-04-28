@@ -1,5 +1,7 @@
 import { Component, DestroyRef, inject } from '@angular/core';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { DeleteItemDialogComponent } from '@layout/dialogs/delete-item-dialog/delete-item-dialog.component';
+import { DummyDataService } from '@shared/services/dummy-data.service';
+import { map } from 'rxjs';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatDialog } from '@angular/material/dialog';
@@ -7,32 +9,30 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { MatMenuModule } from '@angular/material/menu';
-import { RouterModule } from '@angular/router';
-import { tPost } from '@shared/custom-types/custom.type';
-import { DeleteItemDialogComponent } from '@layout/dialogs/delete-item-dialog/delete-item-dialog.component';
-import { DummyDataService } from '@shared/services/dummy-data.service';
-import { map } from 'rxjs';
 import { MomentModule } from 'ngx-moment';
+import { RouterModule } from '@angular/router';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { tPost } from '@shared/custom-types/custom.type';
 
 @Component({
     selector: 'app-post-list',
     standalone: true,
     imports: [
-        MatListModule,
-        MatIconModule,
-        RouterModule,
-        MatCardModule,
-        MatMenuModule,
         MatButtonModule,
+        MatCardModule,
         MatDividerModule,
-        RouterModule,
+        MatIconModule,
+        MatListModule,
+        MatMenuModule,
         MomentModule,
+        RouterModule,
+        RouterModule,
     ],
     templateUrl: './post-list.component.html',
     styleUrl: './post-list.component.scss',
 })
 export class PostListComponent {
-    dialog = inject(MatDialog);
+    #dialog = inject(MatDialog);
     #destroyRef = inject(DestroyRef);
     #dummyDataService = inject(DummyDataService);
 
@@ -43,7 +43,7 @@ export class PostListComponent {
     }
 
     private openDialog(id: string) {
-        let dialogRef = this.dialog.open(DeleteItemDialogComponent, {
+        let dialogRef = this.#dialog.open(DeleteItemDialogComponent, {
             panelClass: 'delete-dialog-panel',
             data: id,
         });
