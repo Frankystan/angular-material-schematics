@@ -11,7 +11,7 @@ import { RouterModule } from '@angular/router';
 import { tPost } from '@shared/custom-types/custom.type';
 import { DummyDataService } from '@shared/services/dummy-data.service';
 import { faker } from '@faker-js/faker/locale/es';
-import { DeleteItemDialogComponent } from '@layout/dialogs/delete-item-dialog/delete-item-dialog.component';
+import { DeletePostDialogComponent } from '@layout/dialogs/delete-post-dialog/delete-post-dialog.component';
 import { map } from 'rxjs/operators';
 
 /*
@@ -46,7 +46,7 @@ export class ListComponent {
     }
 
     private openDialog(id: string) {
-        let dialogRef = this.dialog.open(DeleteItemDialogComponent, {
+        let dialogRef = this.dialog.open(DeletePostDialogComponent, {
             panelClass: 'delete-dialog-panel',
             data: id,
         });

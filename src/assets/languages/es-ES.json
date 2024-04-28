@@ -151,11 +151,11 @@
         }
     },
     "dialog": {
+        "delete-post-title": "¿Deseas eliminar el post?",
         "delete-image": {
             "title": "¿Deseas borrar la imagen?",
             "subtitle": "La imagen se eliminará de forma permanente. Esta acción no se puede deshacer."
         },
-        "delete-post": "¿Deseas eliminar el post?",
         "discard-changes": "¿Descartar los cambios?",
         "avatar": {
             "title": "Añade una imagen de perfil",

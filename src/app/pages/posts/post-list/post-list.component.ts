@@ -1,5 +1,5 @@
 import { Component, DestroyRef, inject } from '@angular/core';
-import { DeleteItemDialogComponent } from '@layout/dialogs/delete-item-dialog/delete-item-dialog.component';
+import { DeletePostDialogComponent } from '@layout/dialogs/delete-post-dialog/delete-post-dialog.component';
 import { DummyDataService } from '@shared/services/dummy-data.service';
 import { map } from 'rxjs';
 import { MatButtonModule } from '@angular/material/button';
@@ -43,7 +43,7 @@ export class PostListComponent {
     }
 
     private openDialog(id: string) {
-        let dialogRef = this.#dialog.open(DeleteItemDialogComponent, {
+        let dialogRef = this.#dialog.open(DeletePostDialogComponent, {
             panelClass: 'delete-dialog-panel',
             data: id,
         });

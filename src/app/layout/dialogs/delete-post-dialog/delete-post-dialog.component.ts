@@ -8,13 +8,14 @@ import {
     MAT_DIALOG_DATA,
 } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
+import { TranslateModule } from '@ngx-translate/core';
 
 /*
 https://stackoverflow.com/questions/48688614/angular-custom-style-to-mat-dialog
 */
 
 @Component({
-    selector: 'app-delete-item-dialog',
+    selector: 'app-delete-post-dialog',
     standalone: true,
     imports: [
         MatButtonModule,
@@ -22,11 +23,12 @@ https://stackoverflow.com/questions/48688614/angular-custom-style-to-mat-dialog
         MatDialogClose,
         MatDialogTitle,
         MatDialogContent,
+        TranslateModule,
     ],
-    templateUrl: './delete-item-dialog.component.html',
-    styleUrl: './delete-item-dialog.component.scss',
+    templateUrl: './delete-post-dialog.component.html',
+    styleUrl: './delete-post-dialog.component.scss',
 })
-export class DeleteItemDialogComponent {
-    dialogRef = inject(MatDialogRef<DeleteItemDialogComponent>);
+export class DeletePostDialogComponent {
+    dialogRef = inject(MatDialogRef<DeletePostDialogComponent>);
     data = inject(MAT_DIALOG_DATA);
 }

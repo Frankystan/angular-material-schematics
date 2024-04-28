@@ -151,11 +151,11 @@
         }
     },
     "dialog": {
+        "delete-post-title": "Would you like to delete this post?",
         "delete-image": {
             "title": "Would you delete this Image?",
             "subtitle": "This will permanently delete all data. After you delete this, it can't be recovered."
         },
-        "delete-post": "Delete this post?",
         "discard-changes": "Do you want to discard the changes?",
         "avatar": {
             "title": "Add a new profile image",
