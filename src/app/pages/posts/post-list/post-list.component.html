@@ -3,11 +3,13 @@
         <mat-list-item>
             <img matListItemAvatar [src]="post.author.img" alt="..." />
             <a [routerLink]="['/posts', post.id]">
-                <span matListItemTitle>#{{ post.id }} - {{ post.title }}</span>
+                <span matListItemTitle>#{{ post.title }}</span>
 
-                <span matListItemLine>{{ post.content }} </span>
+                <span class="mdc-list-item__secondary-text"
+                    >{{ post.content }}
+                </span>
 
-                <span matListItemLine
+                <span class="mdc-list-item__secondary-text"
                     ><mat-icon class="list-item-line-icon">schedule</mat-icon>
                     {{
                         post.created_at * 1000
