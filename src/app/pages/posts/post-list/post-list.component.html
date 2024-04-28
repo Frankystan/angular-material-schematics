@@ -1,46 +1,14 @@
 <!-- <mat-list>
-    @for (item of list; track item.id) {
+    @for (post of list; track post.id) {
         <mat-list-item>
-            <img matListItemAvatar [src]="item.author.img" alt="..." />
-            <a [routerLink]="['/posts', item.id]">
-                <h4 matListItemTitle routerLink="/profile">{{ item.title }}</h4>
-                <span matListItemLine>{{ item.content }} </span>
+            <img matListItemAvatar [src]="post.author.img" alt="..." />
+            <a [routerLink]="['/posts', post.id]">
+                <h4 matListItemTitle routerLink="/profile">{{ post.title }}</h4>
+                <span matListItemLine>{{ post.content }} </span>
                 <span matListItemLine
-                    >{{ item.createdAt }} - {{ item.author.displayName }}
+                    >{{ post.createdAt }} - {{ post.author.displayName }}
                 </span>
             </a>
-            <button
-                mat-icon-button
-                color="primary"
-                matListItemMeta
-                (click)="delete(item.id)"
-            >
-                <mat-icon> delete </mat-icon>
-            </button>
-        </mat-list-item>
-        <mat-divider></mat-divider>
-    }
-</mat-list> -->
-
-<mat-list>
-    @for (post of list; track post.id) {
-        <a [routerLink]="['/posts', post.id]" mat-list-item>
-            <!-- <img matListItemAvatar src="{{ post.author.img }} " alt="..." /> -->
-            <img matListItemAvatar [src]="post.author.img" alt="..." />
-
-            <span matListItemTitle>#{{ post.id }} - {{ post.title }}</span>
-
-            <span matListItemLine>{{ post.content }} </span>
-
-            <span matListItemLine class="post-list-item-line"
-                ><mat-icon class="list-item-icon">schedule</mat-icon>
-                {{
-                    post.created_at * 1000 | amDateFormat: "DD-MM-YYYY HH:mm"
-                }}
-                |
-                <mat-icon class="list-item-icon">person_outline</mat-icon>
-                {{ post.author.displayName }}
-            </span>
             <button
                 mat-icon-button
                 color="primary"
@@ -49,6 +17,70 @@
             >
                 <mat-icon> delete </mat-icon>
             </button>
-        </a>
+        </mat-list-item>
+        <mat-divider></mat-divider>
+    }
+</mat-list> -->
+
+<!-- <mat-list>
+    @for (post of list; track post.id) {
+
+    <a [routerLink]="['/posts', post.id]" mat-list-item class="anchor-list-item">
+        <img matListItemAvatar [src]="post.author.img" alt="..." />
+
+        <span matListItemTitle>#{{ post.id }} - {{ post.title }}</span>
+
+        <span matListItemLine>{{ post.content }} </span>
+
+        <span matListItemLine class="post-list-item-line"><mat-icon class="list-item-icon">schedule</mat-icon>
+            {{
+            post.created_at * 1000 | amDateFormat: "DD-MM-YYYY HH:mm"
+            }}
+            |
+            <mat-icon class="list-item-icon">person_outline</mat-icon>
+            {{ post.author.displayName }}
+        </span>
+    </a>
+    <button mat-icon-button color="primary" matListItemMeta (click)="delete(post.id)">
+        <mat-icon> delete </mat-icon>
+    </button>
+    }
+</mat-list> -->
+
+<mat-list>
+    @for (post of list; track post.id) {
+        <mat-list-item>
+            <img
+                matListItemAvatar
+                [src]="post.author.img"
+                alt="..."
+                class="list-item-avatar"
+            />
+            <a [routerLink]="['/posts', post.id]" class="anchor-list-item">
+                <span matListItemTitle>#{{ post.id }} - {{ post.title }}</span>
+
+                <span matListItemLine>{{ post.content }} </span>
+
+                <span matListItemLine class="post-list-item-line"
+                    ><mat-icon class="list-item-icon">schedule</mat-icon>
+                    {{
+                        post.created_at * 1000
+                            | amDateFormat: "DD-MM-YYYY HH:mm"
+                    }}
+                    |
+                    <mat-icon class="list-item-icon">person_outline</mat-icon>
+                    {{ post.author.displayName }}
+                </span>
+            </a>
+            <button
+                mat-icon-button
+                color="primary"
+                matListItemMeta
+                (click)="delete(post.id)"
+            >
+                <mat-icon> delete </mat-icon>
+            </button>
+        </mat-list-item>
+        <mat-divider></mat-divider>
     }
 </mat-list>
