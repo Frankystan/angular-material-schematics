@@ -1,9 +1,8 @@
+/*
+https://stackoverflow.com/questions/40010597/how-do-i-apply-opacity-to-a-css-color-variable
+*/
 .active {
     font-weight: bold;
-    // background-color: var(
-    //     --mat-option-selected-state-label-text-color
-    // ) !important;
-
     background: color-mix(in srgb, var(--mat-option-selected-state-label-text-color) 70%, transparent) !important;
 }
 
