@@ -3,15 +3,16 @@ https://stackoverflow.com/questions/40010597/how-do-i-apply-opacity-to-a-css-col
 */
 .active {
     font-weight: bold;
-    background: color-mix(in srgb, var(--mat-option-selected-state-label-text-color) 70%, transparent) !important;
+    background: color-mix(
+        in srgb,
+        var(--mat-option-selected-state-label-text-color) 20%,
+        transparent
+    ) !important;
 }
 
 // IS not MOBILE
 @media only screen and (min-width: 600px) {
     mat-nav-list {
-        // color: var(--mat-sidenav-content-text-color);
-        background-color: var(--mat-sidenav-content-background-color);
-
         .mdc-list-item {
             border-radius: 0 2rem 2rem 0;
         }

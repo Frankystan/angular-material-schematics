@@ -2,13 +2,12 @@
     background: inherit;
 }
 
-.mat-drawer-container {
-    height: calc(100vh - 64px);
-    width: 100vw;
+.mat-drawer-side {
+    width: 252px;
 }
 
-.is-mobile {
-    height: 100vh;
+.mat-drawer-container {
+    height: calc(100vh - 64px);
     width: 100vw;
 }
 
@@ -20,7 +19,17 @@ div.horizontally-centered-content {
 // IS not MOBILE
 @media only screen and (min-width: 600px) {
     .mat-drawer-side {
+        // color: var(--mat-sidenav-content-text-color);
+        background-color: var(--mat-sidenav-content-background-color);
         box-shadow: none;
         border: 0 none;
+    }
+}
+
+// IS MOBILE
+@media only screen and (max-width: 599px) {
+    .mat-drawer-container {
+        height: 100vh;
+        width: 100vw;
     }
 }

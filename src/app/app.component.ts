@@ -31,12 +31,8 @@ https://juri.dev/blog/2018/05/dynamic-ui-with-cdk-portals/
     standalone: true,
     imports: [
         FabScrollToTopComponent,
-        IfMobileDirective,
-        IfViewportMatchDirective,
-        IfViewportSizeDirective,
         MatSidenavModule,
         NavToolbarComponent,
-        NgClass,
         RouterModule,
         SidenavBodyComponent,
         SidenavHeaderComponent,

@@ -12,6 +12,7 @@ import { SanitizePipe } from '@shared/pipes/sanitize.pipe';
 import { DummyDataService } from '@shared/services/dummy-data.service';
 import { switchMap, of } from 'rxjs';
 import { MomentModule } from 'ngx-moment';
+import { I18nService } from '@shared/services/i18n.service';
 
 @Component({
     selector: 'app-post-show',
@@ -32,21 +33,21 @@ import { MomentModule } from 'ngx-moment';
 })
 export class PostShowComponent {
     #dummyDataService = inject(DummyDataService);
+    #i18nService = inject(I18nService);
 
     id = input.required<string>();
-    locale = signal<string>('es');
+    // locale = signal<string>('es');
+    locale!: string;
     bookmarked = signal<boolean>(false);
 
-    item: Signal<tPost> = toSignal(
+    post: Signal<tPost> = toSignal(
         toObservable(this.id).pipe(
             switchMap((itemId) => of(this.#dummyDataService.getOne(itemId))),
         ),
     );
 
     ngOnInit() {
-        // do something with the id
-        console.log('🚀 ~ PostShowComponent ~ id:', this.id());
-        console.log('🚀 ~ PostShowComponent ~ post:', this.item());
+        this.locale = this.#i18nService.language;
     }
 
     bookmarkToogle() {

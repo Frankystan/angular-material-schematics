@@ -1,4 +1,3 @@
-import { IfViewportSizeDirective } from '@shared/directives/if-viewport-size.directive';
 import { I18nService } from '@shared/services/i18n.service';
 import { Component, inject } from '@angular/core';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
@@ -6,7 +5,6 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatButtonModule } from '@angular/material/button';
-import { IfViewportMatchDirective } from '@shared/directives/if-viewport-match.directive';
 import { IfMobileDirective } from '@shared/directives/if-mobile.directive';
 
 @Component({
@@ -18,8 +16,6 @@ import { IfMobileDirective } from '@shared/directives/if-mobile.directive';
         MatIconModule,
         MatTooltipModule,
         MatButtonModule,
-        IfViewportSizeDirective,
-        IfViewportMatchDirective,
         IfMobileDirective,
     ],
     templateUrl: './btn-language-selector.component.html',

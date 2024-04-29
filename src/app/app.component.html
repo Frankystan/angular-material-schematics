@@ -1,7 +1,7 @@
 @if (!isMobile()) {
     <app-nav-toolbar [drawer]="drawer" />
 }
-<mat-sidenav-container [ngClass]="isMobile() ? 'is-mobile' : ''">
+<mat-sidenav-container>
     <mat-sidenav
         #drawer
         class="sidenav"

@@ -1,6 +1,7 @@
 mat-card {
     border-radius: 1rem;
     margin: 0.5rem;
+    max-width: fit-content;
 
     mat-card-title {
         display: flex;

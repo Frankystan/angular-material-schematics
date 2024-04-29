@@ -4,20 +4,24 @@
             mat-card-avatar
             class="card-header-avatar"
             [ngStyle]="{
-                background: ' url(' + item()?.author.img + ')  no-repeat 0 0'
+                background: ' url(' + post()?.author.img + ')  no-repeat 0 0'
             }"
         ></div>
-        <mat-card-title>{{ item()?.title }}</mat-card-title>
-        <mat-card-subtitle
-            ><time>
+        <mat-card-title>{{ post()?.title }}</mat-card-title>
+        <mat-card-subtitle>
+            <time>
                 {{
-                    item()?.created_at * 1000 | amDateFormat: "DD-MM-YYYY HH:mm"
+                    post()?.created_at! * 1000
+                        | amDateFormat: "DD-MM-YYYY HH:mm"
                 }}
                 (
-                {{ item()?.created_at * 1000 | amLocale: locale() | amTimeAgo }}
+                {{
+                    post()?.created_at! * 1000 | amLocale: locale | amTimeAgo
+                }}
                 )
-            </time></mat-card-subtitle
-        >
+            </time>
+        </mat-card-subtitle>
+
         <span class="flex-spacer"></span>
 
         <div>
@@ -29,18 +33,18 @@
         </div>
     </mat-card-header>
 
-    <!-- <img mat-card-image [ngSrc]="item()?.featured_image" height="240" width="400"/> -->
-    <img mat-card-image [src]="item()?.featured_image" />
+    <!-- <img mat-card-image [ngSrc]="post()?.featured_image" height="240" width="400"/> -->
+    <img mat-card-image [src]="post()?.featured_image" />
 
     <mat-card-content>
-        <div [innerHTML]="item()?.content | sanitize"></div>
+        <div [innerHTML]="post()?.content | sanitize"></div>
     </mat-card-content>
 
     <mat-divider class="inset"></mat-divider>
 
     <mat-card-actions>
         <mat-chip-listbox>
-            @for (tag of item()?.tags; track tag) {
+            @for (tag of post()?.tags; track tag) {
                 <mat-chip>{{ tag }}</mat-chip>
             }
         </mat-chip-listbox>
