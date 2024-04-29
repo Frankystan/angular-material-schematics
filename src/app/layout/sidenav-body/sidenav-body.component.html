@@ -26,7 +26,7 @@
             }
         } @else {
             <mat-list-item (click)="logout()">
-                <mat-icon mdListIcon>{{ item.icon }}</mat-icon>
+                <mat-icon matListItemIcon mdListIcon>{{ item.icon }}</mat-icon>
                 {{ item.title | translate }}
             </mat-list-item>
         }
