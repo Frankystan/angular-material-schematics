@@ -1,10 +1,18 @@
-mat-nav-list{
-    // color: var(--mat-sidenav-content-text-color);
-    background-color: var(--mat-sidenav-content-background-color);
-
-    .mdc-list-item{
-        border-radius: 0 2rem 2rem 0;
-    }
+.active {
+    font-weight: bold;
+    background-color: var(
+        --mat-option-selected-state-label-text-color
+    ) !important;
 }
 
+// IS not MOBILE
+@media only screen and (min-width: 600px) {
+    mat-nav-list {
+        // color: var(--mat-sidenav-content-text-color);
+        background-color: var(--mat-sidenav-content-background-color);
 
+        .mdc-list-item {
+            border-radius: 0 2rem 2rem 0;
+        }
+    }
+}

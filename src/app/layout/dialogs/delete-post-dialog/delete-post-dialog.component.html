@@ -1,12 +1,12 @@
 <!-- <h2 mat-dialog-title>{{ 'dialog.delete-post-content' | translate }}</h2> -->
 <mat-dialog-content>
-    {{ 'dialog.delete-post-title' | translate }} #{{data }}
+    {{ "dialog.delete-post-title" | translate }} #{{ data }}
 </mat-dialog-content>
 <mat-dialog-actions align="end">
     <button mat-raised-button mat-dialog-close tabindex="-1" color="warn">
-        {{ 'input.cancel' | translate }}
+        {{ "input.cancel" | translate }}
     </button>
     <button mat-button tabindex="2" [mat-dialog-close]="data" cdkFocusInitial>
-        {{ 'input.accept' | translate }}
+        {{ "input.accept" | translate }}
     </button>
 </mat-dialog-actions>

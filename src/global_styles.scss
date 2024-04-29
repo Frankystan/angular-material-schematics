@@ -1,5 +1,26 @@
 /* Add application styles & imports to this file! */
 
+/*
+https://stackoverflow.com/questions/53438937/angular-material-change-color-of-mat-list-option-on-selected
+*/
+
+// @use "sass:map";
+// @use "@angular/material" as mat;
+
+// @mixin color($theme) {
+//     .active {
+//         // Read the 500 hue from the primary color palette.
+//         background-color: mat.get-theme-color($theme, primary, 500);
+//         font-weight: bold;
+
+//     }
+
+// }
+
+:root {
+    --alpha: 0.4;
+}
+
 body {
     margin: 0;
     height: 100vh;

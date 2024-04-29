@@ -16,6 +16,7 @@ import { MatInputModule } from '@angular/material/input';
 import { RouterModule } from '@angular/router';
 import { VisibilityPasswordIconDirective } from '@shared/directives/visibility-password-icon.directive';
 import { TranslateModule } from '@ngx-translate/core';
+import { trimmedRequired } from '@shared/validators/trim-required.validator';
 
 /*
 https://hackernoon.com/es/como-usar-la-directiva-de-enfoque-trampa-cdk-angular
@@ -54,11 +55,11 @@ export class LoginComponent implements OnInit {
     buildForm() {
         this.form = new FormGroup({
             email: new FormControl('fffernandez84@gmail.com', [
-                Validators.required,
                 Validators.email,
+                trimmedRequired,
             ]),
             password: new FormControl('123456', [
-                Validators.required,
+                trimmedRequired,
                 // Validators.pattern('^(?=.*[0-9])(?=.*[a-zA-Z])([a-zA-Z0-9]+)$'),
                 Validators.minLength(6),
                 Validators.maxLength(25),

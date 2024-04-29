@@ -1,35 +1,32 @@
 <mat-nav-list>
-    @for (
-        item of menuItems();
-        track item;
-        let i = $index;
-        let first = $first, last = $last
-    ) {
-        @if (item.title == "") {
-            <mat-divider></mat-divider>
-        } @else if (item.title != "sidenav.logout") {
-            <a
-                #rla="routerLinkActive"
-                mat-list-item
-                routerLinkActive="selected-menu-item"
-                [routerLink]="item.link"
-                [activated]="rla.isActive"
-            >
-                <mat-icon
-                    color="primary"
-                    matListItemIcon
-                    [fontSet]="
-                        rla.isActive
-                            ? 'material-icons'
-                            : 'material-icons-outlined'
-                    "
-                    >{{ item.icon }}
-                </mat-icon>
-                <span matListItemTitle [translate]="item.title"></span>
-            </a>
+    @for (item of menuItems(); track item) {
+        @if (item.title != "sidenav.logout") {
+            @if (item.title == "") {
+                <mat-divider></mat-divider>
+            } @else {
+                <a
+                    #rla="routerLinkActive"
+                    mat-list-item
+                    routerLinkActive="active"
+                    [routerLink]="item.link"
+                    [activated]="rla.isActive"
+                >
+                    <mat-icon
+                        color="primary"
+                        matListItemIcon
+                        [fontSet]="
+                            rla.isActive
+                                ? 'material-icons'
+                                : 'material-icons-outlined'
+                        "
+                        >{{ item.icon }}
+                    </mat-icon>
+                    <span matListItemTitle [translate]="item.title"></span>
+                </a>
+            }
         } @else {
             <mat-list-item (click)="logout()">
-                <mat-icon matListItemIcon mdListIcon>{{ item.icon }}</mat-icon>
+                <mat-icon mdListIcon>{{ item.icon }}</mat-icon>
                 {{ item.title | translate }}
             </mat-list-item>
         }
