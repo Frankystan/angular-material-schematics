@@ -15,9 +15,7 @@
                         | amDateFormat: "DD-MM-YYYY HH:mm"
                 }}
                 (
-                {{
-                    post()?.created_at! * 1000 | amLocale: locale | amTimeAgo
-                }}
+                {{ post()?.created_at! * 1000 | amLocale: locale | amTimeAgo }}
                 )
             </time>
         </mat-card-subtitle>

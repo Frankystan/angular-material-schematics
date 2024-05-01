@@ -11,9 +11,11 @@
         [mode]="isMobile() ? 'over' : 'side'"
         [opened]="isMobile() === false"
     >
-        @if (isMobile()) {
+        <!-- @if (isMobile()) {
             <app-sidenav-header (click)="close()" />
-        }
+        } -->
+
+        <app-sidenav-header (click)="close()" />
 
         <app-sidenav-body (click)="close()" />
     </mat-sidenav>
