@@ -27,6 +27,7 @@ import { TranslateModule } from '@ngx-translate/core';
             </button>
         </mat-dialog-actions>
     `,
+    styleUrl: './forgotten-password-email-sent.dialog.component.scss',
 })
 export class ForgottenPasswordEmailSentDialogComponent {
     #dialogRef = inject(

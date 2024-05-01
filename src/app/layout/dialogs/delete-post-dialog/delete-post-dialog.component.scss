@@ -1,20 +1,7 @@
-// OPCION 1
-::ng-deep .delete-dialog-panel .mat-mdc-dialog-container .mdc-dialog__surface {
-    border-radius: 1rem;
+::ng-deep .delete-dialog-panel .mat-mdc-dialog-surface {
+    border-radius: 1rem !important;
     mat-dialog-actions {
         margin: 1rem;
+        justify-content: center;
     }
 }
-
-// OPCION 2
-//    en global_styles.scss :
-// .delete-dialog-panel .mat-mdc-dialog-container .mdc-dialog__surface{
-//     border-radius: 1rem;
-//     background-color: blue;
-// }
-
-//     y ...en en el componente donde se abre el Dialog::
-// this.dialog.open(DeletePostDialogComponent, {
-//     [.....]
-//     panelClass: 'delete-dialog-panel',
-// });
