@@ -8,6 +8,7 @@ import {
     inject,
 } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
+import { LayoutService } from '@shared/services/layout.service';
 import { map } from 'rxjs/operators';
 
 @Directive({
@@ -15,16 +16,10 @@ import { map } from 'rxjs/operators';
     standalone: true,
 })
 export class IfMobileDirective {
-    #breakpointObserver = inject(BreakpointObserver);
     #vcRef = inject(ViewContainerRef);
     #templateRef = inject(TemplateRef<any>);
 
-    isMobile: Signal<boolean> = toSignal(
-        this.#breakpointObserver
-            .observe(Breakpoints.XSmall)
-            .pipe(map((result) => result.matches)),
-        { initialValue: false },
-    );
+    isMobile: Signal<boolean> = inject(LayoutService).isMobile;
 
     @Input('ifMobile') set size(value: boolean) {
         this.updateView(value);

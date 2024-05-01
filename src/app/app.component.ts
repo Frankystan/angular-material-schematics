@@ -41,8 +41,7 @@ https://juri.dev/blog/2018/05/dynamic-ui-with-cdk-portals/
     styleUrl: './app.component.scss',
 })
 export class AppComponent {
-    #layoutService = inject(LayoutService);
-    isMobile: Signal<boolean> = this.#layoutService.isMobile;
+    isMobile: Signal<boolean> = inject(LayoutService).isMobile;
 
     @ViewChild('drawer', { static: true }) public drawer!: MatDrawer;
 

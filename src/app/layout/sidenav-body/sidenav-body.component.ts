@@ -1,11 +1,10 @@
 import { NgClass } from '@angular/common';
-import { Component, Signal, inject, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { Router, RouterModule } from '@angular/router';
 import { environment } from '@env/environment.development';
 import { TranslateModule } from '@ngx-translate/core';
-import { LayoutService } from '@shared/services/layout.service';
 
 export type SidenavListItem = {
     icon: string;
@@ -28,8 +27,6 @@ export type SidenavListItem = {
 })
 export class SidenavBodyComponent {
     #router = inject(Router);
-    #layoutService = inject(LayoutService);
-    isMobile: Signal<boolean> = this.#layoutService.isMobile;
 
     menuItems = signal<SidenavListItem[]>(environment.sidenav);
 

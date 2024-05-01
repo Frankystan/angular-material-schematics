@@ -38,17 +38,6 @@ he copiado esta linea en consola y funciona:
     styleUrl: './nav-toolbar.component.scss',
 })
 export class NavToolbarComponent {
+    isMobile: Signal<boolean> = inject(LayoutService).isMobile;
     @Input() drawer!: MatDrawer;
-
-    #layoutService = inject(LayoutService);
-    isMobile: Signal<boolean> = this.#layoutService.isMobile;
-
-    // DISABLE SCROLL WHEN MAT-SIDENAV is opened
-    // drawerToggle() {
-    //     this.drawer?.opened
-    //         ? (document.body.style.overflow = 'unset')
-    //         : (document.body.style.overflow = 'hidden');
-
-    //     this.drawer?.toggle();
-    // }
 }

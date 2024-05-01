@@ -10,14 +10,10 @@ import { map } from 'rxjs';
 export class LayoutService {
     #breakpointObserver = inject(BreakpointObserver);
 
-    drawer!: Signal<MatDrawer | undefined>;
-
     isMobile: Signal<boolean> = toSignal(
         this.#breakpointObserver
-            .observe(Breakpoints.XSmall)
+            .observe([Breakpoints.XSmall, '(max-width: 722px)'])
             .pipe(map((result) => result.matches)),
         { initialValue: false },
     );
-
-    constructor() {}
 }
