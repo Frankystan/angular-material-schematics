@@ -25,7 +25,7 @@ body {
 }
 
 .flex-spacer {
-    flex: 1 1 100%;
+    flex: 1 1 auto;
 }
 
 .content-centered {
@@ -51,26 +51,25 @@ mat-divider.inset {
     margin: 1rem 1rem 0 1rem;
 }
 
-// fx-100{
-//     flex: 1 1 100%;
-//     box-sizing: border-box;
-//     max-width: 100%;
-// }
+// TINYMCE OVERRIDES
+.tinymce-editor {
+    margin: 0.5rem 0;
 
-// fx-85{
-//     flex: 1 1 100%;
-//     box-sizing: border-box;
-//     max-width: 85%;
-// }
+    div.tox-editor-header {
+        z-index: 0 !important;
 
-// fx-65{
-//     flex: 1 1 100%;
-//     box-sizing: border-box;
-//     max-width: 65%;
-// }
+        div.tox-toolbar-overlord {
+            box-shadow:
+                0 2px 2px -2px rgb(34 47 62 / 10%),
+                0 8px 8px -4px rgb(34 47 62 / 7%) !important;
+        }
 
-// fx-50{
-//     flex: 1 1 100%;
-//     box-sizing: border-box;
-//     max-width: 50%;
-// }
+        div.tox-promotion {
+            display: none;
+        }
+    }
+
+    span.tox-statusbar__branding {
+        display: none;
+    }
+}

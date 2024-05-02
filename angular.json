@@ -38,12 +38,18 @@
                         }
                     },
                     "options": {
-                        "assets": [],
+                        "assets": [
+                            {
+                                "glob": "**/*",
+                                "input": "node_modules/tinymce",
+                                "output": "/tinymce/"
+                            }
+                        ],
                         "browser": "src/main.ts",
                         "index": "src/index.html",
                         "inlineStyleLanguage": "scss",
                         "outputPath": "dist/demo",
-                        "scripts": [],
+                        "scripts": ["node_modules/tinymce/tinymce.min.js"],
                         "styles": [
                             "src/indigo-pink.scss",
                             "src/global_styles.scss"

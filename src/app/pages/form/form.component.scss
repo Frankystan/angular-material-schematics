@@ -1,22 +1,28 @@
-// OPCION 1.
-// en cada pages>componente poner esta regla "host"
-// :host {
-//     display: flex;
-//     align-items: center;
-//     justify-content: center;
-// }
-
-// OPCION 2
-// en APP.scss
-// <div class="horizontally-centered-content">
-// <router-outlet></router-outlet>
-// </div>
+:host {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin: 0.5rem;
+}
 
 mat-card {
-    max-width: 500px;
+    border-radius: 1rem;
+    margin: 0.5rem;
+
+    mat-card-content img {
+        p {
+            display: flex;
+        }
+    }
 
     mat-form-field {
         width: 100%;
-        margin-top: 0.5rem;
+        margin: 0.5rem 0;
+    }
+
+    mat-card-actions {
+        padding: 1rem;
+        flex-direction: column;
     }
 }

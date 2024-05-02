@@ -1,3 +1,4 @@
+import { A11yModule } from '@angular/cdk/a11y';
 import { ENTER, COMMA } from '@angular/cdk/keycodes';
 import { AsyncPipe, JsonPipe } from '@angular/common';
 import { Component, DestroyRef, ViewChild, inject } from '@angular/core';
@@ -9,7 +10,10 @@ import {
     FormsModule,
     ReactiveFormsModule,
 } from '@angular/forms';
-import { MatAutocompleteModule, MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
+import {
+    MatAutocompleteModule,
+    MatAutocompleteSelectedEvent,
+} from '@angular/material/autocomplete';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import {
@@ -22,8 +26,11 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
+import { environment } from '@env/environment.development';
 import { TranslateModule } from '@ngx-translate/core';
 import { getErrorMessage } from '@shared/utils';
+import { trimmedRequired } from '@shared/validators/trim-required.validator';
+import { EditorModule } from '@tinymce/tinymce-angular';
 import { startWith, map, Observable } from 'rxjs';
 
 export interface User {
@@ -36,6 +43,7 @@ export interface User {
     selector: 'app-post-form',
     standalone: true,
     imports: [
+        A11yModule,
         AsyncPipe,
         FormsModule,
         JsonPipe,
@@ -48,6 +56,8 @@ export interface User {
         MatIconModule,
         MatInputModule,
         ReactiveFormsModule,
+        TranslateModule,
+        EditorModule,
     ],
     templateUrl: './post-form.component.html',
     styleUrl: './post-form.component.scss',
@@ -68,6 +78,11 @@ export class PostFormComponent {
 
     @ViewChild('fruitList') fruitList: MatChipGrid;
 
+    tinyMCEconfig = environment.tinyMCEconfig;
+
+    isUserWindoDark: boolean = window.matchMedia('(prefers-color-scheme: dark)')
+        .matches;
+
     public selectable = true;
     public removable = true;
     public addOnBlur = true;
@@ -81,7 +96,33 @@ export class PostFormComponent {
     public filteredFruits$: Observable<string[]>;
 
     ngOnInit(): void {
-        this.buildUserForm();
+        this.buildForm();
+    }
+
+    deleteImage($event: Event, url: string) {
+        $event.preventDefault();
+    }
+
+    private buildForm(): void {
+        const regex = '(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?';
+        this.form = this.#fb.group({
+            title: ['', Validators.required],
+            content: ['', Validators.required],
+            featured_image: ['', Validators.pattern(regex)],
+            fruitInput: [null],
+            fruits: [this.user.fruits, this.validateFruits],
+        });
+
+        this.form
+            .get('fruits')
+            .statusChanges.subscribe(
+                (status) => (this.fruitList.errorState = status === 'INVALID'),
+            );
+
+        this.filteredFruits$ = this.form.get('fruitInput').valueChanges.pipe(
+            startWith(''),
+            map((value) => this.fruitFilter(value)),
+        );
     }
 
     public addFruit(event: MatChipInputEvent): void {
@@ -141,26 +182,6 @@ export class PostFormComponent {
     public save(): void {
         console.log(this.user);
         console.log(this.form.get('fruits'));
-    }
-
-    private buildUserForm(): void {
-        this.form = this.#fb.group({
-            firstName: [this.user.firstName, Validators.required],
-            lastName: [this.user.lastName, Validators.required],
-            fruitInput: [null],
-            fruits: [this.user.fruits, this.validateFruits],
-        });
-
-        this.form
-            .get('fruits')
-            .statusChanges.subscribe(
-                (status) => (this.fruitList.errorState = status === 'INVALID'),
-            );
-
-        this.filteredFruits$ = this.form.get('fruitInput').valueChanges.pipe(
-            startWith(''),
-            map((value) => this.fruitFilter(value)),
-        );
     }
 
     private fruitFilter(value: any): string[] {

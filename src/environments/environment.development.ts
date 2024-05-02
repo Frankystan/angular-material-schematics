@@ -1,4 +1,17 @@
 export const environment = {
+    tinyMCEconfig: {
+        height: 500,
+        base_url: '/tinymce',
+        suffix: '.min',
+        menubar: false,
+        plugins: ['wordcount', ' link', 'table', 'image', 'lists'],
+        skin: 'oxide',
+        content_css: ['default'],
+        toolbar:
+            'undo redo | formatselect | bold italic backcolor | \
+            alignleft aligncenter alignright alignjustify | \
+            bullist numlist outdent indent | removeformat | table',
+    },
     sidenav: [
         { link: 'posts', icon: 'home', title: 'sidenav.wall' },
         { link: 'auth', icon: 'admin_panel_settings', title: 'Authentication' },
