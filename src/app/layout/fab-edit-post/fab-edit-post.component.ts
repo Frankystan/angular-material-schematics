@@ -4,13 +4,13 @@ import { MatIconModule } from '@angular/material/icon';
 import { RouterModule } from '@angular/router';
 
 @Component({
-    selector: 'fab-edit-item',
+    selector: 'fab-edit-post',
     standalone: true,
     imports: [RouterModule, MatIconModule, MatButtonModule],
     template: `
         <a
             mat-fab
-            [routerLink]="['/posts/', id, 'edit']"
+            [routerLink]="['/posts/', id(), 'edit']"
             class="mat-fab-bottom-right"
         >
             <mat-icon aria-label="edit post">edit</mat-icon>
@@ -29,7 +29,7 @@ import { RouterModule } from '@angular/router';
         `,
     ],
 })
-export class FabEditItemComponent {
-    // id = input.required<string>();
-    @Input() id?: string;
+export class FabEditPostComponent {
+    id = input.required<string>();
+    // @Input() id?: string;
 }

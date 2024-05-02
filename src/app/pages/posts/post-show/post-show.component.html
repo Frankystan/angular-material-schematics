@@ -11,11 +11,10 @@
         <mat-card-subtitle>
             <time>
                 {{
-                    post()?.created_at! * 1000
-                        | amDateFormat: "DD-MM-YYYY HH:mm"
+                    post()?.created_at * 1000 | amDateFormat: "DD-MM-YYYY HH:mm"
                 }}
                 (
-                {{ post()?.created_at! * 1000 | amLocale: locale | amTimeAgo }}
+                {{ created_at() | timeago }}
                 )
             </time>
         </mat-card-subtitle>
@@ -49,4 +48,4 @@
     </mat-card-actions>
 </mat-card>
 
-<fab-edit-item [id]="id()" />
+<fab-edit-post [id]="id()" />

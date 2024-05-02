@@ -16,9 +16,9 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
 import { tPost } from '@shared/custom-types/custom.type';
 import { DummyDataService } from '@shared/services/dummy-data.service';
-import { FabEditItemComponent } from '@layout/fab-edit-item/fab-edit-item.component';
 import { switchMap, of } from 'rxjs';
 import { SanitizePipe } from '@shared/pipes/sanitize.pipe';
+import { FabEditPostComponent } from '@layout/fab-edit-post/fab-edit-post.component';
 
 /*
 https://www.youtube.com/watch?v=DGk6rjD3AG0&t=456s
@@ -33,7 +33,7 @@ https://www.youtube.com/watch?v=DGk6rjD3AG0&t=456s
         MatDividerModule,
         MatIconModule,
         MatButtonModule,
-        FabEditItemComponent,
+        FabEditPostComponent,
         NgStyle,
         SanitizePipe,
     ],

@@ -1,5 +1,13 @@
 import { NgStyle } from '@angular/common';
-import { Component, Signal, inject, input, signal } from '@angular/core';
+import {
+    Component,
+    Signal,
+    computed,
+    effect,
+    inject,
+    input,
+    signal,
+} from '@angular/core';
 import { toSignal, toObservable } from '@angular/core/rxjs-interop';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -7,12 +15,15 @@ import { MatChipsModule } from '@angular/material/chips';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
 import { tPost } from '@shared/custom-types/custom.type';
-import { FabEditItemComponent } from '@layout/fab-edit-item/fab-edit-item.component';
 import { SanitizePipe } from '@shared/pipes/sanitize.pipe';
 import { DummyDataService } from '@shared/services/dummy-data.service';
 import { switchMap, of } from 'rxjs';
 import { MomentModule } from 'ngx-moment';
 import { I18nService } from '@shared/services/i18n.service';
+import { TimeagoIntl, TimeagoModule } from 'ngx-timeago';
+import { strings as enUs } from 'ngx-timeago/language-strings/en';
+import { strings as esES } from 'ngx-timeago/language-strings/es';
+import { FabEditPostComponent } from '@layout/fab-edit-post/fab-edit-post.component';
 
 @Component({
     selector: 'app-post-show',
@@ -27,17 +38,18 @@ import { I18nService } from '@shared/services/i18n.service';
         MatChipsModule,
         MatButtonModule,
         SanitizePipe,
-        FabEditItemComponent,
+        FabEditPostComponent,
         NgStyle,
+        TimeagoModule,
     ],
 })
 export class PostShowComponent {
     #dummyDataService = inject(DummyDataService);
     #i18nService = inject(I18nService);
+    intl = inject(TimeagoIntl);
 
     id = input.required<string>();
-    // locale = signal<string>('es');
-    locale!: string;
+
     bookmarked = signal<boolean>(false);
 
     post: Signal<tPost> = toSignal(
@@ -46,9 +58,26 @@ export class PostShowComponent {
         ),
     );
 
-    ngOnInit() {
-        this.locale = this.#i18nService.language;
+    created_at = signal<number>(0);
+
+    // created_at = computed(()=>{
+    //     return (this.post().created_at * 1000);
+    // });
+
+    constructor() {
+        effect(
+            () => {
+                this.intl.strings = enUs;
+                this.intl.changes.next();
+                this.created_at.set(this.post().created_at * 1000);
+
+                console.log('🚀 ~ I18nService ~ getlanguage ~ language:', enUs);
+            },
+            { allowSignalWrites: true },
+        );
     }
+
+    ngOnInit() {}
 
     bookmarkToogle() {
         this.bookmarked.set(!this.bookmarked());

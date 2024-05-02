@@ -12,6 +12,7 @@ import { provideCustomTitleStrategy } from './providers/custom-title-strategy.pr
 import { provideCustomTranslate } from './providers/custom-translate.provider';
 import { provideHttpClient } from '@angular/common/http';
 import { provideCustomInitializer } from './providers/custom-initializer.provider';
+import { provideCustomTimeago } from './providers/custom-timeago-provider';
 
 /*
 https://stackoverflow.com/questions/76318742/configuring-scroll-restoration-for-angular-standalone-router
@@ -40,5 +41,6 @@ export const appConfig: ApplicationConfig = {
         provideCustomTitleStrategy,
         provideCustomTranslate,
         provideCustomInitializer,
+        provideCustomTimeago,
     ],
 };
