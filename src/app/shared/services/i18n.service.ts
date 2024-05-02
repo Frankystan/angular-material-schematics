@@ -1,12 +1,13 @@
-import { Subscription } from 'rxjs';
-import { Injectable } from '@angular/core';
+import { DestroyRef, Injectable, inject } from '@angular/core';
 import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
-
-// import enUS from '@/assets/languages/en.json';
-// import esES from '@/assets/languages/es.json';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { TimeagoIntl } from 'ngx-timeago';
 
 import enUS from '@assets/languages/en-US.json';
 import esES from '@assets/languages/es-ES.json';
+
+import { strings as stringsUS } from 'ngx-timeago/language-strings/en';
+import { strings as stringsES } from 'ngx-timeago/language-strings/es';
 
 const languageKey = 'language';
 
@@ -14,15 +15,17 @@ const languageKey = 'language';
     providedIn: 'root',
 })
 export class I18nService {
+    #destroyRef = inject(DestroyRef);
+    #translateService = inject(TranslateService);
+    #timeagoIntl = inject(TimeagoIntl);
+
     defaultLanguage!: string;
     supportedLanguages!: string[];
 
-    private langChangeSubscription!: Subscription;
-
-    constructor(private translateService: TranslateService) {
+    constructor() {
         // Embed languages to avoid extra HTTP requests
-        translateService.setTranslation('en-US', enUS);
-        translateService.setTranslation('es-ES', esES);
+        this.#translateService.setTranslation('en-US', enUS);
+        this.#translateService.setTranslation('es-ES', esES);
     }
 
     /**
@@ -37,12 +40,24 @@ export class I18nService {
         this.language = '';
 
         // Warning: this subscription will always be alive for the app's lifetime
-        this.langChangeSubscription =
-            this.translateService.onLangChange.subscribe(
-                (event: LangChangeEvent) => {
-                    localStorage.setItem(languageKey, event.lang);
-                },
-            );
+        this.#translateService.onLangChange
+            .pipe(takeUntilDestroyed(this.#destroyRef))
+            .subscribe((event: LangChangeEvent) => {
+                switch (event.lang) {
+                    case 'es-ES':
+                        this.#timeagoIntl.strings = stringsES;
+                        break;
+                    case 'en-US':
+                        this.#timeagoIntl.strings = stringsUS;
+                        break;
+
+                    default:
+                        this.#timeagoIntl.strings = stringsUS;
+                        break;
+                }
+                this.#timeagoIntl.changes.next();
+                localStorage.setItem(languageKey, event.lang);
+            });
     }
 
     /**
@@ -55,7 +70,7 @@ export class I18nService {
         let newLanguage =
             language ||
             localStorage.getItem(languageKey) ||
-            this.translateService.getBrowserCultureLang() ||
+            this.#translateService.getBrowserCultureLang() ||
             '';
         let isSupportedLanguage = this.supportedLanguages.includes(newLanguage);
 
@@ -78,7 +93,7 @@ export class I18nService {
 
         console.debug(`Language set to ${language}`);
 
-        this.translateService.use(language);
+        this.#translateService.use(language);
     }
 
     /**
@@ -86,15 +101,6 @@ export class I18nService {
      * @return The current language code.
      */
     get language(): string {
-        return this.translateService.currentLang;
-    }
-
-    /**
-     * Cleans up language change subscription.
-     */
-    destroy() {
-        if (this.langChangeSubscription) {
-            this.langChangeSubscription.unsubscribe();
-        }
+        return this.#translateService.currentLang;
     }
 }

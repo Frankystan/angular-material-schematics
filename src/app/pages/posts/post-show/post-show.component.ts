@@ -21,8 +21,8 @@ import { switchMap, of } from 'rxjs';
 import { MomentModule } from 'ngx-moment';
 import { I18nService } from '@shared/services/i18n.service';
 import { TimeagoIntl, TimeagoModule } from 'ngx-timeago';
-import { strings as enUs } from 'ngx-timeago/language-strings/en';
-import { strings as esES } from 'ngx-timeago/language-strings/es';
+import { strings as stringsUS } from 'ngx-timeago/language-strings/en';
+import { strings as stringsES } from 'ngx-timeago/language-strings/es';
 import { FabEditPostComponent } from '@layout/fab-edit-post/fab-edit-post.component';
 
 @Component({
@@ -46,7 +46,8 @@ import { FabEditPostComponent } from '@layout/fab-edit-post/fab-edit-post.compon
 export class PostShowComponent {
     #dummyDataService = inject(DummyDataService);
     #i18nService = inject(I18nService);
-    intl = inject(TimeagoIntl);
+
+    #timeagoIntl = inject(TimeagoIntl);
 
     id = input.required<string>();
 
@@ -67,11 +68,20 @@ export class PostShowComponent {
     constructor() {
         effect(
             () => {
-                this.intl.strings = enUs;
-                this.intl.changes.next();
-                this.created_at.set(this.post().created_at * 1000);
+                switch (this.#i18nService.language) {
+                    case 'es-ES':
+                        this.#timeagoIntl.strings = stringsES;
+                        break;
+                    case 'en-US':
+                        this.#timeagoIntl.strings = stringsUS;
+                        break;
 
-                console.log('🚀 ~ I18nService ~ getlanguage ~ language:', enUs);
+                    default:
+                        this.#timeagoIntl.strings = stringsUS;
+                        break;
+                }
+                this.#timeagoIntl.changes.next();
+                this.created_at.set(this.post().created_at * 1000);
             },
             { allowSignalWrites: true },
         );
