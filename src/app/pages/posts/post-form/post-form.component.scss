@@ -1,0 +1,72 @@
+:host {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin: 0.5rem;
+}
+
+mat-card {
+    display: flex;
+    border-radius: 1rem;
+
+    mat-card-header {
+        display: flex;
+        flex-direction: row;
+
+        .card-header-avatar {
+            background-size: cover !important;
+            height: 48px;
+            width: 48px;
+        }
+
+        .card-header-text {
+            width: 100%;
+            margin: 0 16px;
+        }
+    }
+
+    figure {
+        display: flex;
+        flex-direction: column;
+
+        img {
+            max-width: 100%;
+
+            align-self: center;
+            height: 15rem;
+        }
+    }
+
+    mat-card-actions {
+        padding: 1rem;
+
+        .mat-mdc-raised-button {
+            width: 100%;
+        }
+    }
+}
+
+@media only screen and (max-width: 722px) {
+    .fx-100 {
+        flex: 1 1 100%;
+        box-sizing: border-box;
+        max-width: 100%;
+    }
+}
+
+@media only screen and (min-width: 723px) and (max-width: 900px) {
+    .fx-85 {
+        flex: 1 1 100%;
+        box-sizing: border-box;
+        max-width: 85%;
+    }
+}
+
+@media only screen and (min-width: 901px) {
+    .fx-50 {
+        flex: 1 1 100%;
+        box-sizing: border-box;
+        max-width: 50%;
+    }
+}
