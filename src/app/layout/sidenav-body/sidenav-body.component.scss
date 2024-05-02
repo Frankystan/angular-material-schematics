@@ -3,7 +3,11 @@ https://stackoverflow.com/questions/40010597/how-do-i-apply-opacity-to-a-css-col
 */
 .active {
     font-weight: bold;
-    background: color-mix(in srgb, var(--mat-option-selected-state-label-text-color) 20%, transparent) !important;
+    background: color-mix(
+        in srgb,
+        var(--mat-option-selected-state-label-text-color) 20%,
+        transparent
+    ) !important;
 }
 
 // IS not MOBILE

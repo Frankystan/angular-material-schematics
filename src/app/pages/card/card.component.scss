@@ -1,6 +1,14 @@
-mat-card {
-    border-radius: 1rem;
+:host {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
     margin: 0.5rem;
+}
+
+mat-card {
+    display: flex;
+    border-radius: 1rem;
 
     mat-card-title {
         display: flex;

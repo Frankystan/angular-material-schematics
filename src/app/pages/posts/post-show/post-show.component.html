@@ -7,19 +7,21 @@
                 background: ' url(' + post()?.author.img + ')  no-repeat 0 0'
             }"
         ></div>
-        <mat-card-title>{{ post()?.title }}</mat-card-title>
-        <mat-card-subtitle>
-            <time>
-                {{
-                    post()?.created_at * 1000 | amDateFormat: "DD-MM-YYYY HH:mm"
-                }}
-                (
-                {{ created_at() | timeago }}
-                )
-            </time>
-        </mat-card-subtitle>
 
-        <span class="flex-spacer"></span>
+        <div class="card-header-text">
+            <mat-card-title>{{ post()?.title }}</mat-card-title>
+            <mat-card-subtitle>
+                <time>
+                    {{
+                        post()?.created_at * 1000
+                            | amDateFormat: "DD-MM-YYYY HH:mm"
+                    }}
+                    (
+                    {{ created_at() | timeago }}
+                    )
+                </time>
+            </mat-card-subtitle>
+        </div>
 
         <div>
             <button mat-icon-button (click)="bookmarkToogle()">
@@ -30,8 +32,9 @@
         </div>
     </mat-card-header>
 
-    <!-- <img mat-card-image [ngSrc]="post()?.featured_image" height="240" width="400"/> -->
-    <img mat-card-image [src]="post()?.featured_image" />
+    <figure>
+        <img mat-card-image [src]="post()?.featured_image" />
+    </figure>
 
     <mat-card-content>
         <div [innerHTML]="post()?.content | sanitize"></div>
@@ -39,7 +42,7 @@
 
     <mat-divider class="inset"></mat-divider>
 
-    <mat-card-actions>
+    <mat-card-actions align="start">
         <mat-chip-listbox>
             @for (tag of post()?.tags; track tag) {
                 <mat-chip>{{ tag }}</mat-chip>
