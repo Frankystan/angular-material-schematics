@@ -1,5 +1,5 @@
 import { A11yModule } from '@angular/cdk/a11y';
-import { Component, OnInit, signal } from '@angular/core';
+import { Component, OnInit, computed, signal } from '@angular/core';
 import {
     FormGroup,
     FormControl,
@@ -15,6 +15,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { VisibilityPasswordIconDirective } from '@shared/directives/visibility-password-icon.directive';
 import { TranslateModule } from '@ngx-translate/core';
+import { ImgFromURLComponent } from '@layout/img-from-url/img-from-url.component';
 
 @Component({
     selector: 'app-register',
@@ -29,6 +30,7 @@ import { TranslateModule } from '@ngx-translate/core';
         ReactiveFormsModule,
         VisibilityPasswordIconDirective,
         TranslateModule,
+        ImgFromURLComponent,
     ],
     templateUrl: './register.component.html',
     styleUrl: './register.component.scss',
@@ -38,6 +40,9 @@ export class RegisterComponent implements OnInit {
 
     hide = signal(true);
     form!: FormGroup;
+    control = computed(() => {
+        return this.form.get('photoURL');
+    });
 
     ngOnInit(): void {
         this.buildForm();
