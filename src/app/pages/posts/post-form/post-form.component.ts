@@ -27,6 +27,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { environment } from '@env/environment.development';
+import { ImgFromURLComponent } from '@layout/img-from-url/img-from-url.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { getErrorMessage } from '@shared/utils';
 import { trimmedRequired } from '@shared/validators/trim-required.validator';
@@ -58,6 +59,7 @@ export interface User {
         ReactiveFormsModule,
         TranslateModule,
         EditorModule,
+        ImgFromURLComponent,
     ],
     templateUrl: './post-form.component.html',
     styleUrl: './post-form.component.scss',

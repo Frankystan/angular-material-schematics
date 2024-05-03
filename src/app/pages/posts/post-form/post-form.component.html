@@ -3,7 +3,7 @@
         <mat-card-header>
             <mat-form-field>
                 <mat-label>{{ "input.featured-image" | translate }}</mat-label>
-                <input #imageURL matInput formControlName="featured_image" />
+                <input #featured_image matInput formControlName="featured_image" />
 
                 @if (!form.get("featured_image").valid) {
                     <mat-error>
@@ -11,18 +11,11 @@
                     </mat-error>
                 }
             </mat-form-field>
-
-            <!-- @if(imageURL.value){
-                <figure>
-                    <img [src]="imageURL.value">
-                    <figcaption fxLayoutAlign="center center">
-                        <button id="myDelButton" mat-fab color="primary" (click)="deleteImage($event,imageURL.value)" aria-label="delete post featured image">
-                            <mat-icon>close</mat-icon>
-                        </button>
-                    </figcaption>
-                </figure>
-            } -->
         </mat-card-header>
+        
+        @if (featured_image.value) {
+            <app-img-from-url [control]="form.get('featured_image')" />
+        }
 
         <mat-card-content>
             <div cdkTrapFocus [cdkTrapFocusAutoCapture]="true">
