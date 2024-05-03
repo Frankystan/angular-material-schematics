@@ -1,7 +1,6 @@
 <mat-card>
     <mat-card-header>
-        <mat-card-title
-            >{{ "page.register.section" | translate }}
+        <mat-card-title>{{ "page.register.section" | translate }}
         </mat-card-title>
     </mat-card-header>
     <form autocomplete="off" novalidate [formGroup]="form" (submit)="save()">
@@ -10,16 +9,11 @@
                 <mat-form-field>
                     <mat-label>{{
                         "input.display-name" | translate
-                    }}</mat-label>
-                    <input
-                        type="text"
-                        matInput
-                        formControlName="displayName"
-                        tabindex="1"
-                    />
+                        }}</mat-label>
+                    <input type="text" matInput formControlName="displayName" tabindex="1" />
                     @if (!form.get("displayName").valid) {
-                        <mat-error>{{
-                            getErrorMessage("displayName", form) | translate
+                    <mat-error>{{
+                        getErrorMessage("displayName", form) | translate
                         }}</mat-error>
                     }
                 </mat-form-field>
@@ -27,65 +21,41 @@
 
             <mat-form-field>
                 <mat-label>{{ "input.email" | translate }}</mat-label>
-                <input
-                    type="email"
-                    matInput
-                    formControlName="email"
-                    tabindex="2"
-                />
+                <input type="email" matInput formControlName="email" tabindex="2" />
                 @if (!form.get("email").valid) {
-                    <mat-error>
-                        {{ getErrorMessage("email", form) | translate }}
-                    </mat-error>
+                <mat-error>
+                    {{ getErrorMessage("email", form) | translate }}
+                </mat-error>
                 }
             </mat-form-field>
 
             <mat-form-field>
                 <mat-label>{{ "input.password" | translate }}</mat-label>
-                <input
-                    type="password"
-                    matInput
-                    formControlName="password"
-                    [placeholder]="'input.password' | translate"
-                    [type]="hide() ? 'password' : 'text'"
-                    tabindex="3"
-                />
+                <input type="password" matInput formControlName="password" [placeholder]="'input.password' | translate"
+                    [type]="hide() ? 'password' : 'text'" tabindex="3" />
 
-                <mat-icon
-                    matSuffix
-                    visibilityPasswordIcon
-                    (onChange)="hide.set($event)"
-                ></mat-icon>
+                <mat-icon matSuffix visibilityPasswordIcon (onChange)="hide.set($event)"></mat-icon>
 
                 @if (!form.get("password").valid) {
-                    <mat-error>
-                        {{ getErrorMessage("password", form) | translate }}
-                    </mat-error>
+                <mat-error>
+                    {{ getErrorMessage("password", form) | translate }}
+                </mat-error>
                 }
             </mat-form-field>
 
             <mat-form-field>
                 <mat-label>{{
                     "input.confirm-password" | translate
-                }}</mat-label>
-                <input
-                    type="password"
-                    matInput
-                    formControlName="confirmPassword"
-                    [type]="hide() ? 'password' : 'text'"
-                    tabindex="4"
-                />
-                <mat-icon
-                    matSuffix
-                    visibilityPasswordIcon
-                    (onChange)="hide.set($event)"
-                ></mat-icon>
+                    }}</mat-label>
+                <input type="password" matInput formControlName="confirmPassword" [type]="hide() ? 'password' : 'text'"
+                    tabindex="4" />
+                <mat-icon matSuffix visibilityPasswordIcon (onChange)="hide.set($event)"></mat-icon>
                 @if (!form.get("confirmPassword").valid) {
-                    <mat-error>
-                        {{
-                            getErrorMessage("confirmPassword", form) | translate
-                        }}
-                    </mat-error>
+                <mat-error>
+                    {{
+                    getErrorMessage("confirmPassword", form) | translate
+                    }}
+                </mat-error>
                 }
             </mat-form-field>
 
@@ -93,41 +63,32 @@
                 <mat-label>{{ "input.image" | translate }}</mat-label>
                 <input #photoURL matInput formControlName="photoURL" />
                 @if (!form.get("photoURL").valid) {
-                    <mat-error>
-                        {{
-                            getErrorMessage("photoURL", form) | translate
-                        }}</mat-error
-                    >
+                <mat-error>
+                    {{
+                    getErrorMessage("photoURL", form) | translate
+                    }}</mat-error>
                 }
             </mat-form-field>
         </mat-card-content>
 
         @if (photoURL.value) {
-            <figure>
-                <img [src]="photoURL.value" />
-                <figcaption>
-                    <button
-                        mat-mini-fab
-                        color="primary"
-                        (click)="form.get('photoURL')?.setValue('')"
-                    >
-                        <mat-icon>close</mat-icon>
-                    </button>
-                </figcaption>
-            </figure>
+        <figure>
+            <img [src]="photoURL.value" />
+            <figcaption>
+                <button mat-mini-fab color="primary" (click)="form.get('photoURL')?.setValue('')">
+                    <mat-icon>close</mat-icon>
+                </button>
+            </figcaption>
+        </figure>
         }
 
         <mat-card-actions align="end">
-            <button
-                mat-flat-button
-                color="primary"
-                [disabled]="!form.valid && (form.dirty || form.untouched)"
-                tabindex="5"
-            >
+            <button mat-flat-button color="primary" [disabled]="!form.valid && (form.dirty || form.untouched)"
+                tabindex="5">
                 {{ "input.register" | translate }}
             </button>
         </mat-card-actions>
-        <mat-card-footer>
+        <mat-card-footer >
             <pre>{{ form.value | json }}</pre>
         </mat-card-footer>
     </form>

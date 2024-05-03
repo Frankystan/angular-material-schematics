@@ -13,9 +13,9 @@ export function getErrorMessage(control: string, form: FormGroup<any>) {
         case 'minlength':
             return 'validation.minlength';
         case 'pwdMatch':
-            return 'validation.pwd_match';
+            return 'validation.pwd-match';
         case 'matched':
-            return 'validation.pwd_match';
+            return 'validation.pwd-match';
         case 'pattern':
             return 'validation.url';
         default:

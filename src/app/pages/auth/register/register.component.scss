@@ -21,7 +21,45 @@ mat-card {
         width: 100%;
     }
 
+    figure {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+
+        img {
+            align-self: center;
+            height: 15rem;
+        }
+
+        figcaption {
+            display: flex;
+            align-items: center;
+            height: 100%;
+            width: 100%;
+            justify-content: center;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            // z-index: 99;
+            background: color-mix(in srgb, var(--mat-option-selected-state-label-text-color) 20%, transparent) !important;
+
+            button {
+                align-self: center;
+            }
+        }
+    }
+
     mat-card-actions {
         padding: 1rem;
+    }
+
+    mat-card-footer {
+
+        >* {
+
+            overflow-x: auto;
+        }
     }
 }
