@@ -1,12 +1,8 @@
-import { Component, Signal, ViewChild, inject } from '@angular/core';
+import { Component, Signal, inject, viewChild } from '@angular/core';
 import { FabScrollToTopComponent } from '@layout/fab-scroll-to-top/fab-scroll-to-top.component';
-import { IfMobileDirective } from '@shared/directives/if-mobile.directive';
-import { IfViewportMatchDirective } from '@shared/directives/if-viewport-match.directive';
-import { IfViewportSizeDirective } from '@shared/directives/if-viewport-size.directive';
 import { LayoutService } from './shared/services/layout.service';
 import { MatDrawer, MatSidenavModule } from '@angular/material/sidenav';
 import { NavToolbarComponent } from '@layout/nav-toolbar/nav-toolbar.component';
-import { NgClass } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { SidenavBodyComponent } from '@layout/sidenav-body/sidenav-body.component';
 import { SidenavHeaderComponent } from '@layout/sidenav-header/sidenav-header.component';
@@ -43,11 +39,9 @@ https://juri.dev/blog/2018/05/dynamic-ui-with-cdk-portals/
 export class AppComponent {
     isMobile: Signal<boolean> = inject(LayoutService).isMobile;
 
-    @ViewChild('drawer', { static: true }) public drawer!: MatDrawer;
-
-    // drawer: Signal<MatDrawer | undefined> = viewChild('drawer');
+    drawer = viewChild.required<MatDrawer>('drawer');
 
     close() {
-        if (this.isMobile()) this.drawer.close();
+        if (this.isMobile()) this.drawer().close();
     }
 }

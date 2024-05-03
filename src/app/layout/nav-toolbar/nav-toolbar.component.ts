@@ -1,4 +1,4 @@
-import { Component, Input, Signal, inject } from '@angular/core';
+import { Component, Signal, inject, input } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDrawer } from '@angular/material/sidenav';
@@ -39,5 +39,5 @@ he copiado esta linea en consola y funciona:
 })
 export class NavToolbarComponent {
     isMobile: Signal<boolean> = inject(LayoutService).isMobile;
-    @Input() drawer!: MatDrawer;
+    drawer = input<MatDrawer>();
 }
