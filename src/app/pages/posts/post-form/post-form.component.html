@@ -84,13 +84,14 @@
             </mat-form-field>
 
             <!-- Submit -->
-            <mat-card-actions class="button-wrapper">
+            <mat-card-actions align="end">
                 <button
                     mat-flat-button
                     color="primary"
                     [disabled]="!form.valid && (form.dirty || form.untouched)"
+                    tabindex="6"
                 >
-                    Submit
+                    {{ "input.save" | translate }}
                 </button>
             </mat-card-actions>
         </mat-card-content>

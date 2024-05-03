@@ -1,3 +1,58 @@
+// :host {
+//     display: flex;
+//     flex-direction: row;
+//     align-items: center;
+//     justify-content: center;
+//     margin: 0.5rem;
+// }
+
+// mat-card {
+//     display: flex;
+//     border-radius: 1rem;
+
+//     mat-card-header {
+//         display: flex;
+//         flex-direction: row;
+
+//         .card-header-avatar {
+//             background-size: cover !important;
+//             height: 48px;
+//             width: 48px;
+//         }
+
+//         .card-header-text {
+//             width: 100%;
+//             margin: 0 16px;
+//         }
+//     }
+
+//     figure {
+//         display: flex;
+//         flex-direction: column;
+
+//         img {
+//             max-width: 100%;
+
+//             align-self: center;
+//             height: 15rem;
+//         }
+//     }
+
+//     mat-form-field {
+//         width: 100%;
+//         margin: 0.5rem 0;
+//     }
+
+//     mat-card-actions {
+//         padding: 1rem;
+
+//         .mat-mdc-raised-button {
+//             width: 100%;
+//         }
+//     }
+// }
+
+
 :host {
     display: flex;
     flex-direction: row;
@@ -7,50 +62,36 @@
 }
 
 mat-card {
-    display: flex;
     border-radius: 1rem;
+    margin: 0.5rem;
+
+    width: 30rem;
 
     mat-card-header {
         display: flex;
         flex-direction: row;
-
-        .card-header-avatar {
-            background-size: cover !important;
-            height: 48px;
-            width: 48px;
-        }
-
-        .card-header-text {
-            width: 100%;
-            margin: 0 16px;
-        }
     }
 
-    figure {
+    mat-card-title {
         display: flex;
-        flex-direction: column;
-
-        img {
-            max-width: 100%;
-
-            align-self: center;
-            height: 15rem;
-        }
+        width: max-content;
     }
 
     mat-form-field {
         width: 100%;
-        margin: 0.5rem 0;
     }
 
     mat-card-actions {
-        padding: 1rem;
+        padding: 1rem 0;
+    }
 
-        .mat-mdc-raised-button {
-            width: 100%;
+    mat-card-footer {
+        >* {
+            overflow-x: auto;
         }
     }
 }
+
 
 @media only screen and (max-width: 722px) {
     .fx-100 {
