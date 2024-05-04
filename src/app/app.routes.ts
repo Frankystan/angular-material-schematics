@@ -41,18 +41,15 @@ export const APP_ROUTES: Routes = [
     {
         path: 'auth',
         component: AuthComponent,
-
-        children: [
-            // Eager loading routes in a separate file
-            ...AUTH_ROUTES,
-        ],
+        // Eager loading routes in a separate file
+        children: [...AUTH_ROUTES,],
     },
     {
         path: 'posts',
         component: PostComponent,
+        children: [...POST_ROUTES],
         // Lazy load routes in a separate file
         // loadChildren: () =>	import('./pages/posts/post.routes').then((r) => r.POST_ROUTES),
-        children: [...POST_ROUTES],
     },
 
     { path: '**', redirectTo: '404', pathMatch: 'full' },

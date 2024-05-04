@@ -18,6 +18,7 @@ https://stackblitz.com/edit/sidenavcontainer-scrollable-elementscrolled-1?file=s
 PORTALS
 TOOLBAR WITH PAGE ACTION PORTALS
 https://juri.dev/blog/2018/05/dynamic-ui-with-cdk-portals/
+https://stackblitz.com/github/juristr/demo-cdk-portal-mobile-pageactions?file=README.md
 
 
 */

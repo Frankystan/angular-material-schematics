@@ -13,6 +13,7 @@ import { MomentModule } from 'ngx-moment';
 import { RouterModule } from '@angular/router';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { tPost } from '@shared/custom-types/custom.type';
+import { PageActionsComponent } from '@layout/page-actions/page-actions.component';
 
 @Component({
     selector: 'app-post-list',
@@ -27,6 +28,7 @@ import { tPost } from '@shared/custom-types/custom.type';
         MomentModule,
         RouterModule,
         RouterModule,
+        PageActionsComponent,
     ],
     templateUrl: './post-list.component.html',
     styleUrl: './post-list.component.scss',
@@ -60,5 +62,9 @@ export class PostListComponent {
             .subscribe((result) => {
                 console.log('eliminado el item: ', result);
             });
+    }
+
+    onSave() {
+        alert('Yay funciona!');
     }
 }
