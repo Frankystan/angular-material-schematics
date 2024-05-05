@@ -3,7 +3,11 @@
         <mat-card-header>
             <mat-form-field>
                 <mat-label>{{ "input.featured-image" | translate }}</mat-label>
-                <input #featured_image matInput formControlName="featured_image" />
+                <input
+                    #featured_image
+                    matInput
+                    formControlName="featured_image"
+                />
 
                 @if (!form.get("featured_image").valid) {
                     <mat-error>
@@ -12,7 +16,7 @@
                 }
             </mat-form-field>
         </mat-card-header>
-        
+
         @if (featured_image.value) {
             <app-img-from-url [control]="form.get('featured_image')" />
         }

@@ -5,20 +5,20 @@ figure {
     position: relative;
 
     &:hover figcaption,
-			&:focus figcaption {
-				opacity: 1;
-			}
+    &:focus figcaption {
+        opacity: 1;
+    }
 
-			&:hover button,
-			&:focus button {
-				animation: shrink_and_rotate 0.5s 1
-					cubic-bezier(0.175, 0.885, 0.32, 1.275);
-			}
+    &:hover button,
+    &:focus button {
+        animation: shrink_and_rotate 0.5s 1
+            cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
 
-			&:hover figcaption .caption-content,
-			&:focus figcaption .caption-content {
-				transform: translate(0px, 0px);
-			}
+    &:hover figcaption .caption-content,
+    &:focus figcaption .caption-content {
+        transform: translate(0px, 0px);
+    }
 
     img {
         align-self: center;
@@ -48,17 +48,16 @@ figure {
     }
 }
 
-
 @keyframes shrink_and_rotate {
-	0% {
-		transform: rotate(-10deg) scale(0.8);
-	}
+    0% {
+        transform: rotate(-10deg) scale(0.8);
+    }
 
-	80% {
-		transform: rotate(50deg) scale(1.2);
-	}
+    80% {
+        transform: rotate(50deg) scale(1.2);
+    }
 
-	100% {
-		transform: rotate(0deg) scale(1);
-	}
+    100% {
+        transform: rotate(0deg) scale(1);
+    }
 }

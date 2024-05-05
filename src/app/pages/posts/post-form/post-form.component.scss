@@ -52,7 +52,6 @@
 //     }
 // }
 
-
 :host {
     display: flex;
     flex-direction: row;
@@ -86,12 +85,11 @@ mat-card {
     }
 
     mat-card-footer {
-        >* {
+        > * {
             overflow-x: auto;
         }
     }
 }
-
 
 @media only screen and (max-width: 722px) {
     .fx-100 {

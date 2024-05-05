@@ -26,3 +26,8 @@ export const POST_ROUTES: Routes = [
         title: 'title.posts.edit',
     },
 ];
+
+// con esta línea hago que cuando se llame desde app.routes.ts
+// se pueda hacer la carga perezosa tal que:
+// loadChildren: () =>	import('./pages/posts/post.routes')
+export default POST_ROUTES;
