@@ -1,45 +1,65 @@
-import { PortalHost, DomPortalHost, CdkPortal, Portal } from '@angular/cdk/portal';
-import { AfterViewInit, ApplicationRef, Component, ComponentFactoryResolver, Injector, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import {
+    Component,
+    OnInit,
+    AfterViewInit,
+    ComponentFactoryResolver,
+    Injector,
+    ViewContainerRef,
+    ApplicationRef,
+    ViewChild,
+    OnDestroy,
+    ElementRef
+} from '@angular/core';
+import {
+    DomPortalHost,
+    TemplatePortal,
+    PortalHost,
+    CdkPortal,
+    PortalOutlet,
+    DomPortalOutlet,
+    PortalModule,
+    
+
+} from '@angular/cdk/portal';
 
 @Component({
-  selector: 'app-page-actions',
-  standalone: true,
-  imports: [],
-  template: `
-  <ng-template cdk-portal>
-    <ng-content></ng-content>
-  </ng-template>
+    selector: 'app-page-actions',
+    standalone: true,
+    imports: [PortalModule],
+    template: `
+    <ng-template cdkPortal>
+        <ng-content></ng-content>
+    </ng-template>
   `,
-  styles: []
+    styles: []
 })
-export class PageActionsComponent implements OnInit, AfterViewInit, OnDestroy {
+export class PageActionsComponent implements AfterViewInit, OnDestroy {
+    @ViewChild(CdkPortal) portal: CdkPortal;
+    // @ViewChild(CdkPortal) private portal: CdkPortal;
 
-    private portalHost: PortalHost;
-    @ViewChild(CdkPortal) portal: Portal<any>;
-  
+
+    host: DomPortalOutlet;
+
     constructor(
-      private componentFactoryResolver: ComponentFactoryResolver,
-      private injector: Injector,
-      private appRef: ApplicationRef
-    ) {}
-  
-    ngOnInit() {}
-  
+        private cfr: ComponentFactoryResolver,
+        private appRef: ApplicationRef,
+        private injector: Injector
+    ) { }
+
     ngAfterViewInit(): void {
-      // Create a portalHost from a DOM element
-      this.portalHost = new DomPortalHost(
-        document.querySelector('#page-actions-container'),
-        this.componentFactoryResolver,
-        this.appRef,
-        this.injector
-      );
-  
-      // Attach portal to host
-      this.portalHost.attach(this.portal);
+        this.host = new DomPortalOutlet(
+            document.querySelector('#action'),
+            this.cfr,
+            this.appRef,
+            this.injector
+        );
+
+
+
+        this.host.attach(this.portal);
     }
-  
+
     ngOnDestroy(): void {
-      this.portalHost.detach();
+        this.host.detach();
     }
-  }
-  
+}

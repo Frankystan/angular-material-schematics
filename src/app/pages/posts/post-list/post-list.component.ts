@@ -14,6 +14,7 @@ import { RouterModule } from '@angular/router';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { tPost } from '@shared/custom-types/custom.type';
 import { PageActionsComponent } from '@layout/page-actions/page-actions.component';
+import { PortalModule } from '@angular/cdk/portal';
 
 @Component({
     selector: 'app-post-list',
@@ -29,6 +30,7 @@ import { PageActionsComponent } from '@layout/page-actions/page-actions.componen
         RouterModule,
         RouterModule,
         PageActionsComponent,
+        PortalModule,
     ],
     templateUrl: './post-list.component.html',
     styleUrl: './post-list.component.scss',

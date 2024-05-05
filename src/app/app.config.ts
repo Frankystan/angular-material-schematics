@@ -1,4 +1,4 @@
-import { ApplicationConfig } from '@angular/core';
+import { ApplicationConfig, importProvidersFrom } from '@angular/core';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import {
     InMemoryScrollingFeature,
@@ -13,6 +13,7 @@ import { provideCustomTranslate } from './providers/custom-translate.provider';
 import { provideHttpClient } from '@angular/common/http';
 import { provideCustomInitializer } from './providers/custom-initializer.provider';
 import { provideCustomTimeago } from './providers/custom-timeago-provider';
+import { PortalModule } from '@angular/cdk/portal';
 
 /*
 https://stackoverflow.com/questions/76318742/configuring-scroll-restoration-for-angular-standalone-router
@@ -42,5 +43,6 @@ export const appConfig: ApplicationConfig = {
         provideCustomTranslate,
         provideCustomInitializer,
         provideCustomTimeago,
+        // importProvidersFrom(PortalModule),
     ],
 };

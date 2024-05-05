@@ -14,6 +14,9 @@ https://stackoverflow.com/questions/47528852/angular-material-sidenav-cdkscrolla
 https://stackblitz.com/edit/sidenavcontainer-scrollable-elementscrolled-1?file=src%2Fapp%2Fapp.component.ts
 
 
+// STORE SERVICE angular 13
+https://github.com/Frankistan/ng13fireblog/blob/master/src/app/services/store.service.ts
+
 
 PORTALS
 TOOLBAR WITH PAGE ACTION PORTALS
