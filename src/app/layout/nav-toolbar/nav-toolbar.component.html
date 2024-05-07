@@ -1,5 +1,8 @@
-<!-- <mat-toolbar color="primary" class="mat-elevation-z8" [ngStyle]="{'z-index':drawer.opened  ? '1' : '2' }"> -->
-<mat-toolbar color="primary" class="mat-elevation-z8">
+<mat-toolbar
+    color="primary"
+    class="mat-elevation-z8"
+    [ngStyle]="{ 'z-index': drawer().openedChange ? '1' : '2' }"
+>
     <btn-menu [drawer]="drawer()" />
 
     <span>AMS by Fran</span>
