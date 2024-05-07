@@ -22,18 +22,18 @@ import { IfMobileDirective } from '@shared/directives/if-mobile.directive';
     styleUrl: './btn-language-selector.component.scss',
 })
 export class BtnLanguageSelectorComponent {
-    private i18nService = inject(I18nService);
-    public translate = inject(TranslateService);
+    #i18nService = inject(I18nService);
+    translate = inject(TranslateService);
 
     setLanguage(language: string) {
-        this.i18nService.language = language;
+        this.#i18nService.language = language;
     }
 
     get currentLanguage(): string {
-        return this.i18nService.language;
+        return this.#i18nService.language;
     }
 
     get languages(): string[] {
-        return this.i18nService.supportedLanguages;
+        return this.#i18nService.supportedLanguages;
     }
 }

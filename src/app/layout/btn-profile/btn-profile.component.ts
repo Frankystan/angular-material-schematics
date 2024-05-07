@@ -7,15 +7,8 @@ import { IfMobileDirective } from '@shared/directives/if-mobile.directive';
 @Component({
     selector: 'app-btn-profile',
     standalone: true,
-    imports: [MatIconModule, MatButtonModule,RouterModule],
-    template: `
-        <a
-            mat-icon-button
-            class="profile"
-            routerLink="/profile"
-            
-        ></a>
-    `,
+    imports: [MatIconModule, MatButtonModule, RouterModule],
+    template: ` <a mat-icon-button class="profile" routerLink="/profile"></a> `,
     styles: [
         `
             a.profile {

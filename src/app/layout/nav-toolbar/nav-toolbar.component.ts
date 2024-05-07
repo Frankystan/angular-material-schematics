@@ -10,8 +10,10 @@ import { IfViewportMatchDirective } from '@shared/directives/if-viewport-match.d
 import { IfViewportSizeDirective } from '@shared/directives/if-viewport-size.directive';
 import { IfMobileDirective } from '@shared/directives/if-mobile.directive';
 import { BtnMenuComponent } from '@layout/btn-menu/btn-menu.component';
-import { PortalModule } from '@angular/cdk/portal';
-import { NgIf, NgStyle } from '@angular/common';
+import { PortalModule, TemplatePortal } from '@angular/cdk/portal';
+import { AsyncPipe, NgIf, NgStyle } from '@angular/common';
+import { PortalBridgeService } from '@shared/services/portal-bridge.service';
+import { Observable } from 'rxjs';
 
 /*
 **OPCIONAL**
@@ -36,12 +38,20 @@ he copiado esta linea en consola y funciona:
         PortalModule,
         NgStyle,
         NgIf,
+        AsyncPipe,
     ],
     templateUrl: './nav-toolbar.component.html',
     styleUrl: './nav-toolbar.component.scss',
 })
 export class NavToolbarComponent {
+    #portalBridgeService = inject(PortalBridgeService);
     isMobile: Signal<boolean> = inject(LayoutService).isMobile;
 
     drawer = input<MatDrawer>();
+
+    portal$!: Observable<TemplatePortal>;
+
+    ngOnInit(): void {
+        this.portal$ = this.#portalBridgeService.portal$;
+    }
 }

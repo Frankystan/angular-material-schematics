@@ -6,10 +6,11 @@
         #drawer
         class="sidenav"
         fixedInViewport
-        [fixedTopGap]="isMobile() ? '0' : '64'"
+        [fixedTopGap]="isMobile() ? 0 : 64"
         [attr.role]="isMobile() ? 'dialog' : 'navigation'"
         [mode]="isMobile() ? 'over' : 'side'"
         [opened]="isMobile() === false"
+        (click)="close()"
     >
         @if (isMobile()) {
             <app-sidenav-header [drawer]="drawer" />

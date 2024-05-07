@@ -1,14 +1,6 @@
-import { CdkPortal, DomPortalOutlet, PortalModule } from '@angular/cdk/portal';
-import {
-    AfterViewInit,
-    ApplicationRef,
-    Component,
-    ComponentFactoryResolver,
-    Injector,
-    OnDestroy,
-    inject,
-    viewChild,
-} from '@angular/core';
+import { CdkPortal, PortalModule } from '@angular/cdk/portal';
+import { Component, OnDestroy, OnInit, inject, viewChild } from '@angular/core';
+import { PortalBridgeService } from '@shared/services/portal-bridge.service';
 
 /*
 idea original - CON "ComponentFactoryResolver"
@@ -37,28 +29,33 @@ https://stackblitz.com/github/juristr/demo-cdk-portal-mobile-pageactions/tree/se
     `,
     styles: [],
 })
-export class PageActionsComponent implements AfterViewInit, OnDestroy {
-    #cfr = inject(ComponentFactoryResolver);
-    #appRef = inject(ApplicationRef);
-    #injector = inject(Injector);
+export class PageActionsComponent implements OnInit, OnDestroy {
+    // #cfr = inject(ComponentFactoryResolver);
+    // #appRef = inject(ApplicationRef);
+    // #injector = inject(Injector);
+    // host!: DomPortalOutlet;
+    // elemnt: Element = document.querySelector('#toolbar-portal-outlet') as Element;
+
+    #portalBridgeService = inject(PortalBridgeService);
 
     portal = viewChild.required<CdkPortal>(CdkPortal);
-    host!: DomPortalOutlet;
-    elemnt: Element = document.querySelector(
-        '#toolbar-portal-outlet',
-    ) as Element;
 
-    ngAfterViewInit(): void {
-        this.host = new DomPortalOutlet(
-            this.elemnt,
-            this.#cfr,
-            this.#appRef,
-            this.#injector,
-        );
-        this.host.attach(this.portal());
+    ngOnInit(): void {
+        this.#portalBridgeService.setPortal(this.portal());
     }
 
+    // ngAfterViewInit(): void {
+    //     this.host = new DomPortalOutlet(
+    //         this.elemnt,
+    //         this.#cfr,
+    //         this.#appRef,
+    //         this.#injector,
+    //     );
+    //     this.host.attach(this.portal());
+    // }
+
     ngOnDestroy(): void {
-        this.host.detach();
+        // this.host.detach();
+        this.portal().detach();
     }
 }
