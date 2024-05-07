@@ -14,7 +14,7 @@ import { IfMobileDirective } from '@shared/directives/if-mobile.directive';
             aria-label="Toggle sidenav"
             mat-icon-button
             (click)="drawer().toggle()"
-            *ifMobile="true"
+      
         >
             <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
         </button>

@@ -3,7 +3,7 @@
     class="mat-elevation-z8"
     [ngStyle]="{ 'z-index': drawer().openedChange ? '1' : '2' }"
 >
-    <btn-menu [drawer]="drawer()" />
+    <btn-menu [drawer]="drawer()" *ifMobile="true"/>
 
     <span>AMS by Fran</span>
     <span class="flex-spacer"></span>
@@ -13,5 +13,5 @@
 
     <btn-language-selector />
 
-    <app-btn-profile />
+    <app-btn-profile  *ifMobile="false"/>
 </mat-toolbar>

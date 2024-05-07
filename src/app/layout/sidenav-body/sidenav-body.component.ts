@@ -20,6 +20,7 @@ export type SidenavListItem = {
         RouterModule,
         MatListModule,
         MatIconModule,
+        RouterModule,
         NgClass,
     ],
     templateUrl: './sidenav-body.component.html',

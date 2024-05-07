@@ -11,7 +11,7 @@ import { IfViewportSizeDirective } from '@shared/directives/if-viewport-size.dir
 import { IfMobileDirective } from '@shared/directives/if-mobile.directive';
 import { BtnMenuComponent } from '@layout/btn-menu/btn-menu.component';
 import { PortalModule } from '@angular/cdk/portal';
-import { NgStyle } from '@angular/common';
+import { NgIf, NgStyle } from '@angular/common';
 
 /*
 **OPCIONAL**
@@ -31,12 +31,11 @@ he copiado esta linea en consola y funciona:
         MatToolbarModule,
         MatButtonModule,
         BtnLanguageSelectorComponent,
-        IfViewportMatchDirective,
-        IfViewportSizeDirective,
         IfMobileDirective,
         BtnMenuComponent,
         PortalModule,
         NgStyle,
+        NgIf,
     ],
     templateUrl: './nav-toolbar.component.html',
     styleUrl: './nav-toolbar.component.scss',
