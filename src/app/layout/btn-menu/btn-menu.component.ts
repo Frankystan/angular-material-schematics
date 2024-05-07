@@ -1,15 +1,17 @@
-import { Component, input } from '@angular/core';
+import { NgIf } from '@angular/common';
+import { Component, Signal, inject, input } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDrawer } from '@angular/material/sidenav';
-import { IfMobileDirective } from '@shared/directives/if-mobile.directive';
+import { LayoutService } from '@shared/services/layout.service';
 
 @Component({
     selector: 'btn-menu',
     standalone: true,
-    imports: [IfMobileDirective, MatIconModule, MatButtonModule],
+    imports: [MatIconModule, MatButtonModule, NgIf],
     template: `
         <button
+            *ngIf="isMobile()"
             type="button"
             aria-label="Toggle sidenav"
             mat-icon-button
@@ -21,4 +23,5 @@ import { IfMobileDirective } from '@shared/directives/if-mobile.directive';
 })
 export class BtnMenuComponent {
     drawer = input<MatDrawer>();
+    isMobile: Signal<boolean> = inject(LayoutService).isMobile;
 }

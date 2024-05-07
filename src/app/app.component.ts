@@ -6,6 +6,7 @@ import { NavToolbarComponent } from '@layout/nav-toolbar/nav-toolbar.component';
 import { RouterModule } from '@angular/router';
 import { SidenavBodyComponent } from '@layout/sidenav-body/sidenav-body.component';
 import { SidenavHeaderComponent } from '@layout/sidenav-header/sidenav-header.component';
+import { NgIf } from '@angular/common';
 
 /*
 Scrolling
@@ -36,6 +37,7 @@ https://stackblitz.com/github/juristr/demo-cdk-portal-mobile-pageactions?file=RE
         RouterModule,
         SidenavBodyComponent,
         SidenavHeaderComponent,
+        NgIf,
     ],
     templateUrl: './app.component.html',
     styleUrl: './app.component.scss',

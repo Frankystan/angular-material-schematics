@@ -1,19 +1,20 @@
-.sidenav .mat-toolbar {
-    background: inherit;
-}
-
 mat-sidenav {
     width: 252px;
 }
 
-.mat-drawer-container {
-    height: calc(100vh - 64px);
-    width: 100vw;
+mat-sidenav-container {
+    height: calc(100% - 64px);
 }
 
-div.horizontally-centered-content {
-    display: flex;
-    justify-content: center;
+mat-sidenav .mat-toolbar {
+    background: inherit;
+}
+
+// IS MOBILE
+@media only screen and (max-width: 599px) {
+    mat-sidenav-container {
+        height: calc(100% - 56px);
+    }
 }
 
 // IS not MOBILE
@@ -23,13 +24,5 @@ div.horizontally-centered-content {
         background-color: var(--mat-sidenav-content-background-color);
         box-shadow: none;
         border: 0 none;
-    }
-}
-
-// IS MOBILE
-@media only screen and (max-width: 722px) {
-    .mat-drawer-container {
-        height: 100vh;
-        width: 100vw;
     }
 }

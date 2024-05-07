@@ -1,14 +1,22 @@
-import { Component, inject } from '@angular/core';
+import { NgIf } from '@angular/common';
+import { Component, Signal, inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { Router, RouterModule } from '@angular/router';
-import { IfMobileDirective } from '@shared/directives/if-mobile.directive';
+import { RouterModule } from '@angular/router';
+import { LayoutService } from '@shared/services/layout.service';
 
 @Component({
     selector: 'app-btn-profile',
     standalone: true,
-    imports: [MatIconModule, MatButtonModule, RouterModule],
-    template: ` <a mat-icon-button class="profile" routerLink="/profile"></a> `,
+    imports: [MatIconModule, MatButtonModule, RouterModule, NgIf],
+    template: `
+        <a
+            *ngIf="!isMobile()"
+            mat-icon-button
+            class="profile"
+            routerLink="/profile"
+        ></a>
+    `,
     styles: [
         `
             a.profile {
@@ -21,9 +29,5 @@ import { IfMobileDirective } from '@shared/directives/if-mobile.directive';
     ],
 })
 export class BtnProfileComponent {
-    #router = inject(Router);
-
-    goTo() {
-        this.#router.navigate(['/profile']);
-    }
+    isMobile: Signal<boolean> = inject(LayoutService).isMobile;
 }

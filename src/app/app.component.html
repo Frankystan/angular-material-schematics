@@ -1,6 +1,5 @@
-@if (!isMobile()) {
-    <app-nav-toolbar [drawer]="drawer" />
-}
+<app-nav-toolbar [drawer]="drawer" />
+
 <mat-sidenav-container>
     <mat-sidenav
         #drawer
@@ -12,20 +11,13 @@
         [opened]="isMobile() === false"
         (click)="close()"
     >
-        @if (isMobile()) {
-            <app-sidenav-header [drawer]="drawer" />
-        }
+        <app-sidenav-header [drawer]="drawer" *ngIf="isMobile()" />
 
         <app-sidenav-body (click)="close()" />
     </mat-sidenav>
 
     <mat-sidenav-content>
-        @if (isMobile()) {
-            <app-nav-toolbar [drawer]="drawer" />
-        }
-
         <!-- Add Content Here -->
-
         <router-outlet></router-outlet>
 
         <app-fab-scroll-to-top />
