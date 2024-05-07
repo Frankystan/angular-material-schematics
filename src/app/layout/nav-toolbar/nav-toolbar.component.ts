@@ -41,5 +41,6 @@ he copiado esta linea en consola y funciona:
 })
 export class NavToolbarComponent {
     isMobile: Signal<boolean> = inject(LayoutService).isMobile;
+
     drawer = input<MatDrawer>();
 }

@@ -1,24 +1,29 @@
+import { CdkPortal, DomPortalOutlet, PortalModule } from '@angular/cdk/portal';
 import {
-    Component,
     AfterViewInit,
+    ApplicationRef,
+    Component,
     ComponentFactoryResolver,
     Injector,
-    ApplicationRef,
-    ViewChild,
     OnDestroy,
+    inject,
+    viewChild,
 } from '@angular/core';
-import { CdkPortal, DomPortalOutlet, PortalModule } from '@angular/cdk/portal';
 
 /*
-version 1
+idea original - CON "ComponentFactoryResolver"
+https://juri.dev/blog/2018/05/dynamic-ui-with-cdk-portals/
+https://blog.logrocket.com/inject-dynamic-content-angular-components-with-portals/
+https://stackblitz.com/github/juristr/demo-cdk-portal-mobile-pageactions?file=src%2Fapp%2Fshared%2Fpage-actions%2Fpage-actions.component.ts
+
+DE AQUI TENGO LA IDEA DEL PORTALBRIDGE - elimino el uso del "ComponentFactoryResolver"
+https://stackblitz.com/edit/angular-ivy-phqryn?file=src%2Fapp%2Fportal-outlet%2Fportal-outlet.component.ts
+https://youtu.be/wPjVWeXSdqU?si=uW3ocIek6lizW09y
+
+ver esta alternativa -  SIN "ComponentFactoryResolver" 
 https://medium.com/angular-in-depth/how-do-cdk-portals-work-7c097c14a494
 https://stackblitz.com/github/juristr/demo-cdk-portal-mobile-pageactions/tree/self-made-portals?ctl=1&embed=1
 
-version 2
-https://juri.dev/blog/2018/05/dynamic-ui-with-cdk-portals/
-https://stackblitz.com/github/juristr/demo-cdk-portal-mobile-pageactions?file=README.md
-
-https://www.decodedfrontend.io/how-to-provide-data-to-component-portal-using-dependency-injection/
 */
 
 @Component({
@@ -33,25 +38,24 @@ https://www.decodedfrontend.io/how-to-provide-data-to-component-portal-using-dep
     styles: [],
 })
 export class PageActionsComponent implements AfterViewInit, OnDestroy {
-    @ViewChild(CdkPortal) private portal: CdkPortal;
+    #cfr = inject(ComponentFactoryResolver);
+    #appRef = inject(ApplicationRef);
+    #injector = inject(Injector);
 
-    host: DomPortalOutlet;
-
-    constructor(
-        private cfr: ComponentFactoryResolver,
-        private appRef: ApplicationRef,
-        private injector: Injector,
-    ) {}
+    portal = viewChild.required<CdkPortal>(CdkPortal);
+    host!: DomPortalOutlet;
+    elemnt: Element = document.querySelector(
+        '#toolbar-portal-outlet',
+    ) as Element;
 
     ngAfterViewInit(): void {
         this.host = new DomPortalOutlet(
-            document.querySelector('#action'),
-            this.cfr,
-            this.appRef,
-            this.injector,
+            this.elemnt,
+            this.#cfr,
+            this.#appRef,
+            this.#injector,
         );
-
-        this.host.attach(this.portal);
+        this.host.attach(this.portal());
     }
 
     ngOnDestroy(): void {
