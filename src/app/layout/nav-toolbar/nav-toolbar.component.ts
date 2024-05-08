@@ -1,4 +1,4 @@
-import { Component, Signal, inject, input } from '@angular/core';
+import { Component, Signal, computed, inject, input } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDrawer } from '@angular/material/sidenav';
@@ -46,6 +46,10 @@ he copiado esta linea en consola y funciona:
 export class NavToolbarComponent {
     #portalBridgeService = inject(PortalBridgeService);
     isMobile: Signal<boolean> = inject(LayoutService).isMobile;
+
+    toolbarShadow = computed(() => {
+        return this.isMobile() && this.drawer().openedChange ? '1' : '2';
+    });
 
     drawer = input<MatDrawer>();
 

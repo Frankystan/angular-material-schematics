@@ -1,7 +1,7 @@
 <mat-toolbar
     color="primary"
     class="mat-elevation-z8"
-    [ngStyle]="{ 'z-index': drawer().openedChange ? '1' : '2' }"
+    [ngStyle]="{ 'z-index': toolbarShadow() }"
 >
     <btn-menu [drawer]="drawer()" />
 

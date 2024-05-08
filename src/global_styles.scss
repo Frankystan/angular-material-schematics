@@ -74,3 +74,9 @@ mat-divider.inset {
         display: none;
     }
 }
+
+// FIX para que el MAT-DRAWER-BACKDROP cubra totalmente la pantalla cuando el MAT-TOOLBAR está fuera del MAT-SIDENAV-CONTENT
+// https://github.com/angular/components/issues/15448
+.mat-drawer-backdrop.mat-drawer-shown {
+    position: fixed !important;
+}
