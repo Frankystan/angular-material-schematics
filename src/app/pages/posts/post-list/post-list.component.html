@@ -62,8 +62,10 @@
     </button>
 </app-page-actions>
 
-<!-- <app-page-actions>
-    <button type="button" class="toolbar-btn" mat-icon-button (click)="onSave()">
-        <mat-icon>add</mat-icon>
-    </button>
-</app-page-actions> -->
+<fab-create-post />
+
+<fab-page-action [data]="[{name: 'joe'}, {name: 'mike'}]">
+    <ng-template let-data="data">
+        <p *ngFor="let person of data">{{ person.name }}</p>
+    </ng-template>
+</fab-page-action>

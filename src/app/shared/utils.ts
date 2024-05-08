@@ -18,6 +18,8 @@ export function getErrorMessage(control: string, form: FormGroup<any>) {
             return 'validation.pwd-match';
         case 'pattern':
             return 'validation.url';
+        case 'minTagsLength':
+            return 'validation.minTagsLength';
         default:
             return '';
     }

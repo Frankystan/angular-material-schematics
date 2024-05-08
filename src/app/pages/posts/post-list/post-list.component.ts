@@ -15,6 +15,8 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { tPost } from '@shared/custom-types/custom.type';
 import { PageActionsComponent } from '@layout/page-actions/page-actions.component';
 import { PortalModule } from '@angular/cdk/portal';
+import { FabCreatePostComponent } from '@layout/fab-create-post/fab-create-post.component';
+import { FabPageActionComponent } from '@layout/action-fab/fab-page-action.component';
 
 @Component({
     selector: 'app-post-list',
@@ -31,6 +33,8 @@ import { PortalModule } from '@angular/cdk/portal';
         RouterModule,
         PageActionsComponent,
         PortalModule,
+        FabCreatePostComponent,
+        FabPageActionComponent,
     ],
     templateUrl: './post-list.component.html',
     styleUrl: './post-list.component.scss',

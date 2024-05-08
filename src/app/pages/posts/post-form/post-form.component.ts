@@ -1,7 +1,7 @@
 import { A11yModule } from '@angular/cdk/a11y';
 import { ENTER, COMMA } from '@angular/cdk/keycodes';
 import { AsyncPipe, JsonPipe } from '@angular/common';
-import { Component, DestroyRef, ViewChild, inject } from '@angular/core';
+import { Component, DestroyRef, Input, ViewChild, inject } from '@angular/core';
 import {
     Validators,
     FormControl,
@@ -9,11 +9,9 @@ import {
     FormGroup,
     FormsModule,
     ReactiveFormsModule,
+    FormArray,
 } from '@angular/forms';
-import {
-    MatAutocompleteModule,
-    MatAutocompleteSelectedEvent,
-} from '@angular/material/autocomplete';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import {
@@ -29,17 +27,17 @@ import { MatInputModule } from '@angular/material/input';
 import { environment } from '@env/environment.development';
 import { ImgFromURLComponent } from '@layout/img-from-url/img-from-url.component';
 import { TranslateModule } from '@ngx-translate/core';
+import { IPostForm } from '@shared/custom-types/custom.type';
 import { getErrorMessage } from '@shared/utils';
-import { trimmedRequired } from '@shared/validators/trim-required.validator';
+import {
+    tagValidatorMin,
+    tagValidatorRequired,
+} from '@shared/validators/tags.validator';
 import { EditorModule } from '@tinymce/tinymce-angular';
-import { startWith, map, Observable } from 'rxjs';
 
-export interface User {
-    firstName: string;
-    lastName: string;
-    fruits: Array<string>;
-}
-
+/*
+https://dev.to/jdgamble555/validating-angular-material-chips-tags-43mp
+*/
 @Component({
     selector: 'app-post-form',
     standalone: true,
@@ -73,140 +71,119 @@ export interface User {
     ],
 })
 export class PostFormComponent {
-    #destroyRef = inject(DestroyRef);
-    #fb = inject(FormBuilder);
+    isEditMode: boolean = false;
+
+    @Input() set id(value: any) {
+        this.isEditMode = value ? true : false;
+        console.log('input setter, isEditMode: ', this.isEditMode);
+    }
 
     getErrorMessage = getErrorMessage;
 
-    @ViewChild('fruitList') fruitList: MatChipGrid;
+    @ViewChild('chipGrid') chipGrid: MatChipGrid;
 
     tinyMCEconfig = environment.tinyMCEconfig;
 
     isUserWindoDark: boolean = window.matchMedia('(prefers-color-scheme: dark)')
         .matches;
 
-    public selectable = true;
-    public removable = true;
-    public addOnBlur = true;
-    public form: FormGroup;
-    public user: User = {
-        firstName: 'Lindsey',
-        lastName: 'Broos',
-        fruits: [],
-    };
-    public fruits = ['lemon', 'lime', 'orange', 'strawberry', 'raspberry'];
-    public filteredFruits$: Observable<string[]>;
+    removable = true;
+    addOnBlur = true;
+    form: FormGroup;
 
     ngOnInit(): void {
-        this.buildForm();
+        this.form = this.buildForm();
+        console.log('ngOnInit, isEditMode: ', this.isEditMode);
     }
 
-    deleteImage($event: Event, url: string) {
-        $event.preventDefault();
-    }
-
-    private buildForm(): void {
+    buildForm() {
         const regex = '(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?';
-        this.form = this.#fb.group({
-            title: ['', Validators.required],
-            content: ['', Validators.required],
-            featured_image: ['', Validators.pattern(regex)],
-            fruitInput: [null],
-            fruits: [this.user.fruits, this.validateFruits],
+
+        // TYPED FORM
+        return new FormGroup<IPostForm>({
+            id: new FormControl(''),
+            title: new FormControl<string>('', {
+                nonNullable: true,
+                validators: [Validators.required],
+            }),
+            content: new FormControl<string>('', {
+                nonNullable: true,
+                validators: [Validators.required],
+            }),
+            featured_image: new FormControl<string>('', {
+                nonNullable: true,
+                validators: [Validators.pattern(regex)],
+            }),
+            tags: new FormArray<any>([], {
+                validators: [tagValidatorMin(1), tagValidatorRequired],
+            }),
         });
-
-        this.form
-            .get('fruits')
-            .statusChanges.subscribe(
-                (status) => (this.fruitList.errorState = status === 'INVALID'),
-            );
-
-        this.filteredFruits$ = this.form.get('fruitInput').valueChanges.pipe(
-            startWith(''),
-            map((value) => this.fruitFilter(value)),
-        );
     }
 
-    public addFruit(event: MatChipInputEvent): void {
-        const input = event.chipInput?.inputElement;
-        const value = (event.value || '').trim();
+    get tagControls(): FormArray {
+        return this.form.get('tags') as FormArray;
+    }
 
-        if (value) {
-            const matches = this.fruits.filter(
-                (fruit) => fruit.toLowerCase() === value,
-            );
-            const formValue = this.form.get('fruits').value;
-            const matchesNotYetSelected =
-                formValue === null
-                    ? matches
-                    : matches.filter(
-                          (x) => !formValue.find((y: any) => y === x),
-                      );
-            if (matchesNotYetSelected.length === 1) {
-                this.user.fruits.push(matchesNotYetSelected[0]);
-                this.form.get('fruits').setValue(this.user.fruits);
+    add(event: MatChipInputEvent): void {
+        const input = event.chipInput;
+        const value = event.value;
 
-                this.form.get('fruitInput').setValue('');
+        // Get rid of duplicates
+        if (!(this.tagControls.value as string[]).includes(value)) {
+            // Add tag to new form group
+            if (value.trim()) {
+                const newVal = this.tagFormat(value);
+                if (newVal) {
+                    this.tagControls.push(new FormControl(newVal));
+                    // Manually run validation on the new controls if they exist
+                    this.tagControls.updateValueAndValidity();
+                }
             }
         }
 
         // Reset the input value
         if (input) {
-            input.value = '';
-        }
-    }
-
-    public remove(fruit: any) {
-        const index = this.user.fruits.indexOf(fruit);
-        if (index >= 0) {
-            this.user.fruits.splice(index, 1);
-            this.form.get('fruits').setValue(this.user.fruits);
-            this.form.get('fruitInput').setValue('');
-        }
-    }
-
-    public selectFruit(event: MatAutocompleteSelectedEvent): void {
-        if (!event.option) {
-            return;
+            input.clear();
         }
 
-        const value = event.option.value;
-
-        if (value && !this.user.fruits.includes(value)) {
-            this.user.fruits.push(value);
-            this.form.get('fruits').setValue(this.user.fruits);
-            console.log('user fruits: ', this.user.fruits);
-
-            this.form.get('fruitInput').setValue('');
-        }
+        // update chip error state
+        this.chipGrid.errorState = this.tagControls.status === 'INVALID';
     }
 
-    public save(): void {
-        console.log(this.user);
-        console.log(this.form.get('fruits'));
+    remove(index: any) {
+        this.tagControls.removeAt(index);
+        // update chip error state
+        this.chipGrid.errorState = this.tagControls.status === 'INVALID';
     }
 
-    private fruitFilter(value: any): string[] {
-        const filterValue =
-            value === null || value instanceof Object
-                ? ''
-                : value.toLowerCase();
-        const matches = this.fruits.filter((fruit) =>
-            fruit.toLowerCase().includes(filterValue),
-        );
-        const formValue = this.form.get('fruits').value;
-        return formValue === null
-            ? matches
-            : matches.filter((x) => !formValue.find((y: any) => y === x));
+    save(): void {
+        console.log(this.form.value);
     }
 
-    private validateFruits(fruits: FormControl) {
-        if (fruits.value && fruits.value.length === 0) {
-            return {
-                validateFruitsArray: { valid: false },
-            };
-        }
+    /**
+     * Format a tag in db for viewing
+     * @param tag
+     * @returns
+     */
+    tagFormat(tag: string): string {
+        // can't begin with number or contain only number, no dashes
+        return this.slugify(tag).replace(/-*/g, '').replace(/^\d+/, '');
+    }
 
-        return null;
+    /**
+     * Create a slug from a string
+     * @param value
+     * @returns
+     */
+    slugify(value: string): string {
+        return value
+            .split('-')
+            .join(' ')
+            .normalize('NFD')
+            .replace(/[\u0300-\u036f]/g, '')
+            .toLowerCase()
+            .trim()
+            .replace(/[^a-z0-9 ]/g, '')
+            .replace(/\s+/g, '-');
     }
 }

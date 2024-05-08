@@ -1,4 +1,22 @@
-import { FormControl } from '@angular/forms';
+import { FormArray, FormControl, FormGroup } from '@angular/forms';
+
+export interface IPostForm {
+    id: FormControl<any>;
+    uid?: FormControl<string>;
+    title?: FormControl<string>;
+    author?: FormGroup<{
+        displayName: FormControl<string>;
+        uid: FormControl<string>;
+    }>;
+    content?: FormControl<string>;
+    url?: FormControl<string>;
+    featured_image?: FormControl<string>;
+    createdAt?: FormControl<any>;
+    created_at?: FormControl<number>;
+    updatedAt?: FormControl<any>;
+    updated_at?: FormControl<number>;
+    tags?: FormArray<any | null>;
+}
 
 export type SidenavListItem = {
     icon: string;

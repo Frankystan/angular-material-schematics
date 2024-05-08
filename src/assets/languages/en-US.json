@@ -1,13 +1,14 @@
 {
     "validation": {
         "email": "Invalid email address",
-        "url": "Invalid URL",
+        "file-not-supported": "File type not supported",
         "maxlength": "Too long",
         "minlength": "Too short",
+        "minTagsLength": "At least 1 tag need to be added",
         "pwd-match": "Passwords do not match",
         "required": "Required field",
         "search-minlength": "Search text must be at least 3 characters long.",
-        "file-not-supported": "File type not supported"
+        "url": "Invalid URL"
     },
     "input": {
         "confirm-password": "Confirm password",

@@ -46,15 +46,19 @@
                 tabindex="2"
             ></editor>
 
-            <!-- Favorite fruits -->
+            <!-- Tags -->
             <mat-form-field>
-                <mat-chip-grid #fruitList required formControlName="fruits">
-                    @for (fruit of user.fruits; track fruit) {
+                <mat-chip-grid #chipGrid formArrayName="tags">
+                    @for (
+                        tag of tagControls.controls;
+                        track tag;
+                        let i = $index
+                    ) {
                         <mat-chip-row
                             [removable]="removable"
-                            (removed)="remove(fruit)"
+                            (removed)="remove(i)"
                         >
-                            {{ fruit }}
+                            {{ tag.value }}
                             <button matChipRemove>
                                 @if (removable) {
                                     <mat-icon>cancel</mat-icon>
@@ -63,28 +67,19 @@
                         </mat-chip-row>
                     }
                     <input
-                        #fruitInput
-                        placeholder="Add your favorite fruits"
-                        [matChipInputFor]="fruitList"
+                        #tagInput
+                        placeholder="Add your tags"
+                        [matChipInputFor]="chipGrid"
                         [matChipInputAddOnBlur]="addOnBlur"
-                        (matChipInputTokenEnd)="addFruit($event)"
-                        [matAutocomplete]="fruitsAutocomplete"
-                        formControlName="fruitInput"
+                        (matChipInputTokenEnd)="add($event)"
                     />
                 </mat-chip-grid>
 
-                <mat-autocomplete
-                    #fruitsAutocomplete="matAutocomplete"
-                    (optionSelected)="selectFruit($event)"
-                >
-                    @for (fruit of filteredFruits$ | async; track fruit) {
-                        <mat-option [value]="fruit">
-                            {{ fruit }}
-                        </mat-option>
-                    }
-                </mat-autocomplete>
-
-                <mat-error>At least 1 fruit need to be added</mat-error>
+                @if (!form.get("tags").valid) {
+                    <mat-error>
+                        {{ getErrorMessage("tags", form) | translate }}
+                    </mat-error>
+                }
             </mat-form-field>
 
             <!-- Submit -->
