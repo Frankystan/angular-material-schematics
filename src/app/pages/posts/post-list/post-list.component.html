@@ -62,10 +62,4 @@
     </button>
 </app-page-actions>
 
-<fab-create-post />
-
-<fab-page-action [data]="[{name: 'joe'}, {name: 'mike'}]">
-    <ng-template let-data="data">
-        <p *ngFor="let person of data">{{ person.name }}</p>
-    </ng-template>
-</fab-page-action>
+<fab-page-action [data]="{ link: '/posts/create', icon: 'add' }" />

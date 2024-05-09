@@ -51,4 +51,6 @@
     </mat-card-actions>
 </mat-card>
 
-<fab-edit-post [id]="id()" />
+<fab-page-action
+    [data]="{ link: '/posts/' + this.id() + '/edit', icon: 'edit' }"
+/>

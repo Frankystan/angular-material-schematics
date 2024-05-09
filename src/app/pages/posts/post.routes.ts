@@ -2,7 +2,6 @@ import { Routes } from '@angular/router';
 import { PostFormComponent } from '@pages/posts/post-form/post-form.component';
 import { PostListComponent } from '@pages/posts/post-list/post-list.component';
 import { PostShowComponent } from '@pages/posts/post-show/post-show.component';
-import { TestComponent } from './test/test.component';
 
 export const POST_ROUTES: Routes = [
     {

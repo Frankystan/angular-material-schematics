@@ -18,7 +18,7 @@ import { tPost } from '@shared/custom-types/custom.type';
 import { DummyDataService } from '@shared/services/dummy-data.service';
 import { switchMap, of } from 'rxjs';
 import { SanitizePipe } from '@shared/pipes/sanitize.pipe';
-import { FabEditPostComponent } from '@layout/fab-edit-post/fab-edit-post.component';
+import { FabPageActionComponent } from '@layout/fab-page-action/fab-page-action.component';
 
 /*
 https://www.youtube.com/watch?v=DGk6rjD3AG0&t=456s
@@ -33,9 +33,9 @@ https://www.youtube.com/watch?v=DGk6rjD3AG0&t=456s
         MatDividerModule,
         MatIconModule,
         MatButtonModule,
-        FabEditPostComponent,
         NgStyle,
         SanitizePipe,
+        FabPageActionComponent,
     ],
     templateUrl: './card.component.html',
     styleUrl: './card.component.scss',

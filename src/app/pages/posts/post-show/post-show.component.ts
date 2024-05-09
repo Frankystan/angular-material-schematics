@@ -23,7 +23,7 @@ import { I18nService } from '@shared/services/i18n.service';
 import { TimeagoIntl, TimeagoModule } from 'ngx-timeago';
 import { strings as stringsUS } from 'ngx-timeago/language-strings/en';
 import { strings as stringsES } from 'ngx-timeago/language-strings/es';
-import { FabEditPostComponent } from '@layout/fab-edit-post/fab-edit-post.component';
+import { FabPageActionComponent } from '@layout/fab-page-action/fab-page-action.component';
 
 @Component({
     selector: 'app-post-show',
@@ -38,7 +38,7 @@ import { FabEditPostComponent } from '@layout/fab-edit-post/fab-edit-post.compon
         MatChipsModule,
         MatButtonModule,
         SanitizePipe,
-        FabEditPostComponent,
+        FabPageActionComponent,
         NgStyle,
         TimeagoModule,
     ],
@@ -50,6 +50,13 @@ export class PostShowComponent {
     #timeagoIntl = inject(TimeagoIntl);
 
     id = input.required<string>();
+
+    data = computed(() => {
+        return {
+            link: '/posts/' + this.id() + '/edit',
+            icon: 'edit',
+        };
+    });
 
     bookmarked = signal<boolean>(false);
 
