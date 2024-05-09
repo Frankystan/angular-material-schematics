@@ -12,6 +12,7 @@
                     "configurations": {
                         "development": {
                             "extractLicenses": false,
+                            "outputHashing": "media",
                             "namedChunks": true,
                             "optimization": false,
                             "sourceMap": true,
@@ -51,6 +52,7 @@
                         "outputPath": "dist/demo",
                         "scripts": ["node_modules/tinymce/tinymce.min.js"],
                         "styles": [
+                            "node_modules/flag-icons/css/flag-icons.min.css",
                             "src/indigo-pink.scss",
                             "src/global_styles.scss"
                         ],
