@@ -37,6 +37,10 @@ import { EditorModule } from '@tinymce/tinymce-angular';
 
 /*
 https://dev.to/jdgamble555/validating-angular-material-chips-tags-43mp
+
+https://careydevelopment.us/blog/angular-material-how-to-bind-chips-to-a-form-field
+https://dev.to/shhdharmen/angular-material-menu-nested-menu-using-dynamic-data-1nfm
+
 */
 @Component({
     selector: 'app-post-form',

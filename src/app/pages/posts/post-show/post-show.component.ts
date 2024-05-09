@@ -24,6 +24,7 @@ import { TimeagoIntl, TimeagoModule } from 'ngx-timeago';
 import { strings as stringsUS } from 'ngx-timeago/language-strings/en';
 import { strings as stringsES } from 'ngx-timeago/language-strings/es';
 import { FabPageActionComponent } from '@layout/fab-page-action/fab-page-action.component';
+import { CustomTimeAgoPipe } from '@shared/pipes/custom-time-ago.pipe';
 
 @Component({
     selector: 'app-post-show',
@@ -41,6 +42,7 @@ import { FabPageActionComponent } from '@layout/fab-page-action/fab-page-action.
         FabPageActionComponent,
         NgStyle,
         TimeagoModule,
+        CustomTimeAgoPipe,
     ],
 })
 export class PostShowComponent {
