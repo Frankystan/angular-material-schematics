@@ -27,7 +27,6 @@ https://dev.to/shhdharmen/angular-material-menu-nested-menu-using-dynamic-data-1
 })
 export class BtnLanguageSelectorComponent {
     #i18nService = inject(I18nService);
-    translate = inject(TranslateService);
 
     isMobile: Signal<boolean> = inject(LayoutService).isMobile;
 

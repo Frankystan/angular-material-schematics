@@ -1,7 +1,7 @@
-<button mat-stroked-button *ngIf="!isMobile()" [matMenuTriggerFor]="langMenu">
+<button mat-stroked-button *ngIf="!isMobile()" [matMenuTriggerFor]="langMenu" class="button-menu-trigger">
     <mat-icon class="lang-icon">language</mat-icon>
     <span>{{ "navbar.language" | translate }}</span>
-    <mat-icon iconPositionEnd>arrow_drop_down</mat-icon>
+    <mat-icon class="arrow_down" iconPositionEnd >arrow_drop_down</mat-icon>
 </button>
 
 <button
