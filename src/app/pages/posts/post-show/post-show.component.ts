@@ -50,9 +50,16 @@ export class PostShowComponent {
     #i18nService = inject(I18nService);
     #timeagoIntl = inject(TimeagoIntl);
 
-    id = input.required<string>();
-    created_at = signal<number>(0);
     bookmarked = signal<boolean>(false);
+    id = input.required<string>();
+
+    post: Signal<tPost> = toSignal(
+        toObservable(this.id).pipe(
+            switchMap((itemId) => of(this.#dummyDataService.getOne(itemId))),
+        ),
+    );
+
+    created_at = computed(() => this.post()?.created_at * 1000);
 
     data = computed(() => {
         return {
@@ -60,12 +67,6 @@ export class PostShowComponent {
             icon: 'edit',
         };
     });
-
-    post: Signal<tPost> = toSignal(
-        toObservable(this.id).pipe(
-            switchMap((itemId) => of(this.#dummyDataService.getOne(itemId))),
-        ),
-    );
 
     constructor() {
         effect(
@@ -83,7 +84,6 @@ export class PostShowComponent {
                         break;
                 }
                 this.#timeagoIntl.changes.next();
-                this.created_at.set(this.post().created_at * 1000);
             },
             { allowSignalWrites: true },
         );
