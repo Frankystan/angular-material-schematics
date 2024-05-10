@@ -1,12 +1,12 @@
 export const environment = {
     tinyMCEconfig: {
-        height: 500,
         base_url: '/tinymce',
-        suffix: '.min',
+        content_css: ['default'],
+        height: 500,
         menubar: false,
         plugins: ['wordcount', ' link', 'table', 'image', 'lists'],
         skin: 'oxide',
-        content_css: ['default'],
+        suffix: '.min',
         toolbar:
             'undo redo | formatselect | bold italic backcolor | \
             alignleft aligncenter alignright alignjustify | \
