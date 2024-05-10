@@ -1,7 +1,14 @@
 import { A11yModule } from '@angular/cdk/a11y';
 import { ENTER, COMMA } from '@angular/cdk/keycodes';
 import { AsyncPipe, JsonPipe } from '@angular/common';
-import { Component, DestroyRef, Input, ViewChild, inject } from '@angular/core';
+import {
+    Component,
+    DestroyRef,
+    Input,
+    ViewChild,
+    inject,
+    input,
+} from '@angular/core';
 import {
     Validators,
     FormControl,
@@ -27,7 +34,8 @@ import { MatInputModule } from '@angular/material/input';
 import { environment } from '@env/environment.development';
 import { ImgFromURLComponent } from '@layout/img-from-url/img-from-url.component';
 import { TranslateModule } from '@ngx-translate/core';
-import { IPostForm } from '@shared/custom-types/custom.type';
+import { IPostForm, tPost } from '@shared/custom-types/custom.type';
+import { DummyDataService } from '@shared/services/dummy-data.service';
 import { getErrorMessage } from '@shared/utils';
 import {
     tagValidatorMin,
@@ -75,29 +83,40 @@ https://dev.to/shhdharmen/angular-material-menu-nested-menu-using-dynamic-data-1
     ],
 })
 export class PostFormComponent {
-    isEditMode: boolean = false;
-
-    @Input() set id(value: any) {
-        this.isEditMode = value ? true : false;
-        console.log('input setter, isEditMode: ', this.isEditMode);
-    }
-
-    getErrorMessage = getErrorMessage;
+    #dummyDataService = inject(DummyDataService);
 
     @ViewChild('chipGrid') chipGrid: MatChipGrid;
 
-    tinyMCEconfig = environment.tinyMCEconfig;
-
-    isUserWindoDark: boolean = window.matchMedia('(prefers-color-scheme: dark)')
-        .matches;
-
+    isEditMode: boolean = false;
+    isUserWindoDark: boolean = window.matchMedia('(prefers-color-scheme: dark)').matches;
     removable = true;
     addOnBlur = true;
     form: FormGroup;
 
+    // version: Input decorator
+    // @Input() set id(value: any) {
+    //     this.isEditMode = value ? true : false;
+    // }
+
+    // version: signal
+    id = input(null, {
+        transform: (value: any) => {
+            this.isEditMode = value ? true : false;
+            return value;
+        },
+    });
+
+    getErrorMessage = getErrorMessage;
+
+    tinyMCEconfig = environment.tinyMCEconfig;
+
     ngOnInit(): void {
         this.form = this.buildForm();
-        console.log('ngOnInit, isEditMode: ', this.isEditMode);
+
+        if (this.isEditMode) {
+            let post: tPost = this.#dummyDataService.getOne(this.id());
+            this.form.patchValue(post);
+        }
     }
 
     buildForm() {
@@ -125,7 +144,7 @@ export class PostFormComponent {
     }
 
     get tagControls(): FormArray {
-        return this.form.get('tags') as FormArray;
+        return this.form.get('tags') as FormArray; //  return <FormArray>this.form.get('tags');
     }
 
     add(event: MatChipInputEvent): void {
