@@ -48,10 +48,11 @@ import { CustomTimeAgoPipe } from '@shared/pipes/custom-time-ago.pipe';
 export class PostShowComponent {
     #dummyDataService = inject(DummyDataService);
     #i18nService = inject(I18nService);
-
     #timeagoIntl = inject(TimeagoIntl);
 
     id = input.required<string>();
+    created_at = signal<number>(0);
+    bookmarked = signal<boolean>(false);
 
     data = computed(() => {
         return {
@@ -60,19 +61,11 @@ export class PostShowComponent {
         };
     });
 
-    bookmarked = signal<boolean>(false);
-
     post: Signal<tPost> = toSignal(
         toObservable(this.id).pipe(
             switchMap((itemId) => of(this.#dummyDataService.getOne(itemId))),
         ),
     );
-
-    created_at = signal<number>(0);
-
-    // created_at = computed(()=>{
-    //     return (this.post().created_at * 1000);
-    // });
 
     constructor() {
         effect(

@@ -17,7 +17,7 @@
                             | amDateFormat: "DD-MM-YYYY HH:mm"
                     }}
                     (
-                    {{ created_at() | customTimeAgo }}
+                    {{ created_at() | timeago }}
                     )
                 </time>
             </mat-card-subtitle>
@@ -51,6 +51,4 @@
     </mat-card-actions>
 </mat-card>
 
-<fab-page-action
-    [data]="{ link: '/posts/' + this.id() + '/edit', icon: 'edit' }"
-/>
+<fab-page-action [data]="data()" />
