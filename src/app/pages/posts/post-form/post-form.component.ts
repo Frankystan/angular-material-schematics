@@ -1,45 +1,25 @@
 import { A11yModule } from '@angular/cdk/a11y';
-import { ENTER, COMMA } from '@angular/cdk/keycodes';
 import { AsyncPipe, JsonPipe } from '@angular/common';
-import {
-    Component,
-    DestroyRef,
-    Input,
-    ViewChild,
-    inject,
-    input,
-} from '@angular/core';
-import {
-    Validators,
-    FormControl,
-    FormBuilder,
-    FormGroup,
-    FormsModule,
-    ReactiveFormsModule,
-    FormArray,
-} from '@angular/forms';
+import { Component, ViewChild, inject, input } from '@angular/core';
+import { DummyDataService } from '@shared/services/dummy-data.service';
+import { EditorModule } from '@tinymce/tinymce-angular';
+import { ENTER, COMMA } from '@angular/cdk/keycodes';
+import { environment } from '@env/environment.development';
+import { FormArray, FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { getErrorMessage } from '@shared/utils';
+import { I18nService } from '@shared/services/i18n.service';
+import { ImgFromURLComponent } from '@layout/img-from-url/img-from-url.component';
+import { IPostForm, tPost } from '@shared/custom-types/custom.type';
+import { MAT_CHIPS_DEFAULT_OPTIONS, MatChipGrid, MatChipInputEvent, MatChipsModule } from '@angular/material/chips';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
-import {
-    MAT_CHIPS_DEFAULT_OPTIONS,
-    MatChipGrid,
-    MatChipInputEvent,
-    MatChipsModule,
-} from '@angular/material/chips';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
-import { environment } from '@env/environment.development';
-import { ImgFromURLComponent } from '@layout/img-from-url/img-from-url.component';
-import { TranslateModule } from '@ngx-translate/core';
-import { IPostForm, tPost } from '@shared/custom-types/custom.type';
-import { DummyDataService } from '@shared/services/dummy-data.service';
-import { I18nService } from '@shared/services/i18n.service';
-import { getErrorMessage } from '@shared/utils';
 import { tagValidatorMin, tagValidatorRequired } from '@shared/validators/tags.validator';
-import { EditorModule } from '@tinymce/tinymce-angular';
+import { TranslateModule } from '@ngx-translate/core';
 
 /*
 https://dev.to/jdgamble555/validating-angular-material-chips-tags-43mp
@@ -59,7 +39,9 @@ https://fiddle.tiny.cloud/nYbaab/2
     imports: [
         A11yModule,
         AsyncPipe,
+        EditorModule,
         FormsModule,
+        ImgFromURLComponent,
         JsonPipe,
         MatAutocompleteModule,
         MatButtonModule,
@@ -71,8 +53,6 @@ https://fiddle.tiny.cloud/nYbaab/2
         MatInputModule,
         ReactiveFormsModule,
         TranslateModule,
-        EditorModule,
-        ImgFromURLComponent,
     ],
     templateUrl: './post-form.component.html',
     styleUrl: './post-form.component.scss',
@@ -93,8 +73,7 @@ export class PostFormComponent {
     @ViewChild('chipGrid') chipGrid: MatChipGrid;
 
     isEditMode: boolean = false;
-    isUserWindoDark: boolean = window.matchMedia('(prefers-color-scheme: dark)')
-        .matches;
+    isUserWindoDark: boolean = window.matchMedia('(prefers-color-scheme: dark)').matches;
     removable = true;
     addOnBlur = true;
     form: FormGroup;
@@ -116,7 +95,7 @@ export class PostFormComponent {
 
     tinyMCEconfig = {
         language: this.#i18n.language == 'en-US' ? '' : this.#i18n.language,
-        language_url:  this.#i18n.language == 'en-US' ? '' : `/langs/${this.#i18n.language}.js`,
+        language_url: this.#i18n.language == 'en-US' ? '' : `/langs/${this.#i18n.language}.js`,
         content_css: [this.isUserWindoDark ? 'dark' : 'default'],
         skin: this.isUserWindoDark ? 'oxide-dark' : 'oxide',
         ...environment.tinyMCEconfig,
@@ -124,8 +103,6 @@ export class PostFormComponent {
 
     ngOnInit(): void {
         this.form = this.buildForm();
-
-        console.log('tinyMCEconfig: ', this.tinyMCEconfig);
 
         if (this.isEditMode) {
             let post: tPost = this.#dummyDataService.getOne(this.id());
@@ -195,7 +172,13 @@ export class PostFormComponent {
     }
 
     save(): void {
-        console.log(this.form.value);
+
+        if (this.isEditMode) {
+            console.log("Edit: ", this.form.value);
+        } else {
+            console.log("Create: ", this.form.value);
+
+        }
     }
 
     /**

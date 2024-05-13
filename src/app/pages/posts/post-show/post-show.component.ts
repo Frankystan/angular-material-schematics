@@ -32,17 +32,17 @@ import { CustomTimeAgoPipe } from '@shared/pipes/custom-time-ago.pipe';
     templateUrl: './post-show.component.html',
     styleUrl: './post-show.component.scss',
     imports: [
+        CustomTimeAgoPipe,
+        FabPageActionComponent,
+        MatButtonModule,
         MatCardModule,
+        MatChipsModule,
+        MatDividerModule,
         MatIconModule,
         MomentModule,
-        MatDividerModule,
-        MatChipsModule,
-        MatButtonModule,
-        SanitizePipe,
-        FabPageActionComponent,
         NgStyle,
+        SanitizePipe,
         TimeagoModule,
-        CustomTimeAgoPipe,
     ],
 })
 export class PostShowComponent {

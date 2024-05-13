@@ -3,10 +3,10 @@ import { FabScrollToTopComponent } from '@layout/fab-scroll-to-top/fab-scroll-to
 import { LayoutService } from './shared/services/layout.service';
 import { MatDrawer, MatSidenavModule } from '@angular/material/sidenav';
 import { NavToolbarComponent } from '@layout/nav-toolbar/nav-toolbar.component';
+import { NgIf, NgStyle } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { SidenavBodyComponent } from '@layout/sidenav-body/sidenav-body.component';
 import { SidenavHeaderComponent } from '@layout/sidenav-header/sidenav-header.component';
-import { NgIf, NgStyle } from '@angular/common';
 
 /*
 Scrolling
@@ -34,11 +34,11 @@ https://stackblitz.com/github/juristr/demo-cdk-portal-mobile-pageactions?file=RE
         FabScrollToTopComponent,
         MatSidenavModule,
         NavToolbarComponent,
+        NgIf,
+        NgStyle,
         RouterModule,
         SidenavBodyComponent,
         SidenavHeaderComponent,
-        NgIf,
-        NgStyle,
     ],
     templateUrl: './app.component.html',
     styleUrl: './app.component.scss',
