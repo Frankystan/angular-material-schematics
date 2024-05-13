@@ -4,6 +4,8 @@ export const environment = {
         content_css: ['default'],
         height: 500,
         menubar: false,
+        language: "es-ES",
+        language_url : "/home/Frankystan/angular-material-schematics/src/assets/languages/tinymce/langs/es-ES.js",
         plugins: ['wordcount', ' link', 'table', 'image', 'lists'],
         skin: 'oxide',
         suffix: '.min',

@@ -1,6 +1,7 @@
 import { FormGroup } from '@angular/forms';
 
 export function getErrorMessage(control: string, form: FormGroup<any>) {
+    
     let errors = <Object>form.controls[control].errors;
 
     let key = Object.keys(errors)[0];

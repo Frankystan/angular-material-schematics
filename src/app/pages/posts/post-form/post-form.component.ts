@@ -36,6 +36,7 @@ import { ImgFromURLComponent } from '@layout/img-from-url/img-from-url.component
 import { TranslateModule } from '@ngx-translate/core';
 import { IPostForm, tPost } from '@shared/custom-types/custom.type';
 import { DummyDataService } from '@shared/services/dummy-data.service';
+import { I18nService } from '@shared/services/i18n.service';
 import { getErrorMessage } from '@shared/utils';
 import {
     tagValidatorMin,
@@ -84,11 +85,13 @@ https://dev.to/shhdharmen/angular-material-menu-nested-menu-using-dynamic-data-1
 })
 export class PostFormComponent {
     #dummyDataService = inject(DummyDataService);
+    #i18n = inject(I18nService);
+    #fb = inject(FormBuilder);
 
     @ViewChild('chipGrid') chipGrid: MatChipGrid;
 
     isEditMode: boolean = false;
-    isUserWindoDark: boolean = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    isUserWindoDark: boolean = window.matchMedia("(prefers-color-scheme: dark)").matches;
     removable = true;
     addOnBlur = true;
     form: FormGroup;
@@ -108,14 +111,22 @@ export class PostFormComponent {
 
     getErrorMessage = getErrorMessage;
 
-    tinyMCEconfig = environment.tinyMCEconfig;
+    tinyMCEconfig = {
+        ...environment.tinyMCEconfig, 
+        language: this.#i18n.language, 
+        content_css: [this.isUserWindoDark ? "dark" : "default"],
+        skin: this.isUserWindoDark ? "oxide-dark" : "oxide", };
 
     ngOnInit(): void {
         this.form = this.buildForm();
 
+        console.log("tinyMCEconfig: ",this.tinyMCEconfig);
+        
+
         if (this.isEditMode) {
             let post: tPost = this.#dummyDataService.getOne(this.id());
             this.form.patchValue(post);
+            this.form.setControl('tags', this.#fb.array(post.tags || []));
         }
     }
 

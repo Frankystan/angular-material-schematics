@@ -11,7 +11,9 @@
 
                 @if (!form.get("featured_image").valid) {
                     <mat-error>
-                        {{ getErrorMessage("url", form) | translate }}
+                        {{
+                            getErrorMessage("featured_image", form) | translate
+                        }}
                     </mat-error>
                 }
             </mat-form-field>
