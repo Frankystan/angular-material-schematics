@@ -99,9 +99,7 @@
                 />
                 @if (!form.get("photoURL").valid) {
                     <mat-error>
-                        {{
-                            getErrorMessage("photoURL", form) | translate
-                        }}
+                        {{ getErrorMessage("photoURL", form) | translate }}
                     </mat-error>
                 }
             </mat-form-field>

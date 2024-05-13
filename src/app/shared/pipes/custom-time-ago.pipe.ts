@@ -28,7 +28,7 @@ extiendo de esta clase que modifiqué sus properties de "private" > "protected"
     standalone: true,
     pure: false,
 })
-export class  CustomTimeAgoPipe
+export class CustomTimeAgoPipe
     extends TimeagoPipe
     implements PipeTransform, OnDestroy
 {

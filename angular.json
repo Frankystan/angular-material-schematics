@@ -44,6 +44,26 @@
                                 "glob": "**/*",
                                 "input": "node_modules/tinymce",
                                 "output": "/tinymce/"
+                            },
+                            {
+                                "glob": "**/*",
+                                "input": "src/assets/tinymce/skins",
+                                "output": "./skins"
+                            },
+                            {
+                                "glob": "**/*",
+                                "input": "src/assets/tinymce/themes",
+                                "output": "./themes"
+                            },
+                            {
+                                "glob": "**/*",
+                                "input": "src/assets/tinymce/plugins",
+                                "output": "./plugins"
+                            },
+                            {
+                                "glob": "**/*",
+                                "input": "src/assets/tinymce/langs",
+                                "output": "./langs"
                             }
                         ],
                         "browser": "src/main.ts",

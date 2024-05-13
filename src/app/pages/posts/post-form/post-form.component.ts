@@ -38,10 +38,7 @@ import { IPostForm, tPost } from '@shared/custom-types/custom.type';
 import { DummyDataService } from '@shared/services/dummy-data.service';
 import { I18nService } from '@shared/services/i18n.service';
 import { getErrorMessage } from '@shared/utils';
-import {
-    tagValidatorMin,
-    tagValidatorRequired,
-} from '@shared/validators/tags.validator';
+import { tagValidatorMin, tagValidatorRequired } from '@shared/validators/tags.validator';
 import { EditorModule } from '@tinymce/tinymce-angular';
 
 /*
@@ -50,6 +47,11 @@ https://dev.to/jdgamble555/validating-angular-material-chips-tags-43mp
 https://careydevelopment.us/blog/angular-material-how-to-bind-chips-to-a-form-field
 https://dev.to/shhdharmen/angular-material-menu-nested-menu-using-dynamic-data-1nfm
 
+
+https://stackoverflow.com/questions/12051945/tinymce-change-language-dynamically-with-javascript
+https://github.com/Frankistan/ng11fireblog/tree/master/src/assets/tinymce/langs
+https://jsfiddle.net/antd3tsf/19/
+https://fiddle.tiny.cloud/nYbaab/2
 */
 @Component({
     selector: 'app-post-form',
@@ -91,7 +93,8 @@ export class PostFormComponent {
     @ViewChild('chipGrid') chipGrid: MatChipGrid;
 
     isEditMode: boolean = false;
-    isUserWindoDark: boolean = window.matchMedia("(prefers-color-scheme: dark)").matches;
+    isUserWindoDark: boolean = window.matchMedia('(prefers-color-scheme: dark)')
+        .matches;
     removable = true;
     addOnBlur = true;
     form: FormGroup;
@@ -112,16 +115,17 @@ export class PostFormComponent {
     getErrorMessage = getErrorMessage;
 
     tinyMCEconfig = {
-        ...environment.tinyMCEconfig, 
-        language: this.#i18n.language, 
-        content_css: [this.isUserWindoDark ? "dark" : "default"],
-        skin: this.isUserWindoDark ? "oxide-dark" : "oxide", };
+        language: this.#i18n.language == 'en-US' ? '' : this.#i18n.language,
+        language_url:  this.#i18n.language == 'en-US' ? '' : `/langs/${this.#i18n.language}.js`,
+        content_css: [this.isUserWindoDark ? 'dark' : 'default'],
+        skin: this.isUserWindoDark ? 'oxide-dark' : 'oxide',
+        ...environment.tinyMCEconfig,
+    };
 
     ngOnInit(): void {
         this.form = this.buildForm();
 
-        console.log("tinyMCEconfig: ",this.tinyMCEconfig);
-        
+        console.log('tinyMCEconfig: ', this.tinyMCEconfig);
 
         if (this.isEditMode) {
             let post: tPost = this.#dummyDataService.getOne(this.id());
