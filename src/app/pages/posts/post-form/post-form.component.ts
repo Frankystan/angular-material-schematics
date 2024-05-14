@@ -5,12 +5,25 @@ import { DummyDataService } from '@shared/services/dummy-data.service';
 import { EditorModule } from '@tinymce/tinymce-angular';
 import { ENTER, COMMA } from '@angular/cdk/keycodes';
 import { environment } from '@env/environment.development';
-import { FormArray, FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+    FormArray,
+    FormBuilder,
+    FormControl,
+    FormGroup,
+    FormsModule,
+    ReactiveFormsModule,
+    Validators,
+} from '@angular/forms';
 import { getErrorMessage } from '@shared/utils';
 import { I18nService } from '@shared/services/i18n.service';
 import { ImgFromURLComponent } from '@layout/img-from-url/img-from-url.component';
 import { IPostForm, tPost } from '@shared/custom-types/custom.type';
-import { MAT_CHIPS_DEFAULT_OPTIONS, MatChipGrid, MatChipInputEvent, MatChipsModule } from '@angular/material/chips';
+import {
+    MAT_CHIPS_DEFAULT_OPTIONS,
+    MatChipGrid,
+    MatChipInputEvent,
+    MatChipsModule,
+} from '@angular/material/chips';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -18,7 +31,10 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
-import { tagValidatorMin, tagValidatorRequired } from '@shared/validators/tags.validator';
+import {
+    tagValidatorMin,
+    tagValidatorRequired,
+} from '@shared/validators/tags.validator';
 import { TranslateModule } from '@ngx-translate/core';
 
 /*
@@ -73,7 +89,8 @@ export class PostFormComponent {
     @ViewChild('chipGrid') chipGrid: MatChipGrid;
 
     isEditMode: boolean = false;
-    isUserWindoDark: boolean = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    isUserWindoDark: boolean = window.matchMedia('(prefers-color-scheme: dark)')
+        .matches;
     removable = true;
     addOnBlur = true;
     form: FormGroup;
@@ -95,7 +112,10 @@ export class PostFormComponent {
 
     tinyMCEconfig = {
         language: this.#i18n.language == 'en-US' ? '' : this.#i18n.language,
-        language_url: this.#i18n.language == 'en-US' ? '' : `/langs/${this.#i18n.language}.js`,
+        language_url:
+            this.#i18n.language == 'en-US'
+                ? ''
+                : `/langs/${this.#i18n.language}.js`,
         content_css: [this.isUserWindoDark ? 'dark' : 'default'],
         skin: this.isUserWindoDark ? 'oxide-dark' : 'oxide',
         ...environment.tinyMCEconfig,
@@ -107,7 +127,8 @@ export class PostFormComponent {
         if (this.isEditMode) {
             let post: tPost = this.#dummyDataService.getOne(this.id());
             this.form.patchValue(post);
-            this.form.setControl('tags', this.#fb.array(post.tags || []));
+            // this.form.setControl('tags', this.#fb.array(post.tags || []));
+            this.addTags(post.tags, this.tagControls);
         }
     }
 
@@ -172,13 +193,36 @@ export class PostFormComponent {
     }
 
     save(): void {
-
         if (this.isEditMode) {
-            console.log("Edit: ", this.form.value);
+            console.log('Edit: ', this.form.value);
         } else {
-            console.log("Create: ", this.form.value);
-
+            console.log('Create: ', this.form.value);
         }
+    }
+
+    /**
+     * Adds an array of tags to a form control
+     * @param tags
+     * @param control
+     */
+    addTags(tags: any, control: FormArray): void {
+        if (tags) {
+            // add new tags
+            for (let i = 0; i < tags.length; ++i) {
+                this.tagControls.push(new FormControl(this.tagFormat(tags[i])));
+                // Manually run validation on the new controls if they exist
+                this.tagControls.updateValueAndValidity();
+            }
+        }
+    }
+
+    /**
+     * Adds a tag to the form control
+     * @param tag
+     * @param control
+     */
+    addTag(tag: string, control: FormArray): void {
+        control.push(this.#fb.control(tag));
     }
 
     /**

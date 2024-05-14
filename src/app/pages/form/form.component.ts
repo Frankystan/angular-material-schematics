@@ -56,6 +56,10 @@ export interface User {
 // }
 
 /*
+
+https://stackoverflow.com/questions/53845876/angular-material-chips-autocomplete-how-to-display-required-error-message
+
+
 https://stackblitz.com/edit/angular-chip-with-autocomplete-and-validation?file=src%2Fapp%2Fapp.component.html
 
 
