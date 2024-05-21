@@ -26,6 +26,11 @@ import { strings as stringsES } from 'ngx-timeago/language-strings/es';
 import { FabPageActionComponent } from '@layout/fab-page-action/fab-page-action.component';
 import { CustomTimeAgoPipe } from '@shared/pipes/custom-time-ago.pipe';
 
+/*
+hay que modificar esto en el archivo: /node_modules/ngx-timeago/timeago.pipe.d.ts
+
+*/
+
 @Component({
     selector: 'app-post-show',
     standalone: true,

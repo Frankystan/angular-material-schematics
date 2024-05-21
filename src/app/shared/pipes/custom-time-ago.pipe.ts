@@ -19,8 +19,21 @@ https://github.com/urish/ngx-moment/issues/138
 original
 /node_modules/ngx-timeago/esm2022/timeago.pipe.mjs
 
-extiendo de esta clase que modifiqué sus properties de "private" > "protected"
+extiendo de esta clase ç:
 /node_modules/ngx-timeago/timeago.pipe.d.ts
+
+    private clock:any;
+    private intlSubscription:any;
+    private clockSubscription:any;
+    private date:any;
+    private value:any;
+    private live:any;
+
+ya que las propiedades son "private" y no "protected" , para poder extender correctamente sin tocar la clase orignal del archivo anterior,
+en cada uso de las propiedades ej: "this.clock" , uso (this as any).clock;
+https://stackoverflow.com/questions/64083601/overriding-private-methods-in-typescript#:~:text=private%20member%20%22getMessage%22%20%F0%9F%99%80-,(this%20as%20any),-.getMessage%20%3D
+
+
 */
 
 @Pipe({
@@ -32,12 +45,6 @@ export class CustomTimeAgoPipe
     extends TimeagoPipe
     implements PipeTransform, OnDestroy
 {
-    // private  override clock:any;
-    // private  override intlSubscription:any;
-    // private  override clockSubscription:any;
-    // private  override date:any;
-    // private  override value:any;
-    // private  override live:any;
     constructor(
         intl: TimeagoIntl,
         cd: ChangeDetectorRef,
@@ -46,8 +53,8 @@ export class CustomTimeAgoPipe
     ) {
         super(intl, cd, formatter, clock);
 
-        this.clock = clock;
-        this.live = true;
+        (this as any).clock = clock;
+        (this as any).live = true;
         /**
          * Emits on:
          * - Input change
@@ -56,12 +63,12 @@ export class CustomTimeAgoPipe
          */
         this.stateChanges = new Subject();
         if (intl) {
-            this.intlSubscription = intl.changes.subscribe(() =>
+            (this as any).intlSubscription = intl.changes.subscribe(() =>
                 this.stateChanges.next(),
             );
         }
         this.stateChanges.subscribe(() => {
-            this.value = formatter.format(this.date);
+            (this as any).value = formatter.format((this as any).date);
             cd.markForCheck();
         });
     }
@@ -69,20 +76,20 @@ export class CustomTimeAgoPipe
     override transform(date: string | Date | number, ...args: any[]) {
         const _date = dateParser(date).valueOf();
         let _live;
-        _live = isDefined(args[0]) ? coerceBooleanProperty(args[0]) : this.live;
-        if (this.date === _date && this.live === _live) {
-            return this.value;
+        _live = isDefined(args[0]) ? coerceBooleanProperty(args[0]) : (this as any).live;
+        if ((this as any).date === _date && (this as any).live === _live) {
+            return (this as any).value;
         }
-        this.date = _date;
-        this.live = _live;
-        if (this.date) {
-            if (this.clockSubscription) {
-                this.clockSubscription.unsubscribe();
-                this.clockSubscription = undefined;
+        (this as any).date = _date;
+        (this as any).live = _live;
+        if ((this as any).date) {
+            if ((this as any).clockSubscription) {
+                (this as any).clockSubscription.unsubscribe();
+                (this as any).clockSubscription = undefined;
             }
-            this.clockSubscription = this.clock
-                .tick(this.date)
-                .pipe(filter(() => this.live, this))
+            (this as any).clockSubscription = (this as any).clock
+                .tick((this as any).date)
+                .pipe(filter(() => (this as any).live, this))
                 .subscribe(() => this.stateChanges.next());
             this.stateChanges.next();
         } else {
@@ -91,6 +98,6 @@ export class CustomTimeAgoPipe
                 `Wrong parameter in TimeagoPipe. Expected a valid date, received: ${date}`,
             );
         }
-        return this.value;
+        return (this as any).value;
     }
 }

@@ -12,14 +12,6 @@ import {
     TimeagoClock,
 } from 'ngx-timeago';
 
-// export const provideCustomTimeago: EnvironmentProviders = importProvidersFrom(
-//     TimeagoModule.forRoot(
-//         {
-//             formatter: { provide: TimeagoFormatter, useClass: TimeagoCustomFormatter },
-//             // clock: { provide: TimeagoClock, useClass: TimeagoDefaultClock },
-//         }
-//     )
-// );
 
 export const provideCustomTimeago: EnvironmentProviders = importProvidersFrom(
     TimeagoModule.forRoot({
