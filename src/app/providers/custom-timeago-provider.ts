@@ -1,8 +1,4 @@
-import {
-    EnvironmentProviders,
-    Provider,
-    importProvidersFrom,
-} from '@angular/core';
+import { EnvironmentProviders, importProvidersFrom } from '@angular/core';
 import {
     TimeagoModule,
     TimeagoIntl,
@@ -11,7 +7,6 @@ import {
     TimeagoDefaultClock,
     TimeagoClock,
 } from 'ngx-timeago';
-
 
 export const provideCustomTimeago: EnvironmentProviders = importProvidersFrom(
     TimeagoModule.forRoot({

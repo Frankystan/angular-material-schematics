@@ -1,1 +1,11 @@
-<p>breadcrumbs works!</p>
+<mat-list data-show-xs>
+    <mat-list-item>
+        <div matListItemLine>{{ "title.app" | translate }}</div>
+        <div
+            matListItemLine
+            class="breadcrumb-subtitle"
+            [@slideInUp]="animationState"
+        >{{ title | translate }}
+        </div>
+    </mat-list-item>
+</mat-list>

@@ -1,0 +1,14 @@
+mat-list {
+    padding: 0;
+
+    mat-list-item {
+        font:
+            400 14px/20px Roboto,
+            "Helvetica Neue",
+            sans-serif;
+
+        .mdc-list-item__secondary-text {
+            color: var(--mat-toolbar-container-text-color);
+        }
+    }
+}

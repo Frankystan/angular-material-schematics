@@ -14,6 +14,7 @@ import { PortalModule, TemplatePortal } from '@angular/cdk/portal';
 import { AsyncPipe, NgIf, NgStyle } from '@angular/common';
 import { PortalBridgeService } from '@shared/services/portal-bridge.service';
 import { Observable } from 'rxjs';
+import { BreadcrumbsComponent } from '@layout/breadcrumbs/breadcrumbs.component';
 
 /*
 **OPCIONAL**
@@ -33,6 +34,7 @@ he copiado esta linea en consola y funciona:
         MatToolbarModule,
         MatButtonModule,
         BtnLanguageSelectorComponent,
+        BreadcrumbsComponent,
         IfMobileDirective,
         BtnMenuComponent,
         PortalModule,

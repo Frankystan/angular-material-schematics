@@ -76,7 +76,9 @@ export class CustomTimeAgoPipe
     override transform(date: string | Date | number, ...args: any[]) {
         const _date = dateParser(date).valueOf();
         let _live;
-        _live = isDefined(args[0]) ? coerceBooleanProperty(args[0]) : (this as any).live;
+        _live = isDefined(args[0])
+            ? coerceBooleanProperty(args[0])
+            : (this as any).live;
         if ((this as any).date === _date && (this as any).live === _live) {
             return (this as any).value;
         }
